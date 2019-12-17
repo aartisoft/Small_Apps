@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "13161515404",
+    "firebase_url": "https://karele-ke-fayde.firebaseio.com",
+    "project_id": "karele-ke-fayde",
+    "storage_bucket": "karele-ke-fayde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13161515404:android:3db45f6d23f7383396eea9",
+        "android_client_info": {
+          "package_name": "com.karelakefayde.hindi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13161515404-c84sttg73gq0obb2nlvlpbnijfs4pjtk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.karelakefayde.hindi",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "13161515404-a5jpauhgol4jbe0sca9nsjs0ucubd4k2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEmLBMbWaopEUiFLAHgm63UMVr3ADAvrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13161515404-a5jpauhgol4jbe0sca9nsjs0ucubd4k2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_favorite"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_favorite"
+        app:showAsAction="always"
+        android:title="favorite" />
+
+    <item
+        android:id="@+id/action_copy"
+        android:orderInCategory="100"
+        android:title="Copy"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="100"
+        android:title="Share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:title="Exit"
+        app:showAsAction="never" />
+
+</menu>
