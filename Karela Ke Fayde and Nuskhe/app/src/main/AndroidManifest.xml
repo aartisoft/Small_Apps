@@ -47,11 +47,11 @@
 
 
         <activity android:name="com.karelakefayde.hindi.Activity.DetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppThemesearch"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.karelakefayde.hindi.Activity.FavDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppThemesearch"
             android:screenOrientation="portrait" />
 
         <meta-data

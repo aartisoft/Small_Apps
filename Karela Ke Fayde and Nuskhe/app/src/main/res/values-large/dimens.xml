@@ -4,7 +4,7 @@
     <dimen name="activity_horizontal_margin">0dp</dimen>
     <dimen name="activity_vertical_margin">0dp</dimen>
 
-    <dimen name="thirty_minus">-34dp</dimen>
+    <dimen name="thirty_minus" tools:ignore="MissingDefaultResource">-34dp</dimen>
     <dimen name="three_hundred">304dp</dimen>
 
     <dimen name="one">5dp</dimen>
