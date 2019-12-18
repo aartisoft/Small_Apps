@@ -363,7 +363,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void getopenPrivacypolicy() {
-        String url = "https://simpleappscreatorpolicy.blogspot.com/2019/07/status-policy.html";
+        String url = "https://techcorpsolutions.blogspot.com/2018/03/privacy-policy.html";
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }

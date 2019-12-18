@@ -17,14 +17,7 @@ repositories {
 
 
 android {
-//    signingConfigs {
-//        debug {
-//            storeFile file('C:\\Bhautik\\Work\\Simple Apps Creator\\00.PROJECTS AND KEYNOTE\\PROJECTS\\Wallpaper Apk\\note10wallpaper.jks')
-//            storePassword '123412341234'
-//            keyPassword '123412341234'
-//            keyAlias = 'note10wallpaper'
-//        }
-//    }
+
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
