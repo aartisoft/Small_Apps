@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -74,7 +75,7 @@ public class InsideListFragment extends Fragment implements MainItemAdapter.MyCl
     private int currentpage = 1;
     private boolean mIsLoadingMore;
     String searchtext = "";
-    InterstitialAd interstitialAd;
+    InterstitialAd minterstitialAd;
 
     public InsideListFragment() {
     }
@@ -95,6 +96,9 @@ public class InsideListFragment extends Fragment implements MainItemAdapter.MyCl
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
         this.currentpage = 1;
         this.mIsLoadingMore = false;
+
+
+        initInterstitialAdPrepare();
 
         content_home = (RelativeLayout) rootView.findViewById(R.id.content_home);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
@@ -249,77 +253,66 @@ public class InsideListFragment extends Fragment implements MainItemAdapter.MyCl
         Constant.Passing_item_objct = new Item_images();
         Constant.Passing_item_objct = getarray;
         if (Constant.Adscountlisting >= 2){
-            loadInterstitialAd();
-            Constant.Adscountlisting = 1;
+            if (minterstitialAd.isAdLoaded()) {
+                Constant.Adscountlisting = 1;
+                minterstitialAd.show();
+            } else {
+                onAdsresponce();
+            }
         }else{
             Constant.Adscountlisting++;
-            Intent detailact = new Intent(getActivity(), DetailActivity.class);
-            startActivity(detailact);
+            onAdsresponce();
         }
     }
 
-    private void loadInterstitialAd() {
-        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
-        if (conn.booleanValue()) {
-            final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
-            progress.setMessage("Loading Ad");
-            progress.setCancelable(false);
-            progress.show();
-            interstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
-            interstitialAd.loadAd();
-            interstitialAd.setAdListener(new InterstitialAdListener() {
-                @Override
-                public void onInterstitialDisplayed(Ad ad) {
-                }
-
-                @Override
-                public void onInterstitialDismissed(Ad ad) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd != null) {
-                        interstitialAd.destroy();
-                    }
-                    Intent detailact = new Intent(getActivity(), DetailActivity.class);
-                    startActivity(detailact);
-                }
-
-                @Override
-                public void onError(Ad ad, AdError adError) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd != null) {
-                        interstitialAd.destroy();
-                    }
-                    Intent detailact = new Intent(getActivity(), DetailActivity.class);
-                    startActivity(detailact);
-                }
-
-                @Override
-                public void onAdLoaded(Ad ad) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd.isAdLoaded()) {
-                        interstitialAd.show();
-                    }
-                }
-
-                @Override
-                public void onAdClicked(Ad ad) {
-                }
-
-                @Override
-                public void onLoggingImpression(Ad ad) {
-                }
-            });
-        } else {
-            Intent detailact = new Intent(getActivity(), DetailActivity.class);
-            startActivity(detailact);
+    private void requestNewInterstitial() {
+        if (minterstitialAd != null) {
+            minterstitialAd.loadAd();
         }
-
     }
+
+    private void initInterstitialAdPrepare() {
+        minterstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
+        minterstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                Constant.Adscountlisting = 1;
+                onAdsresponce();
+                requestNewInterstitial();
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+        requestNewInterstitial();
+    }
+
+    public void onAdsresponce() {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        getActivity().startActivity(intent);
+    }
+
 
 
 
@@ -419,8 +412,8 @@ public class InsideListFragment extends Fragment implements MainItemAdapter.MyCl
 
     @Override
     public void onDestroy() {
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
+        if (minterstitialAd != null) {
+            minterstitialAd.destroy();
         }
         super.onDestroy();
     }

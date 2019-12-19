@@ -216,6 +216,7 @@ public class DetailActivity extends AppCompatActivity {
 
         if (Itemdata == null) {
             onBackPressed();
+            return;
         }
 
         String gettext = Itemdata.getItem_description();

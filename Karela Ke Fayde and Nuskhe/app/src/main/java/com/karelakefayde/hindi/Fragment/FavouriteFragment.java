@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
+import com.karelakefayde.hindi.Activity.DetailActivity;
 import com.karelakefayde.hindi.Activity.FavDetailActivity;
 import com.karelakefayde.hindi.Activity.MainActivity;
 import com.karelakefayde.hindi.Adapter.FavItemsAdapter;
@@ -52,7 +54,7 @@ public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyCli
     private SearchView searchView;
     DbAdapter db;
     String PassingTitle = "";
-    InterstitialAd interstitialAd;
+    InterstitialAd minterstitialAd;
 
     public FavouriteFragment() {
     }
@@ -71,8 +73,12 @@ public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyCli
         constantfile = new Constant();
         db = new DbAdapter(getActivity());
         db.open();
+
         this.detectorconn = new ConnectionDetector(getActivity());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+
+        initInterstitialAdPrepare();
+
         content_favorite = (RelativeLayout) rootView.findViewById(R.id.content_favorite);
         items_recycler = (RecyclerView) rootView.findViewById(R.id.items_recycler);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -151,8 +157,12 @@ public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyCli
         Constant.Passing_item_objct = new Item_images();
         Constant.Passing_item_objct = pass_getset;
         if (Constant.Adscountlisting >= 2){
-            loadInterstitialAd();
-            Constant.Adscountlisting = 1;
+            if (minterstitialAd.isAdLoaded()) {
+                Constant.Adscountlisting = 1;
+                minterstitialAd.show();
+            } else {
+                onAdsresponce();
+            }
         }else{
             Constant.Adscountlisting++;
             Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
@@ -160,73 +170,59 @@ public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyCli
         }
     }
 
-    private void loadInterstitialAd() {
-        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
-        if (conn.booleanValue()) {
-            final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
-            progress.setMessage("Loading Ad");
-            progress.setCancelable(false);
-            progress.show();
-            interstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
-            interstitialAd.loadAd();
-            interstitialAd.setAdListener(new InterstitialAdListener() {
-                @Override
-                public void onInterstitialDisplayed(Ad ad) {
-                }
-
-                @Override
-                public void onInterstitialDismissed(Ad ad) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd != null) {
-                        interstitialAd.destroy();
-                    }
-                    Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
-                    startActivity(detailact);
-                }
-
-                @Override
-                public void onError(Ad ad, AdError adError) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd != null) {
-                        interstitialAd.destroy();
-                    }
-                    Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
-                    startActivity(detailact);
-                }
-
-                @Override
-                public void onAdLoaded(Ad ad) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd.isAdLoaded()) {
-                        interstitialAd.show();
-                    }
-                }
-
-                @Override
-                public void onAdClicked(Ad ad) {
-                }
-
-                @Override
-                public void onLoggingImpression(Ad ad) {
-                }
-            });
-        } else {
-            Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
-            startActivity(detailact);
+    private void requestNewInterstitial() {
+        if (minterstitialAd != null) {
+            minterstitialAd.loadAd();
         }
+    }
 
+    private void initInterstitialAdPrepare() {
+        minterstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
+        minterstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                Constant.Adscountlisting = 1;
+                onAdsresponce();
+                requestNewInterstitial();
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+        requestNewInterstitial();
+    }
+
+
+    public void onAdsresponce() {
+        Intent intent = new Intent(getActivity(), FavDetailActivity.class);
+        getActivity().startActivity(intent);
     }
 
     @Override
     public void onDestroy() {
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
+        if (minterstitialAd != null) {
+            minterstitialAd.destroy();
         }
         super.onDestroy();
     }

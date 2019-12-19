@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,7 +69,7 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
     CardView seeall_cardview;
     private ProgressBar progressBar;
     AdView adViewbanner;
-    InterstitialAd interstitialAd;
+    InterstitialAd minterstitialAd;
 
     MainHomeAdapter mainAdapter;
 
@@ -94,6 +95,9 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
         LinearLayout adContainer = (LinearLayout) rootView.findViewById(R.id.ads);
         adContainer.addView(adViewbanner);
         adViewbanner.loadAd();
+
+
+        initInterstitialAdPrepare();
 
         text_intro_title = rootView.findViewById(R.id.text_intro_title);
         text_intro_text = rootView.findViewById(R.id.text_intro_text);
@@ -123,6 +127,7 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
             }
         });
 
+
         return rootView;
     }
 
@@ -144,79 +149,68 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
         Constant.Passing_item_objct = new Item_images();
         Constant.Passing_item_objct = getarray;
         if (Constant.Adscountlisting >= 2) {
-            loadInterstitialAd();
-            Constant.Adscountlisting = 1;
+            if (minterstitialAd.isAdLoaded()) {
+                Constant.Adscountlisting = 1;
+                minterstitialAd.show();
+            } else {
+                onAdsresponce();
+            }
         } else {
             Constant.Adscountlisting++;
-            Intent detailact = new Intent(getActivity(), DetailActivity.class);
-            startActivity(detailact);
+            onAdsresponce();
         }
 
     }
 
-    private void loadInterstitialAd() {
-        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
-        if (conn.booleanValue()) {
-            final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
-            progress.setMessage("Loading Ad");
-            progress.setCancelable(false);
-            progress.show();
-            interstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
-            interstitialAd.loadAd();
-            interstitialAd.setAdListener(new InterstitialAdListener() {
-                @Override
-                public void onInterstitialDisplayed(Ad ad) {
-                }
-
-                @Override
-                public void onInterstitialDismissed(Ad ad) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd != null) {
-                        interstitialAd.destroy();
-                    }
-                    Intent detailact = new Intent(getActivity(), DetailActivity.class);
-                    startActivity(detailact);
-                }
-
-                @Override
-                public void onError(Ad ad, AdError adError) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd != null) {
-                        interstitialAd.destroy();
-                    }
-                    Log.e("gettingadserror","error :: "+adError.getErrorMessage());
-                    Intent detailact = new Intent(getActivity(), DetailActivity.class);
-                    startActivity(detailact);
-                }
-
-                @Override
-                public void onAdLoaded(Ad ad) {
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
-                    if (interstitialAd.isAdLoaded()) {
-                        interstitialAd.show();
-                    }
-                }
-
-                @Override
-                public void onAdClicked(Ad ad) {
-                }
-
-                @Override
-                public void onLoggingImpression(Ad ad) {
-                }
-            });
-        } else {
-            Intent detailact = new Intent(getActivity(), DetailActivity.class);
-            startActivity(detailact);
+    private void requestNewInterstitial() {
+        if (minterstitialAd != null) {
+            minterstitialAd.loadAd();
         }
-
     }
+
+    private void initInterstitialAdPrepare() {
+        minterstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
+        minterstitialAd.setAdListener(new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                Constant.Adscountlisting = 1;
+                onAdsresponce();
+                requestNewInterstitial();
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                Log.e("gettingadserror"," error  : "+adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
+        requestNewInterstitial();
+    }
+
+    public void onAdsresponce() {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        getActivity().startActivity(intent);
+    }
+
 
     public void LoadImagedata() {
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -321,8 +315,8 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
         if (adViewbanner != null) {
             adViewbanner.destroy();
         }
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
+        if (minterstitialAd != null) {
+            minterstitialAd.destroy();
         }
         super.onDestroy();
     }

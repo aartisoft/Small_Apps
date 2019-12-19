@@ -215,6 +215,7 @@ public class FavDetailActivity extends AppCompatActivity {
 
         if (Itemdata == null) {
             onBackPressed();
+            return;
         }
 
         String gettext = Itemdata.getItem_description();
