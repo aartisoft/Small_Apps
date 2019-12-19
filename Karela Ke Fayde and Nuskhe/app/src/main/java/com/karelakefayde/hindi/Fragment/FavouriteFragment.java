@@ -1,5 +1,6 @@
 package com.karelakefayde.hindi.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,6 +19,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.karelakefayde.hindi.Activity.FavDetailActivity;
 import com.karelakefayde.hindi.Activity.MainActivity;
 import com.karelakefayde.hindi.Adapter.FavItemsAdapter;
@@ -32,7 +37,7 @@ import java.util.ArrayList;
 /**
  * Created by Kakadiyas on 12-03-2017.
  */
-public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyClickListener,Constant.Callingafterads{
+public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyClickListener{
 
     public static final String TAG = "Main_list";
     private ConnectionDetector detectorconn;
@@ -47,6 +52,7 @@ public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyCli
     private SearchView searchView;
     DbAdapter db;
     String PassingTitle = "";
+    InterstitialAd interstitialAd;
 
     public FavouriteFragment() {
     }
@@ -144,22 +150,85 @@ public class FavouriteFragment extends Fragment implements FavItemsAdapter.MyCli
         Constant.Passing_item_id = pass_getset.getId();
         Constant.Passing_item_objct = new Item_images();
         Constant.Passing_item_objct = pass_getset;
-        Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
-        startActivity(detailact);
-//        if (Constant.Adscountlisting == 2){
-//
-//            constantfile.loadInterstitialAd(getActivity(),this);
-//        }else{
-//            Constant.Adscountlisting++;
-//            ((MainActivity) getActivity()).SelectItem(PassingTitle, 4);
-//        }
+        if (Constant.Adscountlisting >= 2){
+            loadInterstitialAd();
+            Constant.Adscountlisting = 1;
+        }else{
+            Constant.Adscountlisting++;
+            Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
+            startActivity(detailact);
+        }
+    }
+
+    private void loadInterstitialAd() {
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+        if (conn.booleanValue()) {
+            final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
+            progress.setMessage("Loading Ad");
+            progress.setCancelable(false);
+            progress.show();
+            interstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
+            interstitialAd.loadAd();
+            interstitialAd.setAdListener(new InterstitialAdListener() {
+                @Override
+                public void onInterstitialDisplayed(Ad ad) {
+                }
+
+                @Override
+                public void onInterstitialDismissed(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    if (interstitialAd != null) {
+                        interstitialAd.destroy();
+                    }
+                    Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
+                    startActivity(detailact);
+                }
+
+                @Override
+                public void onError(Ad ad, AdError adError) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    if (interstitialAd != null) {
+                        interstitialAd.destroy();
+                    }
+                    Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
+                    startActivity(detailact);
+                }
+
+                @Override
+                public void onAdLoaded(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    if (interstitialAd.isAdLoaded()) {
+                        interstitialAd.show();
+                    }
+                }
+
+                @Override
+                public void onAdClicked(Ad ad) {
+                }
+
+                @Override
+                public void onLoggingImpression(Ad ad) {
+                }
+            });
+        } else {
+            Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
+            startActivity(detailact);
+        }
+
     }
 
     @Override
-    public void onAdsresponce(Boolean showing) {
-        Constant.Adscountlisting = 1;
-        Intent detailact = new Intent(getActivity(), FavDetailActivity.class);
-        startActivity(detailact);
+    public void onDestroy() {
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        super.onDestroy();
     }
 
 }

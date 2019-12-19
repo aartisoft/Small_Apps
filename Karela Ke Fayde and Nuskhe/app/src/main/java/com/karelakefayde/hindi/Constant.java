@@ -38,7 +38,7 @@ public class Constant {
 
 
     public static final int AD_DISPLAY_FREQUENCY = 10;
-    public static int Adscountlisting = 2;
+    public static int Adscountlisting = 1;
     public static boolean show_app_icon = false;
 
     public static String Passing_From = "HomeFragment";
@@ -88,13 +88,13 @@ public class Constant {
             temp_item.setCategory_image(pass.getString("category_image"));
             temp_array.add(temp_item);
         }
-        for (int j = 1; j <= temp_array.size();j++){
-            if (j  % AD_DISPLAY_FREQUENCY == 0){
-                Item_images ads_item = new Item_images();
-                ads_item.setImage("ads");
-                temp_array.add(j,ads_item);
-            }
-        }
+//        for (int j = 1; j <= temp_array.size();j++){
+//            if (j  % AD_DISPLAY_FREQUENCY == 0){
+//                Item_images ads_item = new Item_images();
+//                ads_item.setImage("ads");
+//                temp_array.add(j,ads_item);
+//            }
+//        }
         return temp_array;
     }
 

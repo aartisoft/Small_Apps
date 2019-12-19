@@ -14,9 +14,9 @@
     <string name="default_notification_channel_id">10001_KarelaKeFayde</string>
 
     <!--for test id's add IMG_16_9_LINK# before ads id-->
-    <string name="facebook_banner_id">IMG_16_9_LINK#</string>
-    <string name="facebook_interstitial_id">IMG_16_9_LINK#</string>
-    <string name="facebook_scroll_id">IMG_16_9_LINK#</string>
+    <string name="facebook_banner_id">572162516950854_572166060283833</string>
+    <string name="facebook_interstitial_id">572162516950854_572165896950516</string>
+    <string name="facebook_native_id">572162516950854_572163013617471</string>
 
     <!--admob ads id-->
     <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>

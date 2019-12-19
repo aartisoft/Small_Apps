@@ -105,10 +105,10 @@ public class MainItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progressbar, parent, false);
             return new ViewHolderLoading(view);
-        } else if (viewType == AD_TYPE) {
+        }/* else if (viewType == AD_TYPE) {
             View view = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_facebook_ads, parent, false);
             return new FacebookNativeHolder(view);
-        }
+        }*/
         return null;
     }
 
@@ -116,9 +116,9 @@ public class MainItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof NullVIewHolder) {
         }
-        if (holder instanceof FacebookNativeHolder) {
+       /* if (holder instanceof FacebookNativeHolder) {
 
-        } else if (holder instanceof DataObjectHolder) {
+        }*/ else if (holder instanceof DataObjectHolder) {
 
             final DataObjectHolder userViewHolder = (DataObjectHolder) holder;
 
@@ -172,7 +172,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private void loadNativeAd(final View view) {
             if (view.getHeight() < 2){
                 LinearLayout adContainer = (LinearLayout) view.findViewById(R.id.native_ad_container);
-                AdView adView = new AdView(context, context.getString(R.string.facebook_scroll_id), AdSize.RECTANGLE_HEIGHT_250);
+                AdView adView = new AdView(context, context.getString(R.string.facebook_native_id), AdSize.RECTANGLE_HEIGHT_250);
                 adContainer.addView(adView);
                 adView.loadAd();
             }
@@ -196,7 +196,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        return BoLitemList.get(position) == null ? VIEW_TYPE_LOADING : position > 0 && BoLitemList.get(position).getImage().equals("ads") ? AD_TYPE : VIEW_TYPE_ITEM;
+        return BoLitemList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
 

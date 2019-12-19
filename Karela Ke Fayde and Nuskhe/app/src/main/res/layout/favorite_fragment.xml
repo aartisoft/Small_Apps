@@ -19,7 +19,7 @@
         android:layout_centerInParent="true"
         android:text="No Favorite's Items Found"
         android:visibility="gone"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
 

@@ -1,5 +1,6 @@
 package com.karelakefayde.hindi.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.karelakefayde.hindi.Activity.DetailActivity;
 import com.karelakefayde.hindi.Activity.MainActivity;
 import com.karelakefayde.hindi.Adapter.MainHomeAdapter;
@@ -32,7 +40,6 @@ import com.karelakefayde.hindi.Constant;
 import com.karelakefayde.hindi.R;
 import com.karelakefayde.hindi.gettersetter.ItemImageHome;
 import com.karelakefayde.hindi.gettersetter.Item_images;
-import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -47,7 +54,7 @@ import static com.karelakefayde.hindi.Constant.show_app_icon;
 /**
  * Created by Kakadiyas on 12-03-2017.
  */
-public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickListener, Constant.Callingafterads {
+public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickListener {
 
     public static final String TAG = "Main_list";
     private ConnectionDetector detectorconn;
@@ -60,6 +67,8 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
     ImageView intro_image;
     CardView seeall_cardview;
     private ProgressBar progressBar;
+    AdView adViewbanner;
+    InterstitialAd interstitialAd;
 
     MainHomeAdapter mainAdapter;
 
@@ -80,6 +89,11 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
 
         this.detectorconn = new ConnectionDetector(getActivity());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+
+        adViewbanner = new AdView(getActivity(), getResources().getString(R.string.facebook_banner_id), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) rootView.findViewById(R.id.ads);
+        adContainer.addView(adViewbanner);
+        adViewbanner.loadAd();
 
         text_intro_title = rootView.findViewById(R.id.text_intro_title);
         text_intro_text = rootView.findViewById(R.id.text_intro_text);
@@ -129,23 +143,80 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
         Constant.Passing_item_id = getarray.getId();
         Constant.Passing_item_objct = new Item_images();
         Constant.Passing_item_objct = getarray;
-        Intent detailact = new Intent(getActivity(), DetailActivity.class);
-        startActivity(detailact);
-//        if (Constant.Adscountlisting == 2){
-//            constantfile.loadInterstitialAd(getActivity(),this);
-//        }else{
-//            Constant.Adscountlisting++;
-//            ((MainActivity) getActivity()).SelectItem(PassingTitle, 3);
-//        }
+        if (Constant.Adscountlisting >= 2) {
+            loadInterstitialAd();
+            Constant.Adscountlisting = 1;
+        } else {
+            Constant.Adscountlisting++;
+            Intent detailact = new Intent(getActivity(), DetailActivity.class);
+            startActivity(detailact);
+        }
+
     }
 
-    @Override
-    public void onAdsresponce(Boolean showing) {
-        Constant.Adscountlisting = 1;
-        Intent detailact = new Intent(getActivity(), DetailActivity.class);
-        startActivity(detailact);
-    }
+    private void loadInterstitialAd() {
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+        if (conn.booleanValue()) {
+            final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
+            progress.setMessage("Loading Ad");
+            progress.setCancelable(false);
+            progress.show();
+            interstitialAd = new InterstitialAd(getActivity(), getResources().getString(R.string.facebook_interstitial_id));
+            interstitialAd.loadAd();
+            interstitialAd.setAdListener(new InterstitialAdListener() {
+                @Override
+                public void onInterstitialDisplayed(Ad ad) {
+                }
 
+                @Override
+                public void onInterstitialDismissed(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    if (interstitialAd != null) {
+                        interstitialAd.destroy();
+                    }
+                    Intent detailact = new Intent(getActivity(), DetailActivity.class);
+                    startActivity(detailact);
+                }
+
+                @Override
+                public void onError(Ad ad, AdError adError) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    if (interstitialAd != null) {
+                        interstitialAd.destroy();
+                    }
+                    Log.e("gettingadserror","error :: "+adError.getErrorMessage());
+                    Intent detailact = new Intent(getActivity(), DetailActivity.class);
+                    startActivity(detailact);
+                }
+
+                @Override
+                public void onAdLoaded(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    if (interstitialAd.isAdLoaded()) {
+                        interstitialAd.show();
+                    }
+                }
+
+                @Override
+                public void onAdClicked(Ad ad) {
+                }
+
+                @Override
+                public void onLoggingImpression(Ad ad) {
+                }
+            });
+        } else {
+            Intent detailact = new Intent(getActivity(), DetailActivity.class);
+            startActivity(detailact);
+        }
+
+    }
 
     public void LoadImagedata() {
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -205,22 +276,22 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
                     }
                     if (imageData.getShow_intro().equals("1")) {
                         intro_ll.setVisibility(View.VISIBLE);
-                        text_intro_title.setText(imageData.getIntro_title()+"");
+                        text_intro_title.setText(imageData.getIntro_title() + "");
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             text_intro_text.setText(Html.fromHtml(imageData.getIntro_description() + "", Html.FROM_HTML_MODE_COMPACT));
                         } else {
                             text_intro_text.setText(Html.fromHtml(imageData.getIntro_description() + ""));
                         }
-                        if (imageData.getIntro_image() != null && !imageData.getIntro_image().equals("")){
+                        if (imageData.getIntro_image() != null && !imageData.getIntro_image().equals("")) {
                             Glide.with(getActivity()).load(imageData.getIntro_image()).placeholder(R.drawable.bg_transparant).into(intro_image);
                             intro_image.setVisibility(View.VISIBLE);
-                        }else{
+                        } else {
                             intro_image.setVisibility(View.GONE);
                         }
                         if (imageData.getIntro_backcolor() != null && !imageData.getIntro_backcolor().equals("")) {
                             text_back_rl.setBackgroundColor(Color.parseColor("#" + imageData.getIntro_backcolor()));
                         }
-                    }else{
+                    } else {
                         intro_ll.setVisibility(View.GONE);
                     }
 
@@ -243,6 +314,17 @@ public class HomeFragment extends Fragment implements MainHomeAdapter.MyClickLis
 
         }
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adViewbanner != null) {
+            adViewbanner.destroy();
+        }
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        super.onDestroy();
     }
 
 
