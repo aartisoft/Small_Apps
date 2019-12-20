@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--the shadow comes from here-->
+    <item
+        android:bottom="-5dp"
+        android:drawable="@android:drawable/dialog_holo_light_frame"
+        android:left="-3dp"
+        android:right="-3dp"
+        android:top="0dp">
+    </item>
+
+    <item
+        android:bottom="-6dp"
+        android:left="-6dp"
+        android:right="-6dp"
+        android:top="-6dp">
+
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorbutton" />
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
+</layer-list>

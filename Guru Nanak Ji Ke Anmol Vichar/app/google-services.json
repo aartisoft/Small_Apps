@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "239819225222",
+    "firebase_url": "https://guru-nanak-ji-ke-anmol.firebaseio.com",
+    "project_id": "guru-nanak-ji-ke-anmol",
+    "storage_bucket": "guru-nanak-ji-ke-anmol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239819225222:android:704e38a0baf21efe16f907",
+        "android_client_info": {
+          "package_name": "com.techcorp.gurunanakjike.anmolvichar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239819225222-egv7uimjkqsvva4ib6ccc4admsafh6of.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.gurunanakjike.anmolvichar",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "239819225222-l6f4leee3d9bu3rn9bktoa911pj4s5bb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwDU6Fvu0eBzUFKbcxHsqND6uLVdiRKM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239819225222-l6f4leee3d9bu3rn9bktoa911pj4s5bb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

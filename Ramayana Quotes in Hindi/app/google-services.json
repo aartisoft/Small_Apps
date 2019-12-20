@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "182279724260",
+    "firebase_url": "https://ramayana-quotes-in-hindi.firebaseio.com",
+    "project_id": "ramayana-quotes-in-hindi",
+    "storage_bucket": "ramayana-quotes-in-hindi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182279724260:android:07981cb41ab149599060f1",
+        "android_client_info": {
+          "package_name": "com.techcorp.ramayanaquotes.inhindi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182279724260-4lpa30mdg3atm08lrv2tcbmoi8ul4521.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.ramayanaquotes.inhindi",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "182279724260-c67udqbnv7o6s3eoh0tj50odtsck18ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKwHplwnwIp0ORiSArIrD6hqNH0WoyJgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182279724260-c67udqbnv7o6s3eoh0tj50odtsck18ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295589679993",
+    "firebase_url": "https://mahatma-gandhi-motivational.firebaseio.com",
+    "project_id": "mahatma-gandhi-motivational",
+    "storage_bucket": "mahatma-gandhi-motivational.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295589679993:android:74dd4fa888ca43e9ced5a8",
+        "android_client_info": {
+          "package_name": "com.techcorp.mahatmagandhi.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295589679993-18lp35b3ip6gl8krh4pn2u5a9dejqe40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.mahatmagandhi.quotes",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "295589679993-ecq963j5ejg83r0p2k7csj9ed5gu3je0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaSm5n7gx6LrMLxh5zyy2qm5TCjtrBQsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295589679993-ecq963j5ejg83r0p2k7csj9ed5gu3je0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

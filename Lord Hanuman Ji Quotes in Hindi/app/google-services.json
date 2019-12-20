@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "372709353842",
+    "firebase_url": "https://lord-hanuman-ji-quotes.firebaseio.com",
+    "project_id": "lord-hanuman-ji-quotes",
+    "storage_bucket": "lord-hanuman-ji-quotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372709353842:android:ad42dbea9a8931f606d5eb",
+        "android_client_info": {
+          "package_name": "com.techcorp.lordhanumanji.quotesinhindi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372709353842-9dn5civutom45rfg0ujjtpnr1bpq8lof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.lordhanumanji.quotesinhindi",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "372709353842-d5mlqf93gohvgf3fleomcenu0iejfprl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC19aQpxKe3BFD32kdOWD_GKGw9NYbYFo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372709353842-d5mlqf93gohvgf3fleomcenu0iejfprl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
