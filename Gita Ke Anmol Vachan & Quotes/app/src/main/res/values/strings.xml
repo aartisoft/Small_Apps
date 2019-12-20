@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Gita Ke Anmol Vachan &amp; Quotes</string>
+    <string name="share_message">Download Now:</string>
+
+    <string name="favoritlist_title">Favorite List</string>
+    <string name="privacypolicy_title">Privacy Policy</string>
+    <string name="title">My Description</string>
+    <string name="no_internet">No Internet Connection!</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="default_notification_channel_id">10001_GitaKeAnmolVachan</string>
+
+    <!--for test id's add IMG_16_9_LINK# before ads id-->
+    <string name="facebook_banner_id">IMG_16_9_LINK#</string>
+    <string name="facebook_interstitial_id">IMG_16_9_LINK#</string>
+    <string name="facebook_native_id">IMG_16_9_LINK#</string>
+
+    <!--admob ads id-->
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="interstial_id">ca-app-pub-3940256099942544/1033173712</string>
+
+</resources>

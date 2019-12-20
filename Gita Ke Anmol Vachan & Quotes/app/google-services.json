@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "294273531182",
+    "firebase_url": "https://bhagavad-gita-ke-anmol-vachan.firebaseio.com",
+    "project_id": "bhagavad-gita-ke-anmol-vachan",
+    "storage_bucket": "bhagavad-gita-ke-anmol-vachan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294273531182:android:079936f0738612c8734ebf",
+        "android_client_info": {
+          "package_name": "com.techcorp.bhagavadgita.keanmolvachan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294273531182-nc43e5vd4ed3j5o9vhfaab2ap2c91j8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.bhagavadgita.keanmolvachan",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "294273531182-434m5rme0krf6o1r99kt2moko450p63u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlr7Yt3E0n_pNi-7CeNpRGsdgcBeVDi6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294273531182-434m5rme0krf6o1r99kt2moko450p63u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
