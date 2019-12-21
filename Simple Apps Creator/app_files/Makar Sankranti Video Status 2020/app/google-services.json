@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "435155457206",
+    "firebase_url": "https://makar-sankranti-video-status.firebaseio.com",
+    "project_id": "makar-sankranti-video-status",
+    "storage_bucket": "makar-sankranti-video-status.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435155457206:android:22f833690f0e6bf20a0217",
+        "android_client_info": {
+          "package_name": "com.makarsankranti.videostatus2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435155457206-ljgsqdsjk68lpendkdts4sduoq799j0m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makarsankranti.videostatus2020",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "435155457206-ottv0d5t03g6rpa56rhrhajeehnkvkk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcF4NR-vSkRP1qoMoGCBKNuyjVkQKIWoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435155457206-ottv0d5t03g6rpa56rhrhajeehnkvkk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Makar Sankranti Video Status 2020</string>
+    <string name="title_settings">Settings</string>
+
+    <string name="see_alert_title">Watch this Video Ad to Download ,Share or Set Image</string>
+
+
+
+    <string name="downloading">Downloading</string>
+
+    <string name="favoritlist_title">Favorite List</string>
+    <string name="privacypolicy_title">Privacy Policy</string>
+    <string name="title">My Description</string>
+    <string name="no_internet">No Internet Connection!</string>
+    <string name="not_download">Something Went Wrong!</string>
+    <string name="download_failed">Download failed! Please try again</string>
+    <string name="images_downloaded">Video has been downloaded successfully</string>
+    <string name="twitter_not_installed">Twitter have not been installed</string>
+    <string name="app_not_installed">No App installed</string>
+    <string name="share_via">Shared via</string>
+    <string name="instagram_not_installed">Instagram have not been installed</string>
+    <string name="hike_not_installed">Hike have not been installed</string>
+    <string name="snapchat_not_installed">Snapshat have not been installed</string>
+    <string name="messenger_not_installed">Messenger have not been installed</string>
+    <string name="facebook_not_installed">Facebook have not been installed</string>
+    <string name="whatsapp_not_installed">Whatsapp have not been installed</string>
+    <string name="download_more_from_link">Get more Videos from : </string>
+    <string name="share_message">Download Makar Sankranti Video Status:</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="download_directory">Makar Sankranti Video Status</string>
+
+    <string name="default_notification_channel_id">10001_makarSankranti</string>
+    <string name="default_notification_name">makarSankrantiVS_notification</string>
+
+
+    <!--Admob IDs-->
+    <string name="admob_banner_id">ca-app-pub-7071067147154248/6439257369</string>
+    <string name="admob_interstitial_id">ca-app-pub-7071067147154248/9668055935</string>
+    <string name="admob_native_id">ca-app-pub-7071067147154248/8354974268</string>
+
+
+    <!--IMG_16_9_LINK#-->
+    <string name="facebook_banner_id">2546460552135341_2546460682135328</string>
+    <string name="facebook_interstitial_id">2546460552135341_2546460685468661</string>
+    <string name="facebook_native_id">2546460552135341_2546460678801995</string>
+    <string name="facebook_scroll_id">2546460552135341_2546460688801994</string>
+
+</resources>
