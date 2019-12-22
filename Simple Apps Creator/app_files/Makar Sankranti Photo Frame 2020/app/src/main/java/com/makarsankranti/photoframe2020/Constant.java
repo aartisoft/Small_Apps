@@ -16,15 +16,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.widget.DrawerLayout;
+
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,41 +55,12 @@ public class Constant {
         Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         textView.setTextSize(16);
         textView.setTextColor(Color.WHITE);
         snackbar.show();
     }
 
-    public void snackbarcommonlinear(Context mcontext, LinearLayout coordinatorLayout, String snackmsg) {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
-        View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextSize(16);
-        textView.setTextColor(Color.WHITE);
-        snackbar.show();
-    }
-
-    public void snackbarcommonConstraintLayout(Context mcontext, ConstraintLayout coordinatorLayout, String snackmsg) {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
-        View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextSize(16);
-        textView.setTextColor(Color.WHITE);
-        snackbar.show();
-    }
-
-    public void snackbarcommondrawerLayout(Context mcontext, DrawerLayout coordinatorLayout, String snackmsg) {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
-        View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextSize(16);
-        textView.setTextColor(Color.WHITE);
-        snackbar.show();
-    }
 
     private void scanFile(Context context, String path) {
 

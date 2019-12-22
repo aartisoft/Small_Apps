@@ -8,10 +8,18 @@
 
     <string name="see_alert_title">Watch this Video Ad to Download Your Beautiful Image</string>
 
+    <string name="startapp_id">211452286</string>
 
-
-    <string name="app_id">ca-app-pub-7071067147154248~7070684892</string>
     <string name="interstial_id">ca-app-pub-7071067147154248/6440129501</string>
+
+    <string name="txt_Welcome">StartApp Interstitial Showcase</string>
+    <string name="txt_SecondActivity">Welcome to another Activity</string>
+    <string name="main_nextBtn">Next Activity</string>
+    <string name="main_rewardedBtn">Show Rewarded Video</string>
+    <string name="main_recyclerBtn">Native Ads in the RecyclerView</string>>
+    <string name="menu_ads">Personalized Ads</string>
+    <string name="list_row_title">Ad Title</string>
+    <string name="list_row_description">Ad Description</string>
 
     <string name="download_directory">Makar Sankranti Photo Frames</string>
     <string name="download_imagename">Makar_Sankranti</string>

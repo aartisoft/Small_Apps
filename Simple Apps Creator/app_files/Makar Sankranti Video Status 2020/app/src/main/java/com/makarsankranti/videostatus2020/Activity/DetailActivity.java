@@ -21,11 +21,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,22 +39,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdChoicesView;
-import com.facebook.ads.AdError;
-import com.facebook.ads.MediaView;
-import com.facebook.ads.NativeAd;
-import com.facebook.ads.NativeAdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.makarsankranti.videostatus2020.PrefManager;
-import com.facebook.ads.AdIconView;
-import com.facebook.ads.AdOptionsView;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.NativeAdLayout;
-import com.facebook.ads.NativeBannerAd;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -86,11 +68,15 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makarsankranti.videostatus2020.ConnectionDetector;
 import com.makarsankranti.videostatus2020.Constant;
+import com.makarsankranti.videostatus2020.PrefManager;
 import com.makarsankranti.videostatus2020.R;
 import com.makarsankranti.videostatus2020.Utility;
 import com.makarsankranti.videostatus2020.gettersetter.ItemUpdate;
 import com.makarsankranti.videostatus2020.gettersetter.Item_collections;
 import com.squareup.picasso.Picasso;
+import com.startapp.android.publish.ads.banner.Banner;
+import com.startapp.android.publish.ads.banner.BannerListener;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import org.json.JSONObject;
 
@@ -101,8 +87,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -140,7 +124,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private Timeline.Window window;
     private DataSource.Factory mediaDataSourceFactory;
-    private ImageView ivHideControllerButton,exo_play;
+    private ImageView ivHideControllerButton, exo_play;
     private BandwidthMeter bandwidthMeter;
     private DefaultTrackSelector trackSelector;
     private boolean shouldAutoPlay;
@@ -160,28 +144,24 @@ public class DetailActivity extends AppCompatActivity {
     TextView videonotfound;
     ScrollView scroll_detail;
     private LinearLayout adView;
-    private AdView adViewbanner;
-    NativeAd nativeAd;
     Boolean mExoPlayerFullscreen = false;
     Dialog mFullScreenDialog;
     public static final String NOTIFICATION_CHANNEL_ID = "10001_makarSankranti";
-    private com.google.android.gms.ads.AdView mAdView;
 
     private SimpleExoPlayer player;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "211774923", false);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
         setContentView(R.layout.activity_detail);
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mTopToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        if (!AudienceNetworkAds.isInAdsProcess(DetailActivity.this)) {
-            AudienceNetworkAds.initialize(DetailActivity.this);
-        }
 
         this.conn = null;
         gson = new Gson();
@@ -195,14 +175,27 @@ public class DetailActivity extends AppCompatActivity {
         initAction();
         showData();
 
+        RelativeLayout mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
+
+        Banner startAppBanner = new Banner(DetailActivity.this, new BannerListener() {
+            @Override
+            public void onReceiveAd(View banner) {
+            }
+            @Override
+            public void onFailedToReceiveAd(View banner) {
+            }
+            @Override
+            public void onClick(View banner) {
+            }
+        });
+        RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        mainLayout.addView(startAppBanner, bannerParameters);
+
+
+
         CallAddView(getvideodata.getId());
-        viewAdstype(getvideodata.getIs_type().toLowerCase());
-
-        MobileAds.initialize(this);
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     public void setdisableclick() {
@@ -270,7 +263,7 @@ public class DetailActivity extends AppCompatActivity {
         Progressbar_player.setVisibility(View.VISIBLE);
         relative_layout_fragement_video_thum.setVisibility(View.GONE);
 
-        if (!mExoPlayerFullscreen){
+        if (!mExoPlayerFullscreen) {
             simpleExoPlayerView.requestFocus();
         }
         simpleExoPlayerView.setVisibility(View.VISIBLE);
@@ -355,7 +348,6 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         ivHideControllerButton.setOnClickListener(new View.OnClickListener() {
@@ -537,8 +529,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void Actionclickworking() {
-        if (player != null){
-            if (player.getPlayWhenReady()){
+        if (player != null) {
+            if (player.getPlayWhenReady()) {
                 player.setPlayWhenReady(false);
                 player.getPlaybackState();
             }
@@ -806,7 +798,7 @@ public class DetailActivity extends AppCompatActivity {
 
         private void download(String getpath) {
             constantfile.snackbarcommonlinear(DetailActivity.this, detail_rl, getResources().getString(R.string.images_downloaded));
-            showNotification(DetailActivity.this,getResources().getString(R.string.app_name), "Download Successfully", getpath);
+            showNotification(DetailActivity.this, getResources().getString(R.string.app_name), "Download Successfully", getpath);
         }
 
         public void shareWhatsapp(String path) {
@@ -920,91 +912,6 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void viewAdstype(String getviewtype) {
-//        if (getviewtype.equals("portrait")) {
-//            adViewbanner = new AdView(this, getResources().getString(R.string.facebook_banner_id), AdSize.BANNER_HEIGHT_50);
-//            LinearLayout adContainer = (LinearLayout) findViewById(R.id.ads);
-//            adContainer.addView(adViewbanner);
-//            adViewbanner.loadAd();
-//        } else {
-//
-//            nativeAd = new NativeAd(DetailActivity.this,getString(R.string.facebook_native_id));
-//            nativeAd.setAdListener(new NativeAdListener() {
-//                @Override
-//                public void onMediaDownloaded(Ad ad) {
-//                    Log.e("detailactivity", "Native ad finished downloading all assets.");
-//                }
-//
-//                @Override
-//                public void onError(Ad ad, AdError adError) {
-//                    Log.e("detailactivity", "Native ad failed to load: " + adError.getErrorMessage());
-//                }
-//
-//                @Override
-//                public void onAdLoaded(Ad ad) {
-//                    Log.d("detailactivity", "Native ad is loaded and ready to be displayed!");
-//                    if (nativeAd == null || nativeAd != ad) {
-//                        return;
-//                    }
-//                    inflateAd(nativeAd);
-//                }
-//
-//                @Override
-//                public void onAdClicked(Ad ad) {
-//                    Log.d("detailactivity", "Native ad clicked!");
-//                }
-//
-//                @Override
-//                public void onLoggingImpression(Ad ad) {
-//                    Log.d("detailactivity", "Native ad impression logged!");
-//                }
-//            });
-//            nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
-//
-//        }
-    }
-
-
-//    private void inflateAd(NativeAd nativeAd) {
-//
-//        nativeAd.unregisterView();
-//        LinearLayout adContainer = (LinearLayout) findViewById(R.id.ads);
-//
-//        LayoutInflater inflater = LayoutInflater.from(DetailActivity.this);
-//        adView = (LinearLayout) inflater.inflate(R.layout.native_ad_layout_1, adContainer, false);
-//        adContainer.addView(adView);
-//
-//
-//        LinearLayout adChoicesContainer = findViewById(R.id.ad_choices_container);
-//        AdChoicesView adChoicesView = new AdChoicesView(DetailActivity.this, nativeAd, true);
-//        adChoicesContainer.addView(adChoicesView, 0);
-//
-//        AdIconView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
-//        TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
-//        MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
-//        TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
-//        TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
-//        TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
-//        Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
-//
-//        nativeAdTitle.setText(nativeAd.getAdvertiserName());
-//        nativeAdBody.setText(nativeAd.getAdBodyText());
-//        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-//        nativeAdCallToAction.setVisibility(nativeAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
-//        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-//        sponsoredLabel.setText(nativeAd.getSponsoredTranslation());
-//
-//        List<View> clickableViews = new ArrayList<>();
-//        clickableViews.add(nativeAdTitle);
-//        clickableViews.add(nativeAdCallToAction);
-//
-//        nativeAd.registerViewForInteraction(
-//                adView,
-//                nativeAdMedia,
-//                nativeAdIcon,
-//                clickableViews);
-//    }
-
     private void initFullscreenDialog() {
 
         mFullScreenDialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
@@ -1036,14 +943,14 @@ public class DetailActivity extends AppCompatActivity {
 
 
     @SuppressLint("NewApi")
-    private void showNotification(Context mContext, String title, String message,String filepath) {
+    private void showNotification(Context mContext, String title, String message, String filepath) {
 
         // Bitmap bitmap = getBitmapFromURL(image);
         Uri contentUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".provider", new File(filepath));
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(contentUri , "video/*");
+        intent.setDataAndType(contentUri, "video/*");
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         Notification notif = null;
@@ -1075,8 +982,7 @@ public class DetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, getResources().getString(R.string.default_notification_name), importance);
             assert notificationManager != null;

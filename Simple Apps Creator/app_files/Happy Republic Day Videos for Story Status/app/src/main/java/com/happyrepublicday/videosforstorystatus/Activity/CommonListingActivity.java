@@ -23,11 +23,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -40,6 +35,10 @@ import com.happyrepublicday.videosforstorystatus.EndlessRecyclerOnScrollListener
 import com.happyrepublicday.videosforstorystatus.R;
 import com.happyrepublicday.videosforstorystatus.gettersetter.ItemData;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
+import com.startapp.android.publish.adsCommon.Ad;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
+import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -67,11 +66,35 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
     private int currentpage = 1;
     String gettype="";
     private Toolbar mTopToolbar;
-    private InterstitialAd mInterstitialAd;
 
-    private AdLoader adLoader;
+    StartAppAd startAppAd = new StartAppAd(CommonListingActivity.this);
 
-    private List<UnifiedNativeAd> mNativeAds = new ArrayList<>();
+    //private StartAppNativeAd mStartAppNativeAd = new StartAppNativeAd(this);
+
+
+    @Override
+    protected void onSaveInstanceState (Bundle outState){
+        super.onSaveInstanceState(outState);
+        startAppAd.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Bundle savedInstanceState){
+        startAppAd.onRestoreInstanceState(savedInstanceState);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
 
 
     @Override
@@ -102,8 +125,6 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
         no_data_tv.setVisibility(View.GONE);
         category_item_rv.setHasFixedSize(true);
 
-        initInterstitialAdPrepare();
-
         GridLayoutManager mLayoutManager = new GridLayoutManager(CommonListingActivity.this, 2);
         category_item_rv.setLayoutManager(mLayoutManager);
         category_item_rv.setItemAnimator(new DefaultItemAnimator());
@@ -128,33 +149,40 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
                         return 1;
                     case CommonListingAdapter.VIEW_TYPE_LOADING:
                         return 2;
-                    case CommonListingAdapter.AD_TYPE:
-                        return 2;
-                    case CommonListingAdapter.VIEW_TYPE_NULL:
-                        return 2;
                     default:
                         return -1;
                 }
             }
         });
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                getWindow().setStatusBarColor(Color.TRANSPARENT);
-//                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-//            } else {
-//                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            }
-//        }
-
         currentpage = 1;
         Loadcatwisedata(currentpage);
+
+        //        mStartAppNativeAd.loadAd(
+//                new NativeAdPreferences()
+//                        .setAdsNumber(10)
+//                        .setAutoBitmapDownload(true)
+//                        .setPrimaryImageSize(2),
+//                mNativeAdListener);
     }
+
+    //    private AdEventListener mNativeAdListener = new AdEventListener() {
+//
+//        @Override
+//        public void onReceiveAd(Ad ad) {
+//            // Get the native ads
+//            catwiseadapter.setItems(mStartAppNativeAd.getNativeAds());
+//        }
+//
+//        @Override
+//        public void onFailedToReceiveAd(Ad ad) {
+//        }
+//    };
+
 
 
     public void Loadcatwisedata(int page) {
         if (page == 1) {
-            loadNativeAds(page);
             catwiseadapter.clearalldata();
         }
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -192,21 +220,32 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
             progress.setMessage("Loading Ad");
             progress.setCancelable(false);
             progress.show();
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
+            startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
                 @Override
-                public void run() {
+                public void onReceiveAd(Ad ad) {
+                    Constant.Adscountlisting = 1;
                     if (progress.isShowing()){
                         progress.dismiss();
                     }
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    }else{
-                        callnewpage();
-                    }
+                    startAppAd.showAd(new AdDisplayListener() {
+                        @Override
+                        public void adHidden(Ad ad) {
+                            callnewpage();
+                        }
+                        @Override
+                        public void adDisplayed(Ad ad) { }
+                        @Override
+                        public void adClicked(Ad ad) { }
+                        @Override
+                        public void adNotDisplayed(Ad ad) {
+                            callnewpage();
+                        }
+                    });
                 }
-            }, 1500);
-
+                @Override
+                public void onFailedToReceiveAd(Ad ad) {
+                }
+            });
         }else{
             Constant.Adscountlisting++;
             callnewpage();
@@ -216,27 +255,6 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
     public void callnewpage(){
         Intent intent = new Intent(CommonListingActivity.this, DetailActivity.class);
         startActivity(intent);
-    }
-
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mInterstitialAd.loadAd(adRequest);
-    }
-
-    private void initInterstitialAdPrepare() {
-        mInterstitialAd = new InterstitialAd(CommonListingActivity.this);
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.admob_interstitial_id));
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                Constant.Adscountlisting = 1;
-                callnewpage();
-                requestNewInterstitial();
-            }
-        });
-
-        requestNewInterstitial();
     }
 
 
@@ -278,11 +296,6 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
                     category_item_rv.setVisibility(View.VISIBLE);
                     no_data_tv.setVisibility(View.GONE);
                     catwiseadapter.adddata(statusData.getData(), getpagenumber);
-                    if (getpagenumber != 1){
-                        //if (!adLoader.isLoading()) {
-                            catwiseadapter.insertAdsInMenuItems(mNativeAds,getpagenumber);
-                       // }
-                    }
                 } else {
                     progressbar.setVisibility(View.GONE);
                     if (getpagenumber == 1) {
@@ -357,35 +370,6 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
         return super.onOptionsItemSelected(item);
     }
 
-
-    private void loadNativeAds(final int page) {
-
-        AdLoader.Builder builder = new AdLoader.Builder(CommonListingActivity.this, getResources().getString(R.string.admob_native_id));
-        adLoader = builder.forUnifiedNativeAd(
-                new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        mNativeAds.add(unifiedNativeAd);
-                        if (page == 1){
-                            if (!adLoader.isLoading()) {
-                                catwiseadapter.insertAdsInMenuItems(mNativeAds,page);
-                            }
-                        }
-                    }
-                }).withAdListener(
-                new AdListener() {
-                    @Override
-                    public void onAdFailedToLoad(int errorCode) {
-                        if (page == 1){
-                            if (!adLoader.isLoading()) {
-                                catwiseadapter.insertAdsInMenuItems(mNativeAds,page);
-                            }
-                        }
-                    }
-                }).build();
-
-        adLoader.loadAds(new AdRequest.Builder().build(), NUMBER_OF_ADS);
-    }
 }
 
 

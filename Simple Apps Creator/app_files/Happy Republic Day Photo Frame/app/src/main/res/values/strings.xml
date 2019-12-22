@@ -8,10 +8,16 @@
 
     <string name="see_alert_title">Watch this Video Ad to Download Your Beautiful Image</string>
 
+    <string name="startapp_id">211158529</string>
 
-
-    <string name="app_id">ca-app-pub-7071067147154248~8192194878</string>
-    <string name="interstial_id">ca-app-pub-7071067147154248/4061378177</string>
+    <string name="txt_Welcome">StartApp Interstitial Showcase</string>
+    <string name="txt_SecondActivity">Welcome to another Activity</string>
+    <string name="main_nextBtn">Next Activity</string>
+    <string name="main_rewardedBtn">Show Rewarded Video</string>
+    <string name="main_recyclerBtn">Native Ads in the RecyclerView</string>>
+    <string name="menu_ads">Personalized Ads</string>
+    <string name="list_row_title">Ad Title</string>
+    <string name="list_row_description">Ad Description</string>
 
     <string name="download_directory">Republic Day Photo Frames</string>
     <string name="download_imagename">Republic_Day</string>
@@ -624,4 +630,5 @@
         <item>u+1f4cd</item>
         <item>u+1f6a9</item>
     </string-array>
+
 </resources>

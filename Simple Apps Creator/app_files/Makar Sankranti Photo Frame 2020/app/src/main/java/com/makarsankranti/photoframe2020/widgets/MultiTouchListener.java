@@ -1,7 +1,7 @@
 package com.makarsankranti.photoframe2020.widgets;
 
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;

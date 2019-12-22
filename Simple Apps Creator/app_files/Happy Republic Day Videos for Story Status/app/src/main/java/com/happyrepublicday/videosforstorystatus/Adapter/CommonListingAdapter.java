@@ -4,27 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.formats.NativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.happyrepublicday.videosforstorystatus.R;
-import com.happyrepublicday.videosforstorystatus.UnifiedNativeAdViewHolder;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.happyrepublicday.videosforstorystatus.Constant.NUMBER_OF_ADS;
 
 public class CommonListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -33,8 +26,6 @@ public class CommonListingAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Context context;
     public static final int VIEW_TYPE_ITEM = 0;
     public static final int VIEW_TYPE_LOADING = 1;
-    public static final int AD_TYPE = 2;
-    public static final int VIEW_TYPE_NULL = 5;
     private String screentype = "";
     private static final int AD_DISPLAY_FREQUENCY = 10;
     int index = 0;
@@ -77,30 +68,6 @@ public class CommonListingAdapter extends RecyclerView.Adapter<RecyclerView.View
         notifyDataSetChanged();
     }
 
-    public void insertAdsInMenuItems(List<UnifiedNativeAd> mNativeAds, int page) {
-        try {
-            if (mNativeAds.size() <= 0) {
-                return;
-            }
-            if (page == 1) {
-                index = AD_DISPLAY_FREQUENCY;
-            }
-
-            for (UnifiedNativeAd ad : mNativeAds) {
-                if (index < mRecyclerViewItems.size()) {
-                    mRecyclerViewItems.add(index, mNativeAds.get(index % NUMBER_OF_ADS));
-                    index++;
-                    index = index + AD_DISPLAY_FREQUENCY;
-                } else {
-                    return;
-                }
-
-            }
-            notifyDataSetChanged();
-        } catch (Exception e) {
-
-        }
-    }
 
     public CommonListingAdapter(Context context, String screentype) {
         this.context = context;
@@ -124,24 +91,13 @@ public class CommonListingAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_progressbar, parent, false);
             return new ViewHolderLoading(view);
-        } else if (viewType == AD_TYPE) {
-            View unifiedNativeLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.ad_unified, parent, false);
-            return new UnifiedNativeAdViewHolder(unifiedNativeLayoutView);
-//            View view = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_facebook_ads, parent, false);
-//            return new FacebookNativeHolder(view);
-        } else if (viewType == VIEW_TYPE_NULL) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_null, parent, false);
-            return new NullVIewHolder(view);
         }
         return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof UnifiedNativeAdViewHolder) {
-            UnifiedNativeAd nativeAd = (UnifiedNativeAd) mRecyclerViewItems.get(position);
-            populateNativeAdView(nativeAd, ((UnifiedNativeAdViewHolder) holder).getAdView());
-        } else if (holder instanceof ViewHolderRow) {
+        if (holder instanceof ViewHolderRow) {
             ViewHolderRow userViewHolder = (ViewHolderRow) holder;
 
             final Item_collections itemobj = (Item_collections) mRecyclerViewItems.get(position);
@@ -182,8 +138,6 @@ public class CommonListingAdapter extends RecyclerView.Adapter<RecyclerView.View
         Object recyclerViewItem = mRecyclerViewItems.get(position);
         if (recyclerViewItem == null) {
             return VIEW_TYPE_LOADING;
-        } else if (recyclerViewItem instanceof UnifiedNativeAd) {
-            return AD_TYPE;
         } else {
             return VIEW_TYPE_ITEM;
         }
@@ -213,153 +167,6 @@ public class CommonListingAdapter extends RecyclerView.Adapter<RecyclerView.View
             super(v);
             image_latest = (ImageView) v.findViewById(R.id.image_latest);
             video_name = (TextView) itemView.findViewById(R.id.video_name);
-        }
-
-    }
-
-   /* public  class FacebookNativeHolder extends  RecyclerView.ViewHolder {
-        private final String TAG = "MainItemAdapter";
-        private LinearLayout nativeAdContainer;
-        private LinearLayout adView;
-        private NativeAd nativeAd;
-        public FacebookNativeHolder(View view) {
-            super(view);
-            loadNativeAd(view);
-        }
-
-        private void loadNativeAd(final View view) {
-
-            LinearLayout adContainer = (LinearLayout) view.findViewById(R.id.native_ad_container);
-            AdView adView = new AdView(context, context.getString(R.string.facebook_scroll_id), AdSize.RECTANGLE_HEIGHT_250);
-            adContainer.addView(adView);
-            adView.loadAd();
-
-//            nativeAd = new NativeAd(context,context.getString(R.string.facebook_native_id));
-//            nativeAd.setAdListener(new NativeAdListener() {
-//                @Override
-//                public void onMediaDownloaded(Ad ad) {
-//                    Log.e(TAG, "Native ad finished downloading all assets.");
-//                }
-//
-//                @Override
-//                public void onError(Ad ad, AdError adError) {
-//                    Log.e(TAG, "Native ad failed to load: " + adError.getErrorMessage());
-//                }
-//
-//                @Override
-//                public void onAdLoaded(Ad ad) {
-//                    Log.d(TAG, "Native ad is loaded and ready to be displayed!");
-//                    if (nativeAd == null || nativeAd != ad) {
-//                        return;
-//                    }
-//                    inflateAd(nativeAd,view);
-//                }
-//
-//                @Override
-//                public void onAdClicked(Ad ad) {
-//                    Log.d(TAG, "Native ad clicked!");
-//                }
-//
-//                @Override
-//                public void onLoggingImpression(Ad ad) {
-//                    Log.d(TAG, "Native ad impression logged!");
-//                }
-//            });
-//            nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
-        }
-
-//        private void inflateAd(NativeAd nativeAd, View view) {
-//
-//            nativeAd.unregisterView();
-//
-//            nativeAdContainer = view.findViewById(R.id.native_ad_container);
-//            LayoutInflater inflater = LayoutInflater.from(context);
-//            adView = (LinearLayout) inflater.inflate(R.layout.native_ad_layout_1, nativeAdContainer, false);
-//            nativeAdContainer.addView(adView);
-//
-//
-//            LinearLayout adChoicesContainer = view.findViewById(R.id.ad_choices_container);
-//            AdChoicesView adChoicesView = new AdChoicesView(context, nativeAd, true);
-//            adChoicesContainer.addView(adChoicesView, 0);
-//
-//            AdIconView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
-//            TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
-//            MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
-//            TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
-//            TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
-//            TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
-//            Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
-//
-//            nativeAdTitle.setText(nativeAd.getAdvertiserName());
-//            nativeAdBody.setText(nativeAd.getAdBodyText());
-//            nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-//            nativeAdCallToAction.setVisibility(nativeAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
-//            nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-//            sponsoredLabel.setText(nativeAd.getSponsoredTranslation());
-//
-//            List<View> clickableViews = new ArrayList<>();
-//            clickableViews.add(nativeAdTitle);
-//            clickableViews.add(nativeAdCallToAction);
-//
-//            nativeAd.registerViewForInteraction(
-//                    adView,
-//                    nativeAdMedia,
-//                    nativeAdIcon,
-//                    clickableViews);
-//        }
-
-    }*/
-
-    private void populateNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
-
-        ((TextView) adView.getHeadlineView()).setText(nativeAd.getHeadline());
-        ((TextView) adView.getBodyView()).setText(nativeAd.getBody());
-        ((Button) adView.getCallToActionView()).setText(nativeAd.getCallToAction());
-
-        NativeAd.Image icon = nativeAd.getIcon();
-
-        if (icon == null) {
-            adView.getIconView().setVisibility(View.INVISIBLE);
-        } else {
-            ((ImageView) adView.getIconView()).setImageDrawable(icon.getDrawable());
-            adView.getIconView().setVisibility(View.VISIBLE);
-        }
-
-        if (nativeAd.getPrice() == null) {
-            adView.getPriceView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getPriceView().setVisibility(View.VISIBLE);
-            ((TextView) adView.getPriceView()).setText(nativeAd.getPrice());
-        }
-
-        if (nativeAd.getStore() == null) {
-            adView.getStoreView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getStoreView().setVisibility(View.VISIBLE);
-            ((TextView) adView.getStoreView()).setText(nativeAd.getStore());
-        }
-
-        if (nativeAd.getStarRating() == null) {
-            adView.getStarRatingView().setVisibility(View.INVISIBLE);
-        } else {
-            ((RatingBar) adView.getStarRatingView()).setRating(nativeAd.getStarRating().floatValue());
-            adView.getStarRatingView().setVisibility(View.VISIBLE);
-        }
-
-        if (nativeAd.getAdvertiser() == null) {
-            adView.getAdvertiserView().setVisibility(View.INVISIBLE);
-        } else {
-            ((TextView) adView.getAdvertiserView()).setText(nativeAd.getAdvertiser());
-            adView.getAdvertiserView().setVisibility(View.VISIBLE);
-        }
-
-        // Assign native ad object to the native view.
-        adView.setNativeAd(nativeAd);
-    }
-
-    public class NullVIewHolder extends RecyclerView.ViewHolder {
-        public NullVIewHolder(View view) {
-            super(view);
         }
 
     }

@@ -201,22 +201,12 @@
 
                     </LinearLayout>
 
-                    <com.google.android.gms.ads.AdView
-                        xmlns:ads="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/adView"
+                    <RelativeLayout
+                        android:id="@+id/mainLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        ads:adSize="SMART_BANNER"
-                        ads:adUnitId="@string/admob_banner_id"
-                        android:layout_alignParentBottom="true" />
-
-<!--                    <com.facebook.ads.NativeAdLayout-->
-<!--                        android:id="@+id/native_banner_ad_container"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentBottom="true" />-->
+                        android:layout_marginBottom="10dp"/>
 
                     <RelativeLayout
                         android:id="@+id/actiondownload_rl"

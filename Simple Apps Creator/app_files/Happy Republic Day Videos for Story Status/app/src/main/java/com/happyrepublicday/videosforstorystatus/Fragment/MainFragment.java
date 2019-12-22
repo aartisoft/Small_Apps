@@ -33,9 +33,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -53,6 +50,10 @@ import com.happyrepublicday.videosforstorystatus.R;
 import com.happyrepublicday.videosforstorystatus.gettersetter.HomeData;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
 import com.happyrepublicday.videosforstorystatus.widgets.EnchantedViewPager;
+import com.startapp.android.publish.adsCommon.Ad;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
+import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -91,7 +92,8 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     PullRefreshLayout swipeRefreshLayout;
     int currentCount = 0;
     View rootView;
-    private InterstitialAd mInterstitialAd;
+
+    StartAppAd startAppAd;
 
     public MainFragment() {
     }
@@ -100,6 +102,18 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        startAppAd.onSaveInstanceState(outState);
+    }
+
+    protected void onRestoreInstanceState (Bundle savedInstanceState){
+        startAppAd.onRestoreInstanceState(savedInstanceState);
+        // super.onRestoreInstanceState(savedInstanceState);
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -124,6 +138,7 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.mainhome_fragment, container, false);
 
+        startAppAd = new StartAppAd(getActivity());
         gson = new Gson();
         this.conn = null;
         constantfile = new Constant();
@@ -152,9 +167,6 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
-
-        initInterstitialAdPrepare();
-
 
         ViewGroup.LayoutParams paramsslider = top_dope_rl.getLayoutParams();
         paramsslider.height = (int) (width / 1.9);
@@ -269,44 +281,10 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     public void opennextviewonclick(String opennext) {
         opentype = opennext;
         if (opentype.equals("listing")) {
-            final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
-            progress.setMessage("Loading Ad");
-            progress.setCancelable(false);
-            progress.show();
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (progress.isShowing()){
-                        progress.dismiss();
-                    }
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    }else{
-                        onAdsresponce();
-                    }
-                }
-            }, 1500);
+            callingadsonclick();
         } else if (opentype.equals("detail")) {
             if (Constant.Adscount == 2) {
-                final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
-                progress.setMessage("Loading Ad");
-                progress.setCancelable(false);
-                progress.show();
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (progress.isShowing()){
-                            progress.dismiss();
-                        }
-                        if (mInterstitialAd.isLoaded()) {
-                            mInterstitialAd.show();
-                        }else{
-                            onAdsresponce();
-                        }
-                    }
-                }, 1500);
+                callingadsonclick();
             } else {
                 Constant.Adscount++;
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
@@ -314,28 +292,43 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
 
             }
         }
-
     }
 
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mInterstitialAd.loadAd(adRequest);
-    }
-
-    private void initInterstitialAdPrepare() {
-        mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.admob_interstitial_id));
-
-        mInterstitialAd.setAdListener(new AdListener() {
+    public void callingadsonclick(){
+        final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
+        progress.setMessage("Loading Ad");
+        progress.setCancelable(false);
+        progress.show();
+        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
             @Override
-            public void onAdClosed() {
+            public void onReceiveAd(Ad ad) {
                 Constant.Adscountlisting = 1;
-                onAdsresponce();
-                requestNewInterstitial();
+                if (progress.isShowing()){
+                    progress.dismiss();
+                }
+                startAppAd.showAd(new AdDisplayListener() {
+                    @Override
+                    public void adHidden(Ad ad) {
+                        onAdsresponce();
+                    }
+                    @Override
+                    public void adDisplayed(Ad ad) { }
+                    @Override
+                    public void adClicked(Ad ad) { }
+                    @Override
+                    public void adNotDisplayed(Ad ad) {
+                        onAdsresponce();
+                    }
+                });
+            }
+            @Override
+            public void onFailedToReceiveAd(Ad ad) {
+                Log.e("gettingerrorad","::    "+ad.getErrorMessage());
+                if (progress.isShowing()){
+                    progress.dismiss();
+                }
             }
         });
-
-        requestNewInterstitial();
     }
 
     public void LoadImagedata() {

@@ -4,10 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.InterstitialAd;
-import com.facebook.ads.InterstitialAdListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.makarsankranti.videostatus2020.gettersetter.Item_collections;
 
@@ -110,67 +106,4 @@ public class Constant {
         return temp_array;
     }
 
-    Callingafterads callingafter;
-
-    public void loadInterstitialAd(Context mContext, final Callingafterads callingafter) {
-
-        this.callingafter = callingafter;
-
-        final ProgressDialog progress = new ProgressDialog(mContext, R.style.MyAlertDialogStyle);
-        progress.setMessage("Loading Ad");
-        progress.setCancelable(false);
-        progress.show();
-        final InterstitialAd interstitialAd = new InterstitialAd(mContext, mContext.getResources().getString(R.string.facebook_interstitial_id));
-        interstitialAd.loadAd();
-        interstitialAd.setAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
-                }
-                if (interstitialAd != null) {
-                    interstitialAd.destroy();
-                }
-                callingafter.onAdsresponce(true);
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
-                }
-                if (interstitialAd != null) {
-                    interstitialAd.destroy();
-                }
-                callingafter.onAdsresponce(true);
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
-                }
-                if (interstitialAd.isAdLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-            }
-        });
-
-    }
-
-    public interface Callingafterads {
-        void onAdsresponce(Boolean showing);
-    }
 }

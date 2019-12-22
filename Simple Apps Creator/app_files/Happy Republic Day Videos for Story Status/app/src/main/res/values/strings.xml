@@ -34,19 +34,15 @@
     <string name="default_notification_channel_id">10001_HappyRepublicDay</string>
     <string name="default_notification_name">HappyRepublicDayVS_notification</string>
 
+    <string name="startapp_id">211144316</string>
 
-
-    <!--Admob IDs-->
-    <string name="admob_banner_id">ca-app-pub-7071067147154248/4276112547</string>
-    <string name="admob_interstitial_id">ca-app-pub-7071067147154248/6654879789</string>
-    <string name="admob_native_id">ca-app-pub-7071067147154248/9089471430</string>
-
-
-    <!--IMG_16_9_LINK#-->
-    <string name="facebook_banner_id">453484665310734_453484715310729</string>
-    <string name="facebook_interstitial_id">453484665310734_453484708644063</string>
-    <string name="facebook_native_id">453484665310734_453484701977397</string>
-    <string name="facebook_scroll_id">453484665310734_453484718644062</string>
-
+    <string name="txt_Welcome">StartApp Interstitial Showcase</string>
+    <string name="txt_SecondActivity">Welcome to another Activity</string>
+    <string name="main_nextBtn">Next Activity</string>
+    <string name="main_rewardedBtn">Show Rewarded Video</string>
+    <string name="main_recyclerBtn">Native Ads in the RecyclerView</string>>
+    <string name="menu_ads">Personalized Ads</string>
+    <string name="list_row_title">Ad Title</string>
+    <string name="list_row_description">Ad Description</string>
 
 </resources>

@@ -41,9 +41,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.happyrepublicday.videosforstorystatus.PrefManager;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -79,6 +76,9 @@ import com.happyrepublicday.videosforstorystatus.Utility;
 import com.happyrepublicday.videosforstorystatus.gettersetter.ItemUpdate;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
 import com.squareup.picasso.Picasso;
+import com.startapp.android.publish.ads.banner.Banner;
+import com.startapp.android.publish.ads.banner.BannerListener;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import org.json.JSONObject;
 
@@ -150,23 +150,20 @@ public class DetailActivity extends AppCompatActivity {
     Boolean mExoPlayerFullscreen = false;
     Dialog mFullScreenDialog;
     public static final String NOTIFICATION_CHANNEL_ID = "10001_HappyRepublicDay";
-    private AdView mAdView;
 
     private SimpleExoPlayer player;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, getResources().getString(R.string.startapp_id), false);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
         setContentView(R.layout.activity_detail);
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mTopToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        if (!AudienceNetworkAds.isInAdsProcess(DetailActivity.this)) {
-//            AudienceNetworkAds.initialize(DetailActivity.this);
-//        }
 
         this.conn = null;
         gson = new Gson();
@@ -180,13 +177,26 @@ public class DetailActivity extends AppCompatActivity {
         initAction();
         showData();
 
-        CallAddView(getvideodata.getId());
-        viewAdstype(getvideodata.getIs_type().toLowerCase());
-        MobileAds.initialize(this);
+        RelativeLayout mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        Banner startAppBanner = new Banner(DetailActivity.this, new BannerListener() {
+            @Override
+            public void onReceiveAd(View banner) {
+            }
+            @Override
+            public void onFailedToReceiveAd(View banner) {
+            }
+            @Override
+            public void onClick(View banner) {
+            }
+        });
+        RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        mainLayout.addView(startAppBanner, bannerParameters);
+
+        CallAddView(getvideodata.getId());
+
     }
 
     public void setdisableclick() {
@@ -904,92 +914,6 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void viewAdstype(String getviewtype) {
-       // findViewById(R.id.adView).setVisibility(View.VISIBLE);
-//        if (getviewtype.equals("portrait")) {
-//            findViewById(R.id.adView).setVisibility(View.VISIBLE);
-////            adViewbanner = new AdView(this, getResources().getString(R.string.facebook_banner_id), AdSize.BANNER_HEIGHT_50);
-////            LinearLayout adContainer = (LinearLayout) findViewById(R.id.ads);
-////            adContainer.addView(adViewbanner);
-////            adViewbanner.loadAd();
-//        } else {
-//
-//            nativeAd = new NativeAd(DetailActivity.this,getString(R.string.facebook_native_id));
-//            nativeAd.setAdListener(new NativeAdListener() {
-//                @Override
-//                public void onMediaDownloaded(Ad ad) {
-//                    Log.e("detailactivity", "Native ad finished downloading all assets.");
-//                }
-//
-//                @Override
-//                public void onError(Ad ad, AdError adError) {
-//                    Log.e("detailactivity", "Native ad failed to load: " + adError.getErrorMessage());
-//                }
-//
-//                @Override
-//                public void onAdLoaded(Ad ad) {
-//                    Log.d("detailactivity", "Native ad is loaded and ready to be displayed!");
-//                    if (nativeAd == null || nativeAd != ad) {
-//                        return;
-//                    }
-//                    inflateAd(nativeAd);
-//                }
-//
-//                @Override
-//                public void onAdClicked(Ad ad) {
-//                    Log.d("detailactivity", "Native ad clicked!");
-//                }
-//
-//                @Override
-//                public void onLoggingImpression(Ad ad) {
-//                    Log.d("detailactivity", "Native ad impression logged!");
-//                }
-//            });
-//            nativeAd.loadAd(NativeAd.MediaCacheFlag.ALL);
-//
-//        }
-    }
-
-
-//    private void inflateAd(NativeAd nativeAd) {
-//
-//        nativeAd.unregisterView();
-//        LinearLayout adContainer = (LinearLayout) findViewById(R.id.ads);
-//
-//        LayoutInflater inflater = LayoutInflater.from(DetailActivity.this);
-//        adView = (LinearLayout) inflater.inflate(R.layout.native_ad_layout_1, adContainer, false);
-//        adContainer.addView(adView);
-//
-//
-//        LinearLayout adChoicesContainer = findViewById(R.id.ad_choices_container);
-//        AdChoicesView adChoicesView = new AdChoicesView(DetailActivity.this, nativeAd, true);
-//        adChoicesContainer.addView(adChoicesView, 0);
-//
-//        AdIconView nativeAdIcon = adView.findViewById(R.id.native_ad_icon);
-//        TextView nativeAdTitle = adView.findViewById(R.id.native_ad_title);
-//        MediaView nativeAdMedia = adView.findViewById(R.id.native_ad_media);
-//        TextView nativeAdSocialContext = adView.findViewById(R.id.native_ad_social_context);
-//        TextView nativeAdBody = adView.findViewById(R.id.native_ad_body);
-//        TextView sponsoredLabel = adView.findViewById(R.id.native_ad_sponsored_label);
-//        Button nativeAdCallToAction = adView.findViewById(R.id.native_ad_call_to_action);
-//
-//        nativeAdTitle.setText(nativeAd.getAdvertiserName());
-//        nativeAdBody.setText(nativeAd.getAdBodyText());
-//        nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
-//        nativeAdCallToAction.setVisibility(nativeAd.hasCallToAction() ? View.VISIBLE : View.INVISIBLE);
-//        nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
-//        sponsoredLabel.setText(nativeAd.getSponsoredTranslation());
-//
-//        List<View> clickableViews = new ArrayList<>();
-//        clickableViews.add(nativeAdTitle);
-//        clickableViews.add(nativeAdCallToAction);
-//
-//        nativeAd.registerViewForInteraction(
-//                adView,
-//                nativeAdMedia,
-//                nativeAdIcon,
-//                clickableViews);
-//    }
 
     private void initFullscreenDialog() {
 

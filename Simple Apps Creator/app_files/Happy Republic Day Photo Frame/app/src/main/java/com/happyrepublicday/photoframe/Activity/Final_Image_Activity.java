@@ -1,31 +1,26 @@
 package com.happyrepublicday.photoframe.Activity;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.happyrepublicday.photoframe.ConnectionDetector;
 import com.happyrepublicday.photoframe.Constant;
 import com.happyrepublicday.photoframe.R;
 import com.happyrepublicday.photoframe.Utility;
+import com.startapp.android.publish.adsCommon.Ad;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
+import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
 /**
  * Created by Kakadiyas on 11-07-2017.
@@ -44,8 +39,33 @@ public class Final_Image_Activity extends AppCompatActivity {
     String Actiontype = "";
     private static final String actiondownload = "download";
     private static final String actionshare = "share";
-    InterstitialAd mInterstitialAd;
 
+    StartAppAd startAppAd = new StartAppAd(Final_Image_Activity.this);
+
+
+    @Override
+    protected void onSaveInstanceState (Bundle outState){
+        super.onSaveInstanceState(outState);
+        startAppAd.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Bundle savedInstanceState){
+        startAppAd.onRestoreInstanceState(savedInstanceState);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +93,7 @@ public class Final_Image_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Actiontype = actiondownload;
-                loadInterstitialAd();
+                openingadsoncall();
             }
         });
 
@@ -81,72 +101,56 @@ public class Final_Image_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Actiontype = actionshare;
-                loadInterstitialAd();
+                openingadsoncall();
             }
         });
 
     }
 
-    private void loadInterstitialAd() {
+    public void openingadsoncall(){
         final ProgressDialog progress = new ProgressDialog(Final_Image_Activity.this, R.style.MyAlertDialogStyle);
         progress.setMessage("Loading Ad");
         progress.setCancelable(false);
         progress.show();
-        mInterstitialAd = new InterstitialAd(Final_Image_Activity.this);
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstial_id));
-        mInterstitialAd.setAdListener(new AdListener() {
-
+        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
             @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                progress.dismiss();
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
+            public void onReceiveAd(Ad ad) {
                 if (progress.isShowing()){
                     progress.dismiss();
                 }
-                if (Actiontype.equals(actiondownload)) {
-                    constantfile.download_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
-                } else if (Actiontype.equals(actionshare)) {
-                    constantfile.share_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
-                }
+                startAppAd.showAd(new AdDisplayListener() {
+                    @Override
+                    public void adHidden(Ad ad) {
+                        callingactiontype();
+                    }
+                    @Override
+                    public void adDisplayed(Ad ad) { }
+                    @Override
+                    public void adClicked(Ad ad) { }
+                    @Override
+                    public void adNotDisplayed(Ad ad) {
+                        callingactiontype();
+                    }
+                });
             }
-
             @Override
-            public void onAdClosed() {
-                super.onAdClosed();
+            public void onFailedToReceiveAd(Ad ad) {
                 if (progress.isShowing()){
                     progress.dismiss();
                 }
-                if (Actiontype.equals(actiondownload)) {
-                    constantfile.download_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
-                } else if (Actiontype.equals(actionshare)) {
-                    constantfile.share_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
-                }
+                callingactiontype();
             }
         });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mInterstitialAd.loadAd(adRequest);
     }
 
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void callingactiontype(){
+        if (Actiontype.equals(actiondownload)) {
+            constantfile.download_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
+        } else if (Actiontype.equals(actionshare)) {
+            constantfile.share_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
+        }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
 
     @Override
     public void onDestroy() {

@@ -46,25 +46,25 @@
     </RelativeLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFrameView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/radio_menubottom"
         android:background="@android:color/transparent"
         android:orientation="horizontal"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/row_filter_view" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFilterView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/radio_menubottom"
         android:background="@android:color/transparent"
         android:orientation="horizontal"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/row_filter_view" />
 
 

@@ -31,7 +31,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.happyrepublicday.videosforstorystatus.PrefManager;
-import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -57,6 +56,8 @@ import com.happyrepublicday.videosforstorystatus.Fragment.MainFragment;
 import com.happyrepublicday.videosforstorystatus.Fragment.PrivacyPolicyFragment;
 import com.happyrepublicday.videosforstorystatus.R;
 import com.happyrepublicday.videosforstorystatus.gettersetter.ItemUpdate;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import org.json.JSONObject;
 
@@ -84,18 +85,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
 
 
+    StartAppAd startAppAd = new StartAppAd(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, getResources().getString(R.string.startapp_id), true);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
+        startAppAd.disableSplash();
+
 
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        if (!AudienceNetworkAds.isInAdsProcess(MainActivity.this)){
-            AudienceNetworkAds.initialize(MainActivity.this);
-        }
 
         title_text = getResources().getString(R.string.app_name);
         toolbar.setTitle(title_text);
@@ -223,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-
+        startAppAd.onResume();
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
             @Override
             public void onSuccess(AppUpdateInfo appUpdateInfo) {
@@ -237,6 +239,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
+
 
 
 

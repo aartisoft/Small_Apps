@@ -4,26 +4,42 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
 import com.happyrepublicday.photoframe.Adapter.FrameItemAdapter;
 import com.happyrepublicday.photoframe.ConnectionDetector;
 import com.happyrepublicday.photoframe.Constant;
 import com.happyrepublicday.photoframe.R;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.startapp.android.publish.adsCommon.Ad;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
+import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
+import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,11 +59,19 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
     TextView no_data_text;
     FrameItemAdapter mAdapter;
     private AlertDialog alert;
-    InterstitialAd mInterstitialAd;
+
+    AppUpdateManager appUpdateManager;
+    private final static int MY_REQUEST_CODE = 111;
+    com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+
+    StartAppAd startAppAd = new StartAppAd(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, getResources().getString(R.string.startapp_id), true);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
+        startAppAd.disableSplash();
         setContentView(R.layout.activity_main);
 
         ActionBar action = getSupportActionBar();
@@ -88,6 +112,63 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
         mAdapter.notifyDataSetChanged();
 
 
+
+        appUpdateManager = AppUpdateManagerFactory.create(MainActivity.this);
+
+        appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                    updatestart(appUpdateInfo);
+                }
+            }
+        });
+    }
+
+    public void updatestart(AppUpdateInfo appUpdateInfo){
+        InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
+            @Override
+            public void onStateUpdate(InstallState installState) {
+                if (installState.installStatus() == InstallStatus.DOWNLOADED) {
+                    // After the update is downloaded, show a notification
+                    // and request user confirmation to restart the app.
+                    popupSnackbarForCompleteUpdate();
+                }
+            }
+        };
+        appUpdateManager.registerListener(listener);
+        try {
+            appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.FLEXIBLE,
+                    this,
+                    MY_REQUEST_CODE);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void popupSnackbarForCompleteUpdate() {
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.content_main), "An update has just been downloaded.", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("RESTART", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                appUpdateManager.completeUpdate();
+            }
+        });
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+        TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+        TextView textaction = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+        textView.setTextSize(16);
+        textaction.setTextSize(18);
+        textView.setTextColor(Color.BLACK);
+        textaction.setTextColor(Color.BLACK);
+        snackbar.show();
     }
 
     private List<String> getImage(Context context) throws IOException {
@@ -103,6 +184,18 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
         List<String> it = Arrays.asList(files);
         return it;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+               Log.e("Update flow failed" ,""+ resultCode);
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+    }
+
 
 
     @Override
@@ -142,52 +235,66 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
 
     @Override
     public void onItemClick(int position, View v) {
-        loadInterstitialAd(position);
-    }
-
-
-    private void loadInterstitialAd(final int pos) {
         final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.MyAlertDialogStyle);
         progress.setMessage("Loading Ad");
         progress.setCancelable(false);
         progress.show();
-        mInterstitialAd = new InterstitialAd(MainActivity.this);
-        mInterstitialAd.setAdUnitId(getResources().getString(R.string.interstial_id));
-        mInterstitialAd.setAdListener(new AdListener() {
-
+        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
             @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                progress.dismiss();
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
+            public void onReceiveAd(Ad ad) {
                 if (progress.isShowing()){
                     progress.dismiss();
                 }
-                Constant.selectedframe = pos;
-                Intent selectimage = new Intent(MainActivity.this, Select_Image_Activity.class);
-                startActivity(selectimage);
+                startAppAd.showAd(new AdDisplayListener() {
+                    @Override
+                    public void adHidden(Ad ad) {
+                        callnewpage(position);
+                    }
+                    @Override
+                    public void adDisplayed(Ad ad) { }
+                    @Override
+                    public void adClicked(Ad ad) { }
+                    @Override
+                    public void adNotDisplayed(Ad ad) {
+                        callnewpage(position);
+                    }
+                });
             }
-
             @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                if (progress.isShowing()){
-                    progress.dismiss();
-                }
-                Constant.selectedframe = pos;
-                Intent selectimage = new Intent(MainActivity.this, Select_Image_Activity.class);
-                startActivity(selectimage);
+            public void onFailedToReceiveAd(Ad ad) {
             }
         });
+    }
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mInterstitialAd.loadAd(adRequest);
+
+    private void callnewpage(final int pos) {
+        Constant.selectedframe = pos;
+        Intent selectimage = new Intent(MainActivity.this, Select_Image_Activity.class);
+        startActivity(selectimage);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                    popupSnackbarForCompleteUpdate();
+                }
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                    // If an in-app update is already running, resume the update.
+                    updatestart(appUpdateInfo);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
     }
 }

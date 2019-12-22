@@ -35,7 +35,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.makarsankranti.videostatus2020.PrefManager;
-import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -61,6 +60,8 @@ import com.makarsankranti.videostatus2020.Fragment.MainFragment;
 import com.makarsankranti.videostatus2020.Fragment.PrivacyPolicyFragment;
 import com.makarsankranti.videostatus2020.R;
 import com.makarsankranti.videostatus2020.gettersetter.ItemUpdate;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import org.json.JSONObject;
 
@@ -86,20 +87,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     AppUpdateManager appUpdateManager;
     private final static int MY_REQUEST_CODE = 111;
     com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
-
+    StartAppAd startAppAd = new StartAppAd(this);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StartAppSDK.init(this, "211774923", true);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
+        startAppAd.disableSplash();
+
 
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        if (!AudienceNetworkAds.isInAdsProcess(MainActivity.this)){
-            AudienceNetworkAds.initialize(MainActivity.this);
-        }
 
         title_text = getResources().getString(R.string.app_name);
         toolbar.setTitle(title_text);
@@ -224,23 +225,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
-            @Override
-            public void onSuccess(AppUpdateInfo appUpdateInfo) {
-                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                    popupSnackbarForCompleteUpdate();
-                }
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                    // If an in-app update is already running, resume the update.
-                    updatestart(appUpdateInfo);
-                }
-            }
-        });
-    }
 
 
 
@@ -256,6 +240,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startAppAd.onResume();
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                    popupSnackbarForCompleteUpdate();
+                }
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                    // If an in-app update is already running, resume the update.
+                    updatestart(appUpdateInfo);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        startAppAd.onPause();
+    }
 
 
 

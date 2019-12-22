@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-public class CustomButtonOblique extends android.support.v7.widget.AppCompatButton {
+public class CustomButtonOblique extends androidx.appcompat.widget.AppCompatButton {
 
     public CustomButtonOblique (Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
