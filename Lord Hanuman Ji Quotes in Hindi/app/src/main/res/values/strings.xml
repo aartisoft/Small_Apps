@@ -18,7 +18,7 @@
     <string name="facebook_interstitial_id">IMG_16_9_LINK#</string>
 
     <!--admob ads id-->
-    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="app_id">  ca-app-pub-3940256099942544~3347511713</string>
     <string name="interstial_id">ca-app-pub-3940256099942544/1033173712</string>
 
 </resources>
