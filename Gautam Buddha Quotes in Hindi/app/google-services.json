@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1098614929473",
+    "firebase_url": "https://gautam-buddha-quotes-in-hindi.firebaseio.com",
+    "project_id": "gautam-buddha-quotes-in-hindi",
+    "storage_bucket": "gautam-buddha-quotes-in-hindi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098614929473:android:f7c83cfcfae9c158dd6ec0",
+        "android_client_info": {
+          "package_name": "com.techcorp.gautambuddha.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098614929473-ie1475r5mcrq1nbvsac0gku3n6d2i845.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.gautambuddha.quotes",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "1098614929473-gjfjcr7fg3dm1k56aqo0u8dn83lavfd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrEXa4P1JjZCacpZRXYHiBSw3qunoM8eI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098614929473-gjfjcr7fg3dm1k56aqo0u8dn83lavfd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
