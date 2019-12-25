@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "967299665221",
+    "firebase_url": "https://abdul-kalam-motivational-q.firebaseio.com",
+    "project_id": "abdul-kalam-motivational-q",
+    "storage_bucket": "abdul-kalam-motivational-q.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967299665221:android:0b5431893a7bcfd905422c",
+        "android_client_info": {
+          "package_name": "com.techcorp.abdulkalam.quotesinhindi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967299665221-rpi4l9ulruop01mtg0sm6iamb71td8no.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.abdulkalam.quotesinhindi",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "967299665221-gmocirdf1a223nvu1r5a7q3rq8biesmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHabT5BcM92-u-wz09htpdLt2hVeUkkEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967299665221-gmocirdf1a223nvu1r5a7q3rq8biesmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

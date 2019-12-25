@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "752183925296",
+    "firebase_url": "https://swami-vivekananda-best-quotes.firebaseio.com",
+    "project_id": "swami-vivekananda-best-quotes",
+    "storage_bucket": "swami-vivekananda-best-quotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752183925296:android:c32ba729ffb93fc66cabf5",
+        "android_client_info": {
+          "package_name": "com.techcorp.swamivivekananda.bestquotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752183925296-v8a9fmond2ju7pmidhj91r06oqpqgjvr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.swamivivekananda.bestquotes",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "752183925296-cudh4dleiracuf3b1fjbggnv4o4r5n2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATMM40bnkZF0A2fn5a9IDq7xO3vO5pCAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752183925296-cudh4dleiracuf3b1fjbggnv4o4r5n2u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
