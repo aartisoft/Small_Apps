@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StartAppSDK.init(this, "211774923", true);
-        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), true);
         startAppAd.disableSplash();
 
 

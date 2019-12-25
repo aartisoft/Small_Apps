@@ -104,6 +104,7 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
         startAppAd.onSaveInstanceState(outState);
     }
 
+
     protected void onRestoreInstanceState (Bundle savedInstanceState){
         startAppAd.onRestoreInstanceState(savedInstanceState);
        // super.onRestoreInstanceState(savedInstanceState);

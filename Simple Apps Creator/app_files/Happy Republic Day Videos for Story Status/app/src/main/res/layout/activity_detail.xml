@@ -206,7 +206,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp">
+
+                        <com.appnext.banners.BannerView
+                            xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            ads:bannerSize="BANNER"
+                            ads:placementId="@string/appnext_placement_id"/>
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/actiondownload_rl"

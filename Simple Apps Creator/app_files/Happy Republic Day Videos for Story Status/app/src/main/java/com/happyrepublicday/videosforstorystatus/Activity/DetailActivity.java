@@ -41,6 +41,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.appnext.banners.BannerAdRequest;
+import com.appnext.banners.BannerView;
 import com.happyrepublicday.videosforstorystatus.PrefManager;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -76,9 +78,6 @@ import com.happyrepublicday.videosforstorystatus.Utility;
 import com.happyrepublicday.videosforstorystatus.gettersetter.ItemUpdate;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
 import com.squareup.picasso.Picasso;
-import com.startapp.android.publish.ads.banner.Banner;
-import com.startapp.android.publish.ads.banner.BannerListener;
-import com.startapp.android.publish.adsCommon.StartAppSDK;
 
 import org.json.JSONObject;
 
@@ -151,13 +150,13 @@ public class DetailActivity extends AppCompatActivity {
     Dialog mFullScreenDialog;
     public static final String NOTIFICATION_CHANNEL_ID = "10001_HappyRepublicDay";
 
+    BannerView bannerView;
+
     private SimpleExoPlayer player;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StartAppSDK.init(this, getResources().getString(R.string.startapp_id), false);
-        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
         setContentView(R.layout.activity_detail);
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -179,21 +178,9 @@ public class DetailActivity extends AppCompatActivity {
 
         RelativeLayout mainLayout = (RelativeLayout)findViewById(R.id.mainLayout);
 
-        Banner startAppBanner = new Banner(DetailActivity.this, new BannerListener() {
-            @Override
-            public void onReceiveAd(View banner) {
-            }
-            @Override
-            public void onFailedToReceiveAd(View banner) {
-            }
-            @Override
-            public void onClick(View banner) {
-            }
-        });
-        RelativeLayout.LayoutParams bannerParameters = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        mainLayout.addView(startAppBanner, bannerParameters);
+        bannerView = (BannerView) findViewById(R.id.banner);
+        BannerAdRequest banner_request = new BannerAdRequest();
+        bannerView.loadAd(banner_request);
 
         CallAddView(getvideodata.getId());
 
@@ -996,6 +983,12 @@ public class DetailActivity extends AppCompatActivity {
         notif.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(1, notif);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bannerView.destroy();
     }
 
 }

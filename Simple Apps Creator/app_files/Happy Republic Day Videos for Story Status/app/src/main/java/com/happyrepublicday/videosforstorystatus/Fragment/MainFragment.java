@@ -28,6 +28,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.appnext.ads.AdsError;
+import com.appnext.ads.interstitial.Interstitial;
+import com.appnext.core.AppnextAdCreativeType;
+import com.appnext.core.callbacks.OnAdClicked;
+import com.appnext.core.callbacks.OnAdClosed;
+import com.appnext.core.callbacks.OnAdError;
+import com.appnext.core.callbacks.OnAdLoaded;
+import com.appnext.core.callbacks.OnAdOpened;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -35,9 +43,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.happyrepublicday.videosforstorystatus.Activity.CommonListingActivity;
 import com.happyrepublicday.videosforstorystatus.Activity.DetailActivity;
 import com.happyrepublicday.videosforstorystatus.Adapter.HomeFullItemAdapter;
@@ -50,10 +55,9 @@ import com.happyrepublicday.videosforstorystatus.R;
 import com.happyrepublicday.videosforstorystatus.gettersetter.HomeData;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
 import com.happyrepublicday.videosforstorystatus.widgets.EnchantedViewPager;
-import com.startapp.android.publish.adsCommon.Ad;
-import com.startapp.android.publish.adsCommon.StartAppAd;
-import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
-import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -93,7 +97,8 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     int currentCount = 0;
     View rootView;
 
-    StartAppAd startAppAd;
+    Interstitial interstitial_Ad;
+
 
     public MainFragment() {
     }
@@ -101,17 +106,6 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){
-        super.onSaveInstanceState(outState);
-        startAppAd.onSaveInstanceState(outState);
-    }
-
-    protected void onRestoreInstanceState (Bundle savedInstanceState){
-        startAppAd.onRestoreInstanceState(savedInstanceState);
-        // super.onRestoreInstanceState(savedInstanceState);
     }
 
 
@@ -138,7 +132,6 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.mainhome_fragment, container, false);
 
-        startAppAd = new StartAppAd(getActivity());
         gson = new Gson();
         this.conn = null;
         constantfile = new Constant();
@@ -162,6 +155,8 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
         progressbar_trending = (ProgressBar) rootView.findViewById(R.id.progressbar_trending);
         progressbar_latest.setVisibility(View.GONE);
         progressbar_trending.setVisibility(View.GONE);
+
+        intializeappnextads();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -253,7 +248,9 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     @Override
     public void onResume() {
         super.onResume();
-
+//        if (interstitial_Ad != null && !interstitial_Ad.isAdLoaded()){
+//            loadappnextads();
+//        }
     }
 
     @Override
@@ -294,41 +291,84 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
         }
     }
 
+    public void intializeappnextads(){
+        interstitial_Ad = new Interstitial(getActivity(), "ADD_HERE_YOUR_PLACEMENT_ID");
+        //interstitial_Ad = new Interstitial(getActivity(), getActivity().getResources().getString(R.string.appnext_placement_id));
+        interstitial_Ad.setOnAdLoadedCallback(new OnAdLoaded() {
+            @Override
+            public void adLoaded(String bannerId, AppnextAdCreativeType creativeType) {
+
+            }
+        });
+        interstitial_Ad.setOnAdOpenedCallback(new OnAdOpened() {
+            @Override
+            public void adOpened() {
+
+            }
+        });
+        interstitial_Ad.setOnAdClickedCallback(new OnAdClicked() {
+            @Override
+            public void adClicked() {
+
+            }
+        });
+        interstitial_Ad.setOnAdClosedCallback(new OnAdClosed() {
+            @Override
+            public void onAdClosed() {
+                onAdsresponce();
+                loadappnextads();
+            }
+        });
+        interstitial_Ad.setOnAdErrorCallback(new OnAdError() {
+            @Override
+            public void adError(String error) {
+                switch (error){
+                    case AdsError.NO_ADS:
+                        Log.v("appnext", "no ads");
+                        break;
+                    case AdsError.CONNECTION_ERROR:
+                        Log.v("appnext", "connection problem");
+                        break;
+                    default:
+                        Log.v("appnext", "other error");
+                }
+            }
+        });
+
+        loadappnextads();
+    }
+
+
+    public void loadappnextads(){
+        if (interstitial_Ad != null){
+            interstitial_Ad.loadAd();
+        }
+    }
+
     public void callingadsonclick(){
         final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
         progress.setMessage("Loading Ad");
         progress.setCancelable(false);
         progress.show();
-        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
-            @Override
-            public void onReceiveAd(Ad ad) {
-                Constant.Adscountlisting = 1;
-                if (progress.isShowing()){
-                    progress.dismiss();
-                }
-                startAppAd.showAd(new AdDisplayListener() {
-                    @Override
-                    public void adHidden(Ad ad) {
-                        onAdsresponce();
+        if (interstitial_Ad.isAdLoaded()){
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
                     }
-                    @Override
-                    public void adDisplayed(Ad ad) { }
-                    @Override
-                    public void adClicked(Ad ad) { }
-                    @Override
-                    public void adNotDisplayed(Ad ad) {
-                        onAdsresponce();
-                    }
-                });
-            }
-            @Override
-            public void onFailedToReceiveAd(Ad ad) {
-                Log.e("gettingerrorad","::    "+ad.getErrorMessage());
-                if (progress.isShowing()){
-                    progress.dismiss();
+                    interstitial_Ad.showAd();
                 }
+            }, 1500);
+
+        }else{
+            if (progress.isShowing()){
+                progress.dismiss();
             }
-        });
+            onAdsresponce();
+        }
+
     }
 
     public void LoadImagedata() {

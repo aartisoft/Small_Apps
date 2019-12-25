@@ -23,6 +23,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appnext.ads.AdsError;
+import com.appnext.ads.interstitial.Interstitial;
+import com.appnext.core.AppnextAdCreativeType;
+import com.appnext.core.callbacks.OnAdClicked;
+import com.appnext.core.callbacks.OnAdClosed;
+import com.appnext.core.callbacks.OnAdError;
+import com.appnext.core.callbacks.OnAdLoaded;
+import com.appnext.core.callbacks.OnAdOpened;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -35,10 +43,6 @@ import com.happyrepublicday.videosforstorystatus.EndlessRecyclerOnScrollListener
 import com.happyrepublicday.videosforstorystatus.R;
 import com.happyrepublicday.videosforstorystatus.gettersetter.ItemData;
 import com.happyrepublicday.videosforstorystatus.gettersetter.Item_collections;
-import com.startapp.android.publish.adsCommon.Ad;
-import com.startapp.android.publish.adsCommon.StartAppAd;
-import com.startapp.android.publish.adsCommon.adListeners.AdDisplayListener;
-import com.startapp.android.publish.adsCommon.adListeners.AdEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -67,33 +71,31 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
     String gettype="";
     private Toolbar mTopToolbar;
 
-    StartAppAd startAppAd = new StartAppAd(CommonListingActivity.this);
+    Interstitial interstitial_Ad;
 
-    //private StartAppNativeAd mStartAppNativeAd = new StartAppNativeAd(this);
 
 
     @Override
     protected void onSaveInstanceState (Bundle outState){
         super.onSaveInstanceState(outState);
-        startAppAd.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState (Bundle savedInstanceState){
-        startAppAd.onRestoreInstanceState(savedInstanceState);
         super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        startAppAd.onResume();
+//        if (interstitial_Ad != null && !interstitial_Ad.isAdLoaded()){
+//            loadappnextads();
+//        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        startAppAd.onPause();
     }
 
 
@@ -124,6 +126,9 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
         no_data_tv = (TextView) findViewById(R.id.no_data_tv);
         no_data_tv.setVisibility(View.GONE);
         category_item_rv.setHasFixedSize(true);
+
+
+        intializeappnextads();
 
         GridLayoutManager mLayoutManager = new GridLayoutManager(CommonListingActivity.this, 2);
         category_item_rv.setLayoutManager(mLayoutManager);
@@ -158,27 +163,8 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
         currentpage = 1;
         Loadcatwisedata(currentpage);
 
-        //        mStartAppNativeAd.loadAd(
-//                new NativeAdPreferences()
-//                        .setAdsNumber(10)
-//                        .setAutoBitmapDownload(true)
-//                        .setPrimaryImageSize(2),
-//                mNativeAdListener);
+
     }
-
-    //    private AdEventListener mNativeAdListener = new AdEventListener() {
-//
-//        @Override
-//        public void onReceiveAd(Ad ad) {
-//            // Get the native ads
-//            catwiseadapter.setItems(mStartAppNativeAd.getNativeAds());
-//        }
-//
-//        @Override
-//        public void onFailedToReceiveAd(Ad ad) {
-//        }
-//    };
-
 
 
     public void Loadcatwisedata(int page) {
@@ -216,40 +202,89 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
         Constant.Passing_item_object = new Item_collections();
         Constant.Passing_item_object = passdata;
         if (Constant.Adscountlisting == 2){
-            final ProgressDialog progress = new ProgressDialog(CommonListingActivity.this, R.style.MyAlertDialogStyle);
-            progress.setMessage("Loading Ad");
-            progress.setCancelable(false);
-            progress.show();
-            startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
-                @Override
-                public void onReceiveAd(Ad ad) {
-                    Constant.Adscountlisting = 1;
-                    if (progress.isShowing()){
-                        progress.dismiss();
-                    }
-                    startAppAd.showAd(new AdDisplayListener() {
-                        @Override
-                        public void adHidden(Ad ad) {
-                            callnewpage();
-                        }
-                        @Override
-                        public void adDisplayed(Ad ad) { }
-                        @Override
-                        public void adClicked(Ad ad) { }
-                        @Override
-                        public void adNotDisplayed(Ad ad) {
-                            callnewpage();
-                        }
-                    });
-                }
-                @Override
-                public void onFailedToReceiveAd(Ad ad) {
-                }
-            });
+            callingadsonclick();
         }else{
             Constant.Adscountlisting++;
             callnewpage();
         }
+    }
+
+    public void intializeappnextads(){
+        interstitial_Ad = new Interstitial(CommonListingActivity.this, getResources().getString(R.string.appnext_placement_id));
+        interstitial_Ad.setOnAdLoadedCallback(new OnAdLoaded() {
+            @Override
+            public void adLoaded(String bannerId, AppnextAdCreativeType creativeType) {
+
+            }
+        });
+        interstitial_Ad.setOnAdOpenedCallback(new OnAdOpened() {
+            @Override
+            public void adOpened() {
+
+            }
+        });
+        interstitial_Ad.setOnAdClickedCallback(new OnAdClicked() {
+            @Override
+            public void adClicked() {
+
+            }
+        });
+        interstitial_Ad.setOnAdClosedCallback(new OnAdClosed() {
+            @Override
+            public void onAdClosed() {
+                callnewpage();
+                loadappnextads();
+            }
+        });
+        interstitial_Ad.setOnAdErrorCallback(new OnAdError() {
+            @Override
+            public void adError(String error) {
+                switch (error){
+                    case AdsError.NO_ADS:
+                        Log.v("appnext", "no ads");
+                        break;
+                    case AdsError.CONNECTION_ERROR:
+                        Log.v("appnext", "connection problem");
+                        break;
+                    default:
+                        Log.v("appnext", "other error");
+                }
+            }
+        });
+
+        loadappnextads();
+    }
+
+    public void loadappnextads(){
+        if (interstitial_Ad != null){
+            interstitial_Ad.loadAd();
+        }
+    }
+
+    public void callingadsonclick(){
+        final ProgressDialog progress = new ProgressDialog(CommonListingActivity.this, R.style.MyAlertDialogStyle);
+        progress.setMessage("Loading Ad");
+        progress.setCancelable(false);
+        progress.show();
+        if (interstitial_Ad.isAdLoaded()){
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    interstitial_Ad.showAd();
+                }
+            }, 1500);
+
+        }else{
+            if (progress.isShowing()){
+                progress.dismiss();
+            }
+            callnewpage();
+        }
+
     }
 
     public void callnewpage(){
@@ -354,8 +389,8 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
 
     @Override
     public void onBackPressed() {
-        finish();
         super.onBackPressed();
+        finish();
     }
 
     @Override

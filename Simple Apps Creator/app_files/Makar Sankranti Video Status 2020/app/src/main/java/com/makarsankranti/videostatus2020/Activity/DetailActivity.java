@@ -155,7 +155,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StartAppSDK.init(this, "211774923", false);
-        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
+        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), true);
         setContentView(R.layout.activity_detail);
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
