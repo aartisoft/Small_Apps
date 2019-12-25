@@ -8,20 +8,21 @@ import android.content.IntentSender;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StartAppSDK.init(this, getResources().getString(R.string.startapp_id), true);
-        StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), false);
+        StartAppSDK.setUserConsent(this, "pas", System.currentTimeMillis(), false);
         startAppAd.disableSplash();
         setContentView(R.layout.activity_main);
 
@@ -112,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
         mAdapter.notifyDataSetChanged();
 
 
-
         appUpdateManager = AppUpdateManagerFactory.create(MainActivity.this);
 
         appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
         });
     }
 
-    public void updatestart(AppUpdateInfo appUpdateInfo){
+    public void updatestart(AppUpdateInfo appUpdateInfo) {
         InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
             @Override
             public void onStateUpdate(InstallState installState) {
@@ -189,13 +189,12 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MY_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
-                Log.e("Update flow failed" ,""+ resultCode);
+                Log.e("Update flow failed", "" + resultCode);
                 // If the update is cancelled or fails,
                 // you can request to start the update again.
             }
         }
     }
-
 
 
     @Override
@@ -235,35 +234,46 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
 
     @Override
     public void onItemClick(int position, View v) {
-        final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.MyAlertDialogStyle);
-        progress.setMessage("Loading Ad");
-        progress.setCancelable(false);
-        progress.show();
-        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
-            @Override
-            public void onReceiveAd(Ad ad) {
-                if (progress.isShowing()){
-                    progress.dismiss();
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+        if (conn) {
+            final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.MyAlertDialogStyle);
+            progress.setMessage("Loading Ad");
+            progress.setCancelable(false);
+            progress.show();
+            startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC, new AdEventListener() {
+                @Override
+                public void onReceiveAd(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    startAppAd.showAd(new AdDisplayListener() {
+                        @Override
+                        public void adHidden(Ad ad) {
+                            callnewpage(position);
+                        }
+
+                        @Override
+                        public void adDisplayed(Ad ad) {
+                        }
+
+                        @Override
+                        public void adClicked(Ad ad) {
+                        }
+
+                        @Override
+                        public void adNotDisplayed(Ad ad) {
+                            callnewpage(position);
+                        }
+                    });
                 }
-                startAppAd.showAd(new AdDisplayListener() {
-                    @Override
-                    public void adHidden(Ad ad) {
-                        callnewpage(position);
-                    }
-                    @Override
-                    public void adDisplayed(Ad ad) { }
-                    @Override
-                    public void adClicked(Ad ad) { }
-                    @Override
-                    public void adNotDisplayed(Ad ad) {
-                        callnewpage(position);
-                    }
-                });
-            }
-            @Override
-            public void onFailedToReceiveAd(Ad ad) {
-            }
-        });
+
+                @Override
+                public void onFailedToReceiveAd(Ad ad) {
+                }
+            });
+        } else {
+            callnewpage(position);
+        }
     }
 
 

@@ -4,14 +4,15 @@ import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.makarsankranti.photoframe2020.ConnectionDetector;
 import com.makarsankranti.photoframe2020.Constant;
@@ -44,13 +45,13 @@ public class Final_Image_Activity extends AppCompatActivity {
 
 
     @Override
-    protected void onSaveInstanceState (Bundle outState){
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         startAppAd.onSaveInstanceState(outState);
     }
 
     @Override
-    protected void onRestoreInstanceState (Bundle savedInstanceState){
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         startAppAd.onRestoreInstanceState(savedInstanceState);
         super.onRestoreInstanceState(savedInstanceState);
     }
@@ -107,43 +108,54 @@ public class Final_Image_Activity extends AppCompatActivity {
 
     }
 
-    public void openingadsoncall(){
-        final ProgressDialog progress = new ProgressDialog(Final_Image_Activity.this, R.style.MyAlertDialogStyle);
-        progress.setMessage("Loading Ad");
-        progress.setCancelable(false);
-        progress.show();
-        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
-            @Override
-            public void onReceiveAd(Ad ad) {
-                if (progress.isShowing()){
-                    progress.dismiss();
-                }
-                startAppAd.showAd(new AdDisplayListener() {
-                    @Override
-                    public void adHidden(Ad ad) {
-                        callingactiontype();
+    public void openingadsoncall() {
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+        if (conn) {
+            final ProgressDialog progress = new ProgressDialog(Final_Image_Activity.this, R.style.MyAlertDialogStyle);
+            progress.setMessage("Loading Ad");
+            progress.setCancelable(false);
+            progress.show();
+            startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC, new AdEventListener() {
+                @Override
+                public void onReceiveAd(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
                     }
-                    @Override
-                    public void adDisplayed(Ad ad) { }
-                    @Override
-                    public void adClicked(Ad ad) { }
-                    @Override
-                    public void adNotDisplayed(Ad ad) {
-                        callingactiontype();
-                    }
-                });
-            }
-            @Override
-            public void onFailedToReceiveAd(Ad ad) {
-                if (progress.isShowing()){
-                    progress.dismiss();
+                    startAppAd.showAd(new AdDisplayListener() {
+                        @Override
+                        public void adHidden(Ad ad) {
+                            callingactiontype();
+                        }
+
+                        @Override
+                        public void adDisplayed(Ad ad) {
+                        }
+
+                        @Override
+                        public void adClicked(Ad ad) {
+                        }
+
+                        @Override
+                        public void adNotDisplayed(Ad ad) {
+                            callingactiontype();
+                        }
+                    });
                 }
-                callingactiontype();
-            }
-        });
+
+                @Override
+                public void onFailedToReceiveAd(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    callingactiontype();
+                }
+            });
+        } else {
+            callingactiontype();
+        }
     }
 
-    public void callingactiontype(){
+    public void callingactiontype() {
         if (Actiontype.equals(actiondownload)) {
             constantfile.download_image(Final_Image_Activity.this, Constant.getfinalimage, relaivelayout);
         } else if (Actiontype.equals(actionshare)) {

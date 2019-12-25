@@ -88,9 +88,6 @@ public class CommonListingActivity extends AppCompatActivity implements CommonLi
     @Override
     public void onResume() {
         super.onResume();
-//        if (interstitial_Ad != null && !interstitial_Ad.isAdLoaded()){
-//            loadappnextads();
-//        }
     }
 
     @Override

@@ -235,35 +235,46 @@ public class MainActivity extends AppCompatActivity implements FrameItemAdapter.
 
     @Override
     public void onItemClick(int position, View v) {
-        final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.MyAlertDialogStyle);
-        progress.setMessage("Loading Ad");
-        progress.setCancelable(false);
-        progress.show();
-        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
-            @Override
-            public void onReceiveAd(Ad ad) {
-                if (progress.isShowing()){
-                    progress.dismiss();
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+        if (conn) {
+            final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.MyAlertDialogStyle);
+            progress.setMessage("Loading Ad");
+            progress.setCancelable(false);
+            progress.show();
+            startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC, new AdEventListener() {
+                @Override
+                public void onReceiveAd(Ad ad) {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    startAppAd.showAd(new AdDisplayListener() {
+                        @Override
+                        public void adHidden(Ad ad) {
+                            callnewpage(position);
+                        }
+
+                        @Override
+                        public void adDisplayed(Ad ad) {
+                        }
+
+                        @Override
+                        public void adClicked(Ad ad) {
+                        }
+
+                        @Override
+                        public void adNotDisplayed(Ad ad) {
+                            callnewpage(position);
+                        }
+                    });
                 }
-                startAppAd.showAd(new AdDisplayListener() {
-                    @Override
-                    public void adHidden(Ad ad) {
-                        callnewpage(position);
-                    }
-                    @Override
-                    public void adDisplayed(Ad ad) { }
-                    @Override
-                    public void adClicked(Ad ad) { }
-                    @Override
-                    public void adNotDisplayed(Ad ad) {
-                        callnewpage(position);
-                    }
-                });
-            }
-            @Override
-            public void onFailedToReceiveAd(Ad ad) {
-            }
-        });
+
+                @Override
+                public void onFailedToReceiveAd(Ad ad) {
+                }
+            });
+        }else{
+            callnewpage(position);
+        }
     }
 
 

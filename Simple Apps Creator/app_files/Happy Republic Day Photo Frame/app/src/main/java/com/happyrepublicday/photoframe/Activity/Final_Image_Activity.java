@@ -108,39 +108,44 @@ public class Final_Image_Activity extends AppCompatActivity {
     }
 
     public void openingadsoncall(){
-        final ProgressDialog progress = new ProgressDialog(Final_Image_Activity.this, R.style.MyAlertDialogStyle);
-        progress.setMessage("Loading Ad");
-        progress.setCancelable(false);
-        progress.show();
-        startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
-            @Override
-            public void onReceiveAd(Ad ad) {
-                if (progress.isShowing()){
-                    progress.dismiss();
-                }
-                startAppAd.showAd(new AdDisplayListener() {
-                    @Override
-                    public void adHidden(Ad ad) {
-                        callingactiontype();
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+        if (conn){
+            final ProgressDialog progress = new ProgressDialog(Final_Image_Activity.this, R.style.MyAlertDialogStyle);
+            progress.setMessage("Loading Ad");
+            progress.setCancelable(false);
+            progress.show();
+            startAppAd.loadAd(StartAppAd.AdMode.AUTOMATIC,new AdEventListener() {
+                @Override
+                public void onReceiveAd(Ad ad) {
+                    if (progress.isShowing()){
+                        progress.dismiss();
                     }
-                    @Override
-                    public void adDisplayed(Ad ad) { }
-                    @Override
-                    public void adClicked(Ad ad) { }
-                    @Override
-                    public void adNotDisplayed(Ad ad) {
-                        callingactiontype();
-                    }
-                });
-            }
-            @Override
-            public void onFailedToReceiveAd(Ad ad) {
-                if (progress.isShowing()){
-                    progress.dismiss();
+                    startAppAd.showAd(new AdDisplayListener() {
+                        @Override
+                        public void adHidden(Ad ad) {
+                            callingactiontype();
+                        }
+                        @Override
+                        public void adDisplayed(Ad ad) { }
+                        @Override
+                        public void adClicked(Ad ad) { }
+                        @Override
+                        public void adNotDisplayed(Ad ad) {
+                            callingactiontype();
+                        }
+                    });
                 }
-                callingactiontype();
-            }
-        });
+                @Override
+                public void onFailedToReceiveAd(Ad ad) {
+                    if (progress.isShowing()){
+                        progress.dismiss();
+                    }
+                    callingactiontype();
+                }
+            });
+        }else{
+            callingactiontype();
+        }
     }
 
     public void callingactiontype(){

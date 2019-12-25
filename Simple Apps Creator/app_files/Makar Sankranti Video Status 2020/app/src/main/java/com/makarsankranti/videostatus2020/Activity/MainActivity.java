@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StartAppSDK.init(this, "211774923", true);
+        StartAppSDK.init(this, getResources().getString(R.string.startapp_id), true);
         StartAppSDK.setUserConsent (this, "pas", System.currentTimeMillis(), true);
         startAppAd.disableSplash();
 
