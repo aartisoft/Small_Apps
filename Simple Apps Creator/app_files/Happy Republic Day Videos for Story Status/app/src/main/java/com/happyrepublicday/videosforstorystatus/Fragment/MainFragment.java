@@ -292,8 +292,7 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     }
 
     public void intializeappnextads(){
-        interstitial_Ad = new Interstitial(getActivity(), "ADD_HERE_YOUR_PLACEMENT_ID");
-        //interstitial_Ad = new Interstitial(getActivity(), getActivity().getResources().getString(R.string.appnext_placement_id));
+        interstitial_Ad = new Interstitial(getActivity(), getActivity().getResources().getString(R.string.appnext_placement_id));
         interstitial_Ad.setOnAdLoadedCallback(new OnAdLoaded() {
             @Override
             public void adLoaded(String bannerId, AppnextAdCreativeType creativeType) {
