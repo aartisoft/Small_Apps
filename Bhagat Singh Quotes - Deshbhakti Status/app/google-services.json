@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "192223041765",
+    "firebase_url": "https://bhagat-singh-quotes.firebaseio.com",
+    "project_id": "bhagat-singh-quotes",
+    "storage_bucket": "bhagat-singh-quotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192223041765:android:481c6813bbb868c5d99c0c",
+        "android_client_info": {
+          "package_name": "com.techcorp.bhagatsingh.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192223041765-6ksi0jncctfkr8r1pn56mnbg4tgq4fsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.bhagatsingh.quotes",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "192223041765-depgfvg3t5a2qi5rvibb5n61vcnhuqr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8-Ozlyn9ol7etNZCoWQfBvLr3U1Q1rWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192223041765-depgfvg3t5a2qi5rvibb5n61vcnhuqr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
