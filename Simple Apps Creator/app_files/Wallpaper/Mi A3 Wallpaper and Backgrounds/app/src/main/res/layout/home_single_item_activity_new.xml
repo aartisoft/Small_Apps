@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <ImageView
+        android:id="@+id/image_full"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:layout_above="@+id/ads"
+        android:background="@drawable/back_round"
+        android:scaleType="center" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_backarrow"
+        android:tint="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ads">
+
+        <com.mia3.wallpaperandbackgrounds.Float.FloatingActionsMenu
+
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            fab:fab_addButtonColorNormal="@color/white"
+            fab:fab_addButtonColorPressed="@color/white_pressed"
+            fab:fab_addButtonPlusIconColor="@color/colorPrimary"
+            fab:fab_labelStyle="@style/menu_labels_style">
+
+            <com.mia3.wallpaperandbackgrounds.Float.FloatingActionButton
+                android:id="@+id/action_setas"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_setas"
+                android:tint="@color/colorPrimary"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white_pressed"
+                fab:fab_size="mini"
+                fab:fab_title="Set As" />
+
+            <com.mia3.wallpaperandbackgrounds.Float.FloatingActionButton
+                android:id="@+id/action_download"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_download"
+                android:tint="@color/colorPrimary"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white_pressed"
+                fab:fab_size="mini"
+                fab:fab_title="Download" />
+
+
+        </com.mia3.wallpaperandbackgrounds.Float.FloatingActionsMenu>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/ads"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/progress_icon" />
+
+</RelativeLayout>
