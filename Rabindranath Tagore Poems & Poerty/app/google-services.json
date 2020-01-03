@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "277332183129",
+    "firebase_url": "https://rabindranath-tagore-poems.firebaseio.com",
+    "project_id": "rabindranath-tagore-poems",
+    "storage_bucket": "rabindranath-tagore-poems.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277332183129:android:cf578804b332ccc58c0948",
+        "android_client_info": {
+          "package_name": "com.techcorp.rabindranathtagore.poemsand.poerty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277332183129-p3n94f7hskb21d8a9545pkgd9a9ucjnm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.rabindranathtagore.poemsand.poerty",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "277332183129-8t91jlbdom488ooq423o4aim803lfij1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZfOL0lWTqG-dLjhoM3awvIWEu7EpJc78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277332183129-8t91jlbdom488ooq423o4aim803lfij1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
