@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "175575780454",
+    "firebase_url": "https://chhatrapati-shivaji-quotes.firebaseio.com",
+    "project_id": "chhatrapati-shivaji-quotes",
+    "storage_bucket": "chhatrapati-shivaji-quotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175575780454:android:bf8523922925b3003271a7",
+        "android_client_info": {
+          "package_name": "com.techcorp.chhatrapatishivajimaharaj.quotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175575780454-vfopk4md19hlkecsb6qe1aaaparmn1cb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.chhatrapatishivajimaharaj.quotes",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "175575780454-4lpqtavshpuu84179o4ljrh3rkaat4pj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbGgB-M2s_VLrszTozFqQOicHFL0xHdVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175575780454-4lpqtavshpuu84179o4ljrh3rkaat4pj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
