@@ -33,12 +33,15 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
@@ -86,6 +89,7 @@ import java.util.Objects;
 import cz.msebera.android.httpclient.Header;
 
 import static com.crashlytics.android.Crashlytics.log;
+import static com.mi9t.k20prowallpapers.Constant.passing_from;
 import static com.mi9t.k20prowallpapers.Constant.passing_object;
 
 public class MainActivity extends AppCompatActivity implements ImageAdapter.MyClickListener {
@@ -117,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     private final static int MY_REQUEST_CODE = 111;
     com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
 
+    private AdView adView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +140,11 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         PACKAGE_NAME = getApplicationContext().getPackageName();
         this.detectorconn = new ConnectionDetector(getApplicationContext());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+
+        adView = new AdView(this, getResources().getString(R.string.facebook_banner_id), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         no_data_text = (TextView) findViewById(R.id.no_data_text);
@@ -437,6 +448,9 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         }else if (id == R.id.action_privacy) {
             getopenPrivacypolicy();
             return true;
+        }else if (id == R.id.action_favorite) {
+            getopenFavorite_activity();
+            return true;
         }else if (id == R.id.action_exit) {
             AppExit();
             return true;
@@ -464,17 +478,11 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         startActivity(browserIntent);
     }
 
-    public void getShareCounter() {
-        constantfile.snackbarcommondrawerLayout(MainActivity.this, drawer_layout, "Processing");
-        String whatsAppMessage = getResources().getString(R.string.app_share_status)+"\n\n";
-        whatsAppMessage = whatsAppMessage + "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName() + "\n";
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, whatsAppMessage);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-
+    public void getopenFavorite_activity() {
+       Intent openfav = new Intent(MainActivity.this,FavoriteActivity.class);
+       startActivity(openfav);
     }
+
 
 
     public void AppExit() {
@@ -512,7 +520,13 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     public void onItemClick(int position, String ImgUrl, ArrayList<Item_collections> passarray, View v) {
         passing_object = new Item_collections();
         passing_object = passarray.get(position);
-        loadInterstitialAd(ImgUrl);
+        passing_from = 1;
+        if (Constant.Adscount >= 2){
+            loadInterstitialAd(ImgUrl);
+        }else{
+            Constant.Adscount++;
+            callnextscreen(ImgUrl);
+        }
     }
 
 
@@ -585,6 +599,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
                 if (interstitialAd != null) {
                     interstitialAd.destroy();
                 }
+                Constant.Adscount = 1;
                 callnextscreen(imgURL);
             }
 
@@ -596,6 +611,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
                 if (interstitialAd != null) {
                     interstitialAd.destroy();
                 }
+                Constant.Adscount = 1;
                 callnextscreen(imgURL);
             }
 
@@ -625,5 +641,13 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         Intent catwise = new Intent(MainActivity.this, Home_SingleItem_Activity.class);
         catwise.putExtra("image_url", imgURL + "");
         startActivity(catwise);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 }

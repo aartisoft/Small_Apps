@@ -15,7 +15,8 @@
         android:id="@+id/Image_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="0dp"
+        android:layout_above="@+id/banner_container"
+        android:layout_marginBottom="5dp"
         android:padding="5dp"
         android:scrollbars="vertical" />
 
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Sorry! No Data Found"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:visibility="gone" />
 
@@ -37,6 +38,15 @@
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:indeterminateDrawable="@drawable/progress_icon"/>
+
+
+    <LinearLayout
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </RelativeLayout>

@@ -1,27 +1,23 @@
 package com.mi9t.k20prowallpapers.Activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -39,6 +35,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.mi9t.k20prowallpapers.ConnectionDetector;
 import com.mi9t.k20prowallpapers.Constant;
+import com.mi9t.k20prowallpapers.DbAdapter;
 import com.mi9t.k20prowallpapers.Float.FloatingActionButton;
 import com.mi9t.k20prowallpapers.R;
 import com.mi9t.k20prowallpapers.Utility;
@@ -48,8 +45,10 @@ import com.mi9t.k20prowallpapers.gettersetter.Item_collections;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+
 import static com.mi9t.k20prowallpapers.Constant.actiondownload;
 import static com.mi9t.k20prowallpapers.Constant.actionsetas;
+import static com.mi9t.k20prowallpapers.Constant.passing_from;
 
 /**
  * Created by Kakadiyas on 11-07-2017.
@@ -58,7 +57,7 @@ import static com.mi9t.k20prowallpapers.Constant.actionsetas;
 public class Home_SingleItem_Activity extends AppCompatActivity {
 
 
-    ImageView image_full, back;
+    ImageView image_full, back, favorite;
     ProgressBar progressBar;
     private ConnectionDetector detectorconn;
     Boolean conn;
@@ -70,7 +69,8 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
     Item_collections getdata;
     private AdView adViewbanner;
 
-    FloatingActionButton action_download,action_setas;
+    DbAdapter db;
+    FloatingActionButton action_download, action_setas;
 
 
     @Override
@@ -80,6 +80,9 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
         setContentView(R.layout.home_single_item_activity_new);
+
+        db = new DbAdapter(Home_SingleItem_Activity.this);
+        db.open();
 
         constantfile = new Constant();
 
@@ -108,6 +111,7 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         image_full = (ImageView) findViewById(R.id.image_full);
         back = (ImageView) findViewById(R.id.back);
+        favorite = (ImageView) findViewById(R.id.favorite);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +135,39 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
                 setdisableclick();
                 actiontype = actionsetas;
                 Actionclickworking();
+            }
+        });
+
+        if (db.isExist(getdata.getId())) {
+            favorite.setImageResource(R.drawable.ic_favorite_done);
+        } else {
+            favorite.setImageResource(R.drawable.ic_favorite);
+        }
+
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String item_id = getdata.getId();
+                if (db.isExist(item_id)) {
+                    db.delete(item_id);
+                    favorite.setImageResource(R.drawable.ic_favorite);
+                    constantfile.snackbarcommonView(Home_SingleItem_Activity.this, relative, "Remove from Favourite Successfully!");
+                    if (passing_from == 2){
+                        onBackPressed();
+                    }
+                } else {
+                    String name = getdata.getWall_name();
+                    String image = getdata.getWallpaper_image();
+                    String image_thumb = getdata.getWallpaper_image_thumb();
+                    String tview = getdata.getTotal_views();
+                    String tdownload = getdata.getTotal_download();
+                    String tags = getdata.getWall_tags();
+                    String date = getdata.getDate();
+                    db.insert(item_id, name, image, image_thumb, tview, tdownload, tags, date);
+                    favorite.setImageResource(R.drawable.ic_favorite_done);
+                    constantfile.snackbarcommonView(Home_SingleItem_Activity.this, relative, "Add to Favourite Successfully!");
+                }
             }
         });
 
@@ -163,7 +200,7 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
         adViewbanner.setAdListener(new AdListener() {
             @Override
             public void onError(Ad ad, AdError adError) {
-                Log.e("gettingerror"," get error of ads :: " + adError.getErrorMessage());
+                Log.e("gettingerror", " get error of ads :: " + adError.getErrorMessage());
             }
 
             @Override
@@ -184,7 +221,7 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
 
     }
 
-    public void setdisableclick(){
+    public void setdisableclick() {
         action_download.setClickable(false);
         action_setas.setClickable(false);
         new Handler().postDelayed(new Runnable() {
@@ -201,14 +238,13 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
         if (this.conn.booleanValue()) {
             boolean result = Utility.checkPermission(Home_SingleItem_Activity.this);
             if (result) {
-                    constantfile.showporgressdialog(Home_SingleItem_Activity.this,actiontype);
-                    if (actiontype.equals(actionsetas)) {
-                        constantfile.share_image(Home_SingleItem_Activity.this, actionsetas, getdata.getWallpaper_image(), relative);
-
-                    } else if (actiontype.equals(actiondownload)) {
-                        CallAddDownload(getdata.getId());
-                        constantfile.share_image(Home_SingleItem_Activity.this, actiondownload, getdata.getWallpaper_image(), relative);
-                    }
+                constantfile.showporgressdialog(Home_SingleItem_Activity.this, actiontype);
+                if (actiontype.equals(actionsetas)) {
+                    constantfile.share_image(Home_SingleItem_Activity.this, actionsetas, getdata.getWallpaper_image(), relative);
+                } else if (actiontype.equals(actiondownload)) {
+                    CallAddDownload(getdata.getId());
+                    constantfile.share_image(Home_SingleItem_Activity.this, actiondownload, getdata.getWallpaper_image(), relative);
+                }
             } else {
                 constantfile.snackbarcommonrelative(Home_SingleItem_Activity.this, relative, "Please give the permission to download Image!");
             }
@@ -254,10 +290,10 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onBackPressed() {
         this.finish();
+        finish();
     }
 
 
@@ -272,7 +308,8 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
 
     class AsynchronouseData extends JsonHttpResponseHandler {
 
-        AsynchronouseData() { }
+        AsynchronouseData() {
+        }
 
         public void onStart() {
             super.onStart();
@@ -311,7 +348,8 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
 
     class AsynchronouseDownloadData extends JsonHttpResponseHandler {
 
-        AsynchronouseDownloadData() { }
+        AsynchronouseDownloadData() {
+        }
 
         public void onStart() {
             super.onStart();
