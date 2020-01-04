@@ -21,7 +21,7 @@
     <!--<string name="interstial_id">ca-app-pub-3940256099942544/1033173712</string>-->
 
     <!--for test id's add IMG_16_9_LINK# before ads id-->
-    <string name="facebook_banner_id">410022006286767_410022246286743</string>
-    <string name="facebook_interstitial_id">410022006286767_410022752953359</string>
+    <string name="facebook_banner_id">IMG_16_9_LINK#410022006286767_410022246286743</string>
+    <string name="facebook_interstitial_id">IMG_16_9_LINK#410022006286767_410022752953359</string>
 
 </resources>
