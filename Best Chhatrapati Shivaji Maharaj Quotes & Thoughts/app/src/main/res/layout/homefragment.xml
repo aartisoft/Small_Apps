@@ -63,8 +63,8 @@
                             android:gravity="center"
                             android:padding="10dp"
                             android:text="Introduction"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
+                            android:textColor="#6D5E00"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
 
@@ -81,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:padding="10dp"
-                        android:text="फायदे (Banefits)"
+                        android:text="Quotes"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
