@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.appnext.sdk:core:2.5.0.472@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce6cf34cfc0bb21b9e622128987c874d/jetified-core-2.5.0.472/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce6cf34cfc0bb21b9e622128987c874d/jetified-core-2.5.0.472/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

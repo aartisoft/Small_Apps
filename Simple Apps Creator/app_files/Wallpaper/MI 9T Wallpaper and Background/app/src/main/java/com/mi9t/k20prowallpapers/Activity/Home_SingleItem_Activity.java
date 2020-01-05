@@ -2,7 +2,10 @@ package com.mi9t.k20prowallpapers.Activity;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -37,6 +41,7 @@ import com.mi9t.k20prowallpapers.ConnectionDetector;
 import com.mi9t.k20prowallpapers.Constant;
 import com.mi9t.k20prowallpapers.DbAdapter;
 import com.mi9t.k20prowallpapers.Float.FloatingActionButton;
+import com.mi9t.k20prowallpapers.Float.FloatingActionsMenu;
 import com.mi9t.k20prowallpapers.R;
 import com.mi9t.k20prowallpapers.Utility;
 import com.mi9t.k20prowallpapers.gettersetter.ItemUpdate;
@@ -68,9 +73,10 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
     String actiontype = "";
     Item_collections getdata;
     private AdView adViewbanner;
-
+    Bitmap bitmapdownload = null;
     DbAdapter db;
     FloatingActionButton action_download, action_setas;
+    FloatingActionsMenu floatingmenu;
 
 
     @Override
@@ -105,6 +111,7 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
 
 
         action_download = (FloatingActionButton) findViewById(R.id.action_download);
+        floatingmenu = (FloatingActionsMenu) findViewById(R.id.floatingmenu);
         action_setas = (FloatingActionButton) findViewById(R.id.action_setas);
         relative = (RelativeLayout) findViewById(R.id.relative);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -172,19 +179,22 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
         });
 
         Glide.with(Home_SingleItem_Activity.this)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .dontAnimate()
                 .load(image_url)
                 .error(R.drawable.error)
-                .listener(new RequestListener<Drawable>() {
+                .listener(new RequestListener<Bitmap>() {
+
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        // log exception
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                         progressBar.setVisibility(View.GONE);
-                        return false; // important to return false so the error placeholder can be placed
+                        return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        bitmapdownload = resource;
                         progressBar.setVisibility(View.GONE);
                         return false;
                     }
@@ -222,6 +232,9 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
     }
 
     public void setdisableclick() {
+        if (floatingmenu.isExpanded()){
+            floatingmenu.collapse();
+        }
         action_download.setClickable(false);
         action_setas.setClickable(false);
         new Handler().postDelayed(new Runnable() {
@@ -239,11 +252,20 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
             boolean result = Utility.checkPermission(Home_SingleItem_Activity.this);
             if (result) {
                 constantfile.showporgressdialog(Home_SingleItem_Activity.this, actiontype);
-                if (actiontype.equals(actionsetas)) {
-                    constantfile.share_image(Home_SingleItem_Activity.this, actionsetas, getdata.getWallpaper_image(), relative);
-                } else if (actiontype.equals(actiondownload)) {
-                    CallAddDownload(getdata.getId());
-                    constantfile.share_image(Home_SingleItem_Activity.this, actiondownload, getdata.getWallpaper_image(), relative);
+                if (bitmapdownload != null){
+                    if (actiontype.equals(actionsetas)) {
+                        constantfile.setAs_bitmapimage(Home_SingleItem_Activity.this, bitmapdownload, relative);
+                    } else if (actiontype.equals(actiondownload)) {
+                        CallAddDownload(getdata.getId());
+                        constantfile.download_bitmapimage(Home_SingleItem_Activity.this, bitmapdownload, relative);
+                    }
+                }else{
+                    if (actiontype.equals(actionsetas)) {
+                        constantfile.share_image(Home_SingleItem_Activity.this, actionsetas, getdata.getWallpaper_image(), relative);
+                    } else if (actiontype.equals(actiondownload)) {
+                        CallAddDownload(getdata.getId());
+                        constantfile.share_image(Home_SingleItem_Activity.this, actiondownload, getdata.getWallpaper_image(), relative);
+                    }
                 }
             } else {
                 constantfile.snackbarcommonrelative(Home_SingleItem_Activity.this, relative, "Please give the permission to download Image!");

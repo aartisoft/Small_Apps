@@ -106,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         Appnext.init(MainActivity.this);
         //tool_title = (TextView) toolbar.findViewById(R.id.tool_title);
 

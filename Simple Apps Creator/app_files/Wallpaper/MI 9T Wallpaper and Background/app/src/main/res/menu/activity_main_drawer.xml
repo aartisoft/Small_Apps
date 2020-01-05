@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorite" />
+        <item
             android:id="@+id/nav_rate_us"
             android:icon="@drawable/ic_rate_icon"
             android:title="Rate this App" />
@@ -16,10 +20,6 @@
             android:id="@+id/nav_share_app"
             android:icon="@drawable/ic_share_icon"
             android:title="Share this App" />
-        <item
-            android:id="@+id/nav_contact_us"
-            android:icon="@drawable/ic_contact_icon"
-            android:title="Contact Us" />
         <item
             android:id="@+id/nav_policy"
             android:icon="@drawable/ic_keyhole"

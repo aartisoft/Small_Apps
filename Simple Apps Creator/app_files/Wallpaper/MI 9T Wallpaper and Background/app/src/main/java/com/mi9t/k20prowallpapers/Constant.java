@@ -5,19 +5,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import com.google.android.material.snackbar.Snackbar;
-import com.mi9t.k20prowallpapers.gettersetter.Item_collections;
-
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -25,10 +18,16 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.mi9t.k20prowallpapers.gettersetter.Item_collections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,12 +46,13 @@ public class Constant {
     public static final String BASIC_URL = "http://simpleappscreator.com/mobile_wise_wallpaper/api/";
 
 
-    public static final String GET_IMAGE_LISTING = BASIC_URL+ "api_listing.php";
-    public static final String GET_ADD_VIEW = BASIC_URL+ "api_add_view.php";
-    public static final String GET_ADD_DOWNLOAD = BASIC_URL+ "api_add_download.php";
-    public static final String GET_ADD_TOKEN = BASIC_URL+ "api_add_token.php";
+    public static final String GET_IMAGE_LISTING = BASIC_URL + "api_listing.php";
+    public static final String GET_ADD_VIEW = BASIC_URL + "api_add_view.php";
+    public static final String GET_ADD_DOWNLOAD = BASIC_URL + "api_add_download.php";
+    public static final String GET_ADD_TOKEN = BASIC_URL + "api_add_token.php";
 
 
+    public static final String downloadshareimage = "MI9TWallpapershare.jpg";
     public static final String LOGIN_DATA = "LOGIN_DATA";
     public static final String actiondownload = "download";
     public static final String actionsetas = "setas";
@@ -79,8 +79,8 @@ public class Constant {
     public static final String PUSH_NOTIFICATION = "pushNotification";
 
 
-    public void snackbarcommonrelative(Context mcontext, RelativeLayout coordinatorLayout, String snackmsg){
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg+"", Snackbar.LENGTH_LONG);
+    public void snackbarcommonrelative(Context mcontext, RelativeLayout coordinatorLayout, String snackmsg) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
         TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
@@ -89,8 +89,8 @@ public class Constant {
         snackbar.show();
     }
 
-    public void snackbarcommonView(Context mcontext, View coordinatorLayout, String snackmsg){
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg+"", Snackbar.LENGTH_LONG);
+    public void snackbarcommonView(Context mcontext, View coordinatorLayout, String snackmsg) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
         TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
@@ -99,8 +99,8 @@ public class Constant {
         snackbar.show();
     }
 
-    public void snackbarcommoncoordinatorLayout(Context mcontext, CoordinatorLayout coordinatorLayout, String snackmsg){
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg+"", Snackbar.LENGTH_LONG);
+    public void snackbarcommoncoordinatorLayout(Context mcontext, CoordinatorLayout coordinatorLayout, String snackmsg) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
         TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
@@ -109,8 +109,8 @@ public class Constant {
         snackbar.show();
     }
 
-    public void snackbarcommondrawerLayout(Context mcontext, DrawerLayout coordinatorLayout, String snackmsg){
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg+"", Snackbar.LENGTH_LONG);
+    public void snackbarcommondrawerLayout(Context mcontext, DrawerLayout coordinatorLayout, String snackmsg) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
         TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
@@ -122,7 +122,7 @@ public class Constant {
     public ArrayList<Item_collections> ConvertJSONtoModel(JSONArray getarray) throws JSONException {
         ArrayList<Item_collections> temp_array = new ArrayList<>();
 
-        for (int i = 0; i< getarray.length();i++){
+        for (int i = 0; i < getarray.length(); i++) {
             JSONObject pass = getarray.getJSONObject(i);
             Item_collections temp_item = new Item_collections();
 
@@ -140,16 +140,16 @@ public class Constant {
         return temp_array;
     }
 
-    public void showporgressdialog(Context mContext,String Actiontype){
+    public void showporgressdialog(Context mContext, String Actiontype) {
         String title = "";
-        if (Actiontype.equals(actionsetas)){
+        if (Actiontype.equals(actionsetas)) {
             title = "Set As";
-        }else if (Actiontype.equals(actiondownload)){
+        } else if (Actiontype.equals(actiondownload)) {
             title = "Downloding...";
-        }else {
+        } else {
             title = "Processing";
         }
-        pdialog = new ProgressDialog(mContext,R.style.MyAlertDialogStyle);
+        pdialog = new ProgressDialog(mContext, R.style.MyAlertDialogStyle);
         pdialog.setCancelable(false);
         pdialog.setMessage(title);
         pdialog.show();
@@ -179,25 +179,25 @@ public class Constant {
         @Override
         protected void onPostExecute(Void result) {
             try {
-                if (pdialog.isShowing()){
+                if (pdialog.isShowing()) {
                     pdialog.dismiss();
                 }
                 if (outputFile != null) {
 
-                    if(action.equals(actionsetas)){
-                        SetAscall(context,outputFile);
-                    }else{
-                        if (pdialog.isShowing()){
+                    if (action.equals(actionsetas)) {
+                        SetAscall(context, outputFile);
+                    } else {
+                        if (pdialog.isShowing()) {
                             pdialog.dismiss();
                         }
                         snackbarcommonrelative(context, relativelayout, "Download Successfully!");
-                        new generatePictureStyleNotification(context,context.getResources().getString(R.string.app_name), "Download Successfully", outputFile.getAbsolutePath()).execute();
+                        new generatePictureStyleNotification(context, context.getResources().getString(R.string.app_name), "Download Successfully", outputFile.getAbsolutePath()).execute();
                     }
                 } else {
                     snackbarcommonrelative(context, relativelayout, "Something Went Wrong! please try again");
                 }
             } catch (Exception e) {
-                if (pdialog.isShowing()){
+                if (pdialog.isShowing()) {
                     pdialog.dismiss();
                 }
                 e.printStackTrace();
@@ -241,7 +241,7 @@ public class Constant {
                 }
                 fos.close();
                 is.close();
-                scanFile(context,outputFile.getAbsolutePath());
+                scanFile(context, outputFile.getAbsolutePath());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -252,10 +252,110 @@ public class Constant {
         }
     }
 
-    private void scanFile(Context context,String path) {
+
+    public void download_bitmapimage(Context mContext, Bitmap imageshare, RelativeLayout relaivelayout) {
+        context = mContext;
+        if (pdialog.isShowing()) {
+            pdialog.dismiss();
+        }
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+            File myDir = new File(root + "/" + mContext.getResources().getString(R.string.download_directory) + "/");
+            if (!myDir.exists()) {
+                myDir.mkdirs();
+            }
+            File file = new File(myDir, mContext.getResources().getString(R.string.download_imagename) + System.currentTimeMillis() + ".jpg");
+
+            try {
+                if (file.exists()) {
+                    file = new File(myDir, mContext.getResources().getString(R.string.download_imagename) + System.currentTimeMillis() + "12" + ".jpg");
+                    file.createNewFile();
+
+
+                } else {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(file);
+                imageshare.compress(Bitmap.CompressFormat.JPEG, 40, out);
+                out.flush();
+                out.close();
+                scanFile(mContext, file.getAbsolutePath());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            snackbarcommonrelative(mContext, relaivelayout, "Download Successfully!");
+            new generatePictureStyleNotification(mContext, mContext.getResources().getString(R.string.app_name), "Download Successfully", file.getAbsolutePath()).execute();
+        } catch (NullPointerException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ClassCastException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ActivityNotFoundException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (RuntimeException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (OutOfMemoryError e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        }
+    }
+
+    public void setAs_bitmapimage(Context mContext, Bitmap imageshare, RelativeLayout relaivelayout) {
+        context = mContext;
+        if (pdialog.isShowing()) {
+            pdialog.dismiss();
+        }
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+            File myDir = new File(root + "/" + mContext.getResources().getString(R.string.download_directory) + "/");
+            if (!myDir.exists()) {
+                myDir.mkdirs();
+            }
+            File file = new File(myDir, mContext.getResources().getString(R.string.download_imagename) + downloadshareimage);
+            snackbarcommonrelative(mContext, relaivelayout, "Sharing Process!");
+            if (file.exists())
+                file.delete();
+            try {
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                FileOutputStream ostream = new FileOutputStream(file);
+                imageshare.compress(Bitmap.CompressFormat.PNG, 100, ostream);
+                ostream.close();
+
+                Uri contentUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".provider", file);
+
+                if (contentUri != null) {
+                    SetAscall(mContext, file);
+                }
+
+                scanFile(mContext, file.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (NullPointerException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ClassCastException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ActivityNotFoundException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (RuntimeException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (OutOfMemoryError e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        }
+    }
+
+
+    private void scanFile(Context context, String path) {
 
         MediaScannerConnection.scanFile(context,
-                new String[] { path }, null,
+                new String[]{path}, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
 
                     public void onScanCompleted(String path, Uri uri) {
@@ -264,16 +364,15 @@ public class Constant {
                 });
     }
 
-    public void SetAscall(Context mContext,File outputFile){
-        Uri uri = FileProvider.getUriForFile(mContext, BuildConfig.APPLICATION_ID + ".provider",outputFile);
+    public void SetAscall(Context mContext, File outputFile) {
+        Uri uri = FileProvider.getUriForFile(mContext, BuildConfig.APPLICATION_ID + ".provider", outputFile);
         Intent intent = new Intent(Intent.ACTION_ATTACH_DATA);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.setDataAndType(uri,"image/*");
-        intent.putExtra("mimeType","image/*");
-        mContext.startActivity(Intent.createChooser(intent,"Set Image"));
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("mimeType", "image/*");
+        mContext.startActivity(Intent.createChooser(intent, "Set Image"));
     }
-
 
 
     public class generatePictureStyleNotification extends AsyncTask<String, Void, Bitmap> {
@@ -318,7 +417,7 @@ public class Constant {
             Intent intent = new Intent();
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(contentUri , "image/*");
+            intent.setDataAndType(contentUri, "image/*");
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
             Bitmap bitmap = BitmapFactory.decodeFile((new File(imageUrl)).getAbsolutePath());
             NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -332,8 +431,7 @@ public class Constant {
                     .setChannelId(NOTIFICATION_CHANNEL_ID)
                     .build();
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-            {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 int importance = NotificationManager.IMPORTANCE_HIGH;
                 NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Wallexplore_notification", importance);
                 assert notificationManager != null;

@@ -14,10 +14,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +36,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -40,6 +44,7 @@ import android.widget.TextView;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.facebook.ads.AudienceNetworkAds;
@@ -47,6 +52,7 @@ import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -92,12 +98,11 @@ import static com.crashlytics.android.Crashlytics.log;
 import static com.mi9t.k20prowallpapers.Constant.passing_from;
 import static com.mi9t.k20prowallpapers.Constant.passing_object;
 
-public class MainActivity extends AppCompatActivity implements ImageAdapter.MyClickListener {
+public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,ImageAdapter.MyClickListener {
     TextView tool_title;
     Toolbar toolbar;
     Constant constantfile;
     String title_text;
-    DrawerLayout drawer_layout;
     private ConnectionDetector detectorconn;
     Boolean conn;
     private ProgressBar progressBar;
@@ -115,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
 
     private FirebaseAnalytics mFirebaseAnalytics;
     RelativeLayout content_main;
+
+    DrawerLayout drawer_layout;
+    NavigationView navigationView;
+    ImageView drawer_back;
 
     public static String PACKAGE_NAME;
     AppUpdateManager appUpdateManager;
@@ -137,6 +146,30 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         AudienceNetworkAds.initialize(MainActivity.this);
         this.conn = null;
         constantfile = new Constant();
+        drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer_back = (ImageView) navigationView.findViewById(R.id.drawer_back);
+
+        this.detectorconn = new ConnectionDetector(getApplicationContext());
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu, getApplicationContext().getTheme()));
+        } else {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu));
+        }
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+
+
+
         PACKAGE_NAME = getApplicationContext().getPackageName();
         this.detectorconn = new ConnectionDetector(getApplicationContext());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -145,6 +178,27 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                Log.e("loadbanner","error : "+adError.getErrorMessage() + ",  code : "+adError.getErrorCode());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                Log.e("loadbanner","ad loaded");
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+        });
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         no_data_text = (TextView) findViewById(R.id.no_data_text);
@@ -333,6 +387,28 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         client.get(Constant.GET_IMAGE_LISTING, params, new AsynchronouseData(pageget));
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+        } else if (id == R.id.nav_favorite) {
+            getopenFavorite_activity();
+        } else if (id == R.id.nav_rate_us) {
+            getRateAppCounter();
+        } else if (id == R.id.nav_share_app) {
+            getShareCounter();
+        } else if (id == R.id.nav_policy) {
+            getopenPrivacypolicy();
+        } else if (id == R.id.nav_exit_app) {
+            AppExit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     class AsynchronouseData extends JsonHttpResponseHandler {
 
         int getpagenumber;
@@ -433,31 +509,31 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         AppExit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_rateus) {
-            getRateAppCounter();
-            return true;
-        }else if (id == R.id.action_privacy) {
-            getopenPrivacypolicy();
-            return true;
-        }else if (id == R.id.action_favorite) {
-            getopenFavorite_activity();
-            return true;
-        }else if (id == R.id.action_exit) {
-            AppExit();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.action_rateus) {
+//            getRateAppCounter();
+//            return true;
+//        }else if (id == R.id.action_privacy) {
+//            getopenPrivacypolicy();
+//            return true;
+//        }else if (id == R.id.action_favorite) {
+//            getopenFavorite_activity();
+//            return true;
+//        }else if (id == R.id.action_exit) {
+//            AppExit();
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     public void getRateAppCounter() {
@@ -481,6 +557,18 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     public void getopenFavorite_activity() {
        Intent openfav = new Intent(MainActivity.this,FavoriteActivity.class);
        startActivity(openfav);
+    }
+
+    public void getShareCounter() {
+        constantfile.snackbarcommondrawerLayout(MainActivity.this, drawer_layout, "Processing");
+        String whatsAppMessage = getResources().getString(R.string.share_message) + "\n\n";
+        whatsAppMessage = whatsAppMessage + "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName() + "\n";
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, whatsAppMessage);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+
     }
 
 

@@ -1,0 +1,602 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.techcorp.chhatrapatishivajimaharaj.quotes"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:6:5-78
+11-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:6:22-76
+12    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+12-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:7:5-75
+12-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:7:22-73
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:8:5-66
+13-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:8:22-64
+14    <uses-permission android:name="android.permission.GET_TASKS" />
+14-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:9:5-67
+14-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:9:22-65
+15    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+15-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:10:5-114
+15-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:10:22-75
+16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+16-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:11:5-80
+16-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:11:22-78
+17    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+17-->[com.google.android.gms:play-services-measurement-api:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7fc679e14b3468e5f5b6a297992bc16f\play-services-measurement-api-17.2.1\AndroidManifest.xml:24:5-68
+17-->[com.google.android.gms:play-services-measurement-api:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7fc679e14b3468e5f5b6a297992bc16f\play-services-measurement-api-17.2.1\AndroidManifest.xml:24:22-65
+18    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+18-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:26:5-82
+18-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:26:22-79
+19    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+19-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:26:5-110
+19-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:26:22-107
+20
+21    <application
+21-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:13:5-102:19
+22        android:allowBackup="true"
+22-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:14:9-35
+23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+23-->[androidx.core:core:1.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\2b41c8384ce520c88ee6c90d1bf62dee\core-1.1.0\AndroidManifest.xml:24:18-86
+24        android:debuggable="true"
+25        android:hardwareAccelerated="true"
+25-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:21:9-43
+26        android:icon="@drawable/logo"
+26-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:15:9-38
+27        android:label="@string/app_name"
+27-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:17:9-41
+28        android:largeHeap="true"
+28-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:18:9-33
+29        android:roundIcon="@drawable/logo"
+29-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:16:9-43
+30        android:supportsRtl="true"
+30-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:19:9-35
+31        android:theme="@style/AppTheme"
+31-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:22:9-40
+32        android:usesCleartextTraffic="true" >
+32-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:20:9-44
+33        <provider
+34            android:name="androidx.core.content.FileProvider"
+34-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:25:13-62
+35            android:authorities="com.techcorp.chhatrapatishivajimaharaj.quotes.provider"
+35-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:26:13-60
+36            android:exported="false"
+36-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:27:13-37
+37            android:grantUriPermissions="true" >
+37-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:28:13-47
+38            <meta-data
+38-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:29:13-31:57
+39                android:name="android.support.FILE_PROVIDER_PATHS"
+39-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:30:17-67
+40                android:resource="@xml/provider_paths" />
+40-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:31:17-55
+41        </provider>
+42
+43        <activity
+43-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:33:9-41:20
+44            android:name="com.techcorp.chhatrapatishivajimaharaj.quotes.Activity.WelcomeActivity"
+44-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:34:13-98
+45            android:screenOrientation="portrait" >
+45-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:35:13-49
+46            <intent-filter>
+46-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:36:13-40:29
+47                <action android:name="android.intent.action.MAIN" />
+47-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:37:17-69
+47-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:37:25-66
+48
+49                <category android:name="android.intent.category.LAUNCHER" />
+49-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:39:17-77
+49-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:39:27-74
+50            </intent-filter>
+51        </activity>
+52        <activity
+52-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:42:9-47:66
+53            android:name="com.techcorp.chhatrapatishivajimaharaj.quotes.Activity.MainActivity"
+53-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:43:13-95
+54            android:fitsSystemWindows="true"
+54-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:44:13-45
+55            android:screenOrientation="portrait"
+55-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:45:13-49
+56            android:theme="@style/AppTheme.NoActionBar"
+56-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:46:13-56
+57            android:windowSoftInputMode="stateHidden" />
+57-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:47:13-54
+58        <activity
+58-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:50:9-52:52
+59            android:name="com.techcorp.chhatrapatishivajimaharaj.quotes.Activity.DetailActivity"
+59-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:50:19-103
+60            android:screenOrientation="portrait"
+60-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:52:13-49
+61            android:theme="@style/AppThemesearch" />
+61-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:51:13-50
+62        <activity
+62-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:54:9-56:52
+63            android:name="com.techcorp.chhatrapatishivajimaharaj.quotes.Activity.FavDetailActivity"
+63-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:54:19-106
+64            android:screenOrientation="portrait"
+64-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:56:13-49
+65            android:theme="@style/AppThemesearch" />
+65-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:55:13-50
+66
+67        <meta-data
+67-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:58:9-60:50
+68            android:name="android.app.searchable"
+68-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:59:13-50
+69            android:resource="@xml/searchable" />
+69-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:60:13-47
+70
+71        <service android:name="com.techcorp.chhatrapatishivajimaharaj.quotes.MyFirebaseMessagingService" >
+71-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:62:9-66:19
+71-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:62:18-105
+72            <intent-filter>
+72-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:63:13-65:29
+73                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+73-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:64:17-78
+73-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:64:25-75
+74            </intent-filter>
+75        </service>
+76
+77        <meta-data
+77-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:69:9-71:71
+78            android:name="com.google.firebase.messaging.default_notification_channel_id"
+78-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:70:13-89
+79            android:value="@string/default_notification_channel_id" />
+79-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:71:13-68
+80        <meta-data
+80-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:73:9-75:72
+81            android:name="io.fabric.ApiKey"
+81-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:74:13-44
+82            android:value="49d38fbe79e145251e504c8e2893597bf1d157f7" />
+82-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:75:13-69
+83        <meta-data
+83-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:77:9-79:69
+84            android:name="com.google.android.gms.ads.APPLICATION_ID"
+84-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:78:13-69
+85            android:value="ca-app-pub-3940256099942544~3347511713" />
+85-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:79:13-67
+86
+87        <activity
+87-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:81:9-82:52
+88            android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
+88-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:81:19-88
+89            android:theme="@android:style/Theme" />
+89-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:82:13-49
+90        <activity
+90-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:84:9-86:77
+91            android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
+91-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:84:19-99
+92            android:configChanges="orientation|keyboardHidden|screenSize"
+92-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:86:13-74
+93            android:theme="@android:style/Theme.Translucent" />
+93-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:85:13-61
+94        <activity
+94-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:88:9-90:77
+95            android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
+95-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:88:19-102
+96            android:configChanges="orientation|keyboardHidden|screenSize"
+96-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:90:13-74
+97            android:theme="@android:style/Theme" />
+97-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:89:13-49
+98
+99        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
+99-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:92:9-104
+99-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:92:18-101
+100        <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
+100-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:93:9-97
+100-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:93:18-94
+101        <service
+101-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:94:9-95:72
+102            android:name="com.startapp.android.publish.common.metaData.PeriodicJobService"
+102-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:94:18-96
+103            android:permission="android.permission.BIND_JOB_SERVICE" />
+103-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:95:13-69
+104
+105        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener" >
+105-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:96:9-100:20
+105-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:96:19-99
+106            <intent-filter>
+106-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:97:13-99:29
+107                <action android:name="android.intent.action.BOOT_COMPLETED" />
+107-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:98:17-79
+107-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:98:25-76
+108            </intent-filter>
+109        </receiver>
+110
+111        <service
+111-->[com.google.firebase:firebase-database:19.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\868de60a854ee160767e9ea20264b8b5\firebase-database-19.2.0\AndroidManifest.xml:29:9-35:19
+112            android:name="com.google.firebase.components.ComponentDiscoveryService"
+112-->[com.google.firebase:firebase-database:19.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\868de60a854ee160767e9ea20264b8b5\firebase-database-19.2.0\AndroidManifest.xml:30:13-84
+113            android:directBootAware="true"
+113-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\bbf33cb72a4386b915bfc4e7f83e4f4d\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
+114            android:exported="false" >
+114-->[com.google.firebase:firebase-database:19.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\868de60a854ee160767e9ea20264b8b5\firebase-database-19.2.0\AndroidManifest.xml:31:13-37
+115            <meta-data
+115-->[com.google.firebase:firebase-database:19.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\868de60a854ee160767e9ea20264b8b5\firebase-database-19.2.0\AndroidManifest.xml:32:13-34:85
+116                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+116-->[com.google.firebase:firebase-database:19.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\868de60a854ee160767e9ea20264b8b5\firebase-database-19.2.0\AndroidManifest.xml:33:17-109
+117                android:value="com.google.firebase.components.ComponentRegistrar" />
+117-->[com.google.firebase:firebase-database:19.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\868de60a854ee160767e9ea20264b8b5\firebase-database-19.2.0\AndroidManifest.xml:34:17-82
+118            <meta-data
+118-->[com.google.firebase:firebase-messaging:20.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6feae8bf9ead270352e372bb0e677387\jetified-firebase-messaging-20.1.0\AndroidManifest.xml:38:13-40:85
+119                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+119-->[com.google.firebase:firebase-messaging:20.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6feae8bf9ead270352e372bb0e677387\jetified-firebase-messaging-20.1.0\AndroidManifest.xml:39:17-119
+120                android:value="com.google.firebase.components.ComponentRegistrar" />
+120-->[com.google.firebase:firebase-messaging:20.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6feae8bf9ead270352e372bb0e677387\jetified-firebase-messaging-20.1.0\AndroidManifest.xml:40:17-82
+121            <meta-data
+121-->[com.google.firebase:firebase-datatransport:17.0.3] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\92b7de11e1379be20c0072b930d55611\firebase-datatransport-17.0.3\AndroidManifest.xml:28:13-30:85
+122                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+122-->[com.google.firebase:firebase-datatransport:17.0.3] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\92b7de11e1379be20c0072b930d55611\firebase-datatransport-17.0.3\AndroidManifest.xml:29:17-115
+123                android:value="com.google.firebase.components.ComponentRegistrar" />
+123-->[com.google.firebase:firebase-datatransport:17.0.3] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\92b7de11e1379be20c0072b930d55611\firebase-datatransport-17.0.3\AndroidManifest.xml:30:17-82
+124            <meta-data
+124-->[com.google.android.gms:play-services-measurement-api:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7fc679e14b3468e5f5b6a297992bc16f\play-services-measurement-api-17.2.1\AndroidManifest.xml:30:13-32:85
+125                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+125-->[com.google.android.gms:play-services-measurement-api:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7fc679e14b3468e5f5b6a297992bc16f\play-services-measurement-api-17.2.1\AndroidManifest.xml:31:17-139
+126                android:value="com.google.firebase.components.ComponentRegistrar" />
+126-->[com.google.android.gms:play-services-measurement-api:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\7fc679e14b3468e5f5b6a297992bc16f\play-services-measurement-api-17.2.1\AndroidManifest.xml:32:17-82
+127            <meta-data
+127-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:32:13-34:85
+128                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+128-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:33:17-96
+129                android:value="com.google.firebase.components.ComponentRegistrar" />
+129-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:34:17-82
+130        </service>
+131        <!--
+132             FirebaseMessagingService performs security checks at runtime,
+133             but set to not exported to explicitly avoid allowing another app to call it.
+134        -->
+135        <service
+135-->[com.google.firebase:firebase-messaging:20.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6feae8bf9ead270352e372bb0e677387\jetified-firebase-messaging-20.1.0\AndroidManifest.xml:28:9-34:19
+136            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+136-->[com.google.firebase:firebase-messaging:20.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6feae8bf9ead270352e372bb0e677387\jetified-firebase-messaging-20.1.0\AndroidManifest.xml:29:13-82
+137            android:exported="false" >
+137-->[com.google.firebase:firebase-messaging:20.1.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6feae8bf9ead270352e372bb0e677387\jetified-firebase-messaging-20.1.0\AndroidManifest.xml:30:13-37
+138            <intent-filter android:priority="-500" >
+138-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:63:13-65:29
+139                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+139-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:64:17-78
+139-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:64:25-75
+140            </intent-filter>
+141        </service>
+142
+143        <activity
+143-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:15:9-19:75
+144            android:name="com.facebook.ads.AudienceNetworkActivity"
+144-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:16:13-68
+145            android:configChanges="keyboardHidden|orientation|screenSize"
+145-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:17:13-74
+146            android:exported="false"
+146-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:18:13-37
+147            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+147-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:19:13-72
+148        <activity
+148-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:20:9-25:75
+149            android:name="com.facebook.ads.internal.ipc.RemoteANActivity"
+149-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:21:13-74
+150            android:configChanges="keyboardHidden|orientation|screenSize"
+150-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:22:13-74
+151            android:exported="false"
+151-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:23:13-37
+152            android:process=":adnw"
+152-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:24:13-36
+153            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+153-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:25:13-72
+154
+155        <service
+155-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:27:9-29:40
+156            android:name="com.facebook.ads.internal.ipc.AdsProcessPriorityService"
+156-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:28:13-83
+157            android:exported="false" />
+157-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:29:13-37
+158        <service
+158-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:30:9-33:39
+159            android:name="com.facebook.ads.internal.ipc.AdsMessengerService"
+159-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:31:13-77
+160            android:exported="false"
+160-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:32:13-37
+161            android:process=":adnw" />
+161-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:33:13-36
+162
+163        <provider
+163-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:35:9-38:40
+164            android:name="com.facebook.ads.AudienceNetworkContentProvider"
+164-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:36:13-75
+165            android:authorities="com.techcorp.chhatrapatishivajimaharaj.quotes.AudienceNetworkContentProvider"
+165-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:37:13-82
+166            android:exported="false" />
+166-->[com.facebook.android:audience-network-sdk:5.6.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\78341a4caa96494ad07e5214fe0cbf1c\jetified-audience-network-sdk-5.6.0\AndroidManifest.xml:38:13-37
+167
+168        <receiver
+168-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:37:9-44:20
+169            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+169-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:38:13-78
+170            android:exported="true"
+170-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:39:13-36
+171            android:permission="com.google.android.c2dm.permission.SEND" >
+171-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:40:13-73
+172            <intent-filter>
+172-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:41:13-43:29
+173                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+173-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:42:17-81
+173-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\30577560cc88a7e3ef60fa1de141f1b1\firebase-iid-20.0.2\AndroidManifest.xml:42:25-78
+174            </intent-filter>
+175        </receiver>
+176
+177        <provider
+177-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\bbf33cb72a4386b915bfc4e7f83e4f4d\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
+178            android:name="com.google.firebase.provider.FirebaseInitProvider"
+178-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\bbf33cb72a4386b915bfc4e7f83e4f4d\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
+179            android:authorities="com.techcorp.chhatrapatishivajimaharaj.quotes.firebaseinitprovider"
+179-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\bbf33cb72a4386b915bfc4e7f83e4f4d\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
+180            android:exported="false"
+180-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\bbf33cb72a4386b915bfc4e7f83e4f4d\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
+181            android:initOrder="100" />
+181-->[com.google.firebase:firebase-common:19.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\bbf33cb72a4386b915bfc4e7f83e4f4d\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
+182
+183        <activity
+183-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\acdee6995056b976d2ca15110faeb00c\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+184            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+184-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\acdee6995056b976d2ca15110faeb00c\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+185            android:exported="false"
+185-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\acdee6995056b976d2ca15110faeb00c\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+186            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+186-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\acdee6995056b976d2ca15110faeb00c\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+187
+188        <receiver
+188-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:29:9-33:20
+189            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+189-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:30:13-85
+190            android:enabled="true"
+190-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:31:13-35
+191            android:exported="false" >
+191-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:32:13-37
+192        </receiver>
+193        <receiver
+193-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:34:9-42:20
+194            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+194-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:35:13-100
+195            android:enabled="true"
+195-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:36:13-35
+196            android:exported="true"
+196-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:37:13-36
+197            android:permission="android.permission.INSTALL_PACKAGES" >
+197-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:38:13-69
+198            <intent-filter>
+198-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:39:13-41:29
+199                <action android:name="com.android.vending.INSTALL_REFERRER" />
+199-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:40:17-79
+199-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:40:25-76
+200            </intent-filter>
+201        </receiver>
+202
+203        <service
+203-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:44:9-47:40
+204            android:name="com.google.android.gms.measurement.AppMeasurementService"
+204-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:45:13-84
+205            android:enabled="true"
+205-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:46:13-35
+206            android:exported="false" />
+206-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:47:13-37
+207        <service
+207-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:48:9-52:72
+208            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+208-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:49:13-87
+209            android:enabled="true"
+209-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:50:13-35
+210            android:exported="false"
+210-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:51:13-37
+211            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+211-->[com.google.android.gms:play-services-measurement:17.2.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\1e377b0015d638cdfdcafee508588ae0\play-services-measurement-17.2.1\AndroidManifest.xml:52:13-69
+212        <activity
+212-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:29:9-33:64
+213            android:name="com.google.android.gms.ads.AdActivity"
+213-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:30:13-65
+214            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+214-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:31:13-122
+215            android:exported="false"
+215-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:32:13-37
+216            android:theme="@android:style/Theme.Translucent" />
+216-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:33:13-61
+217
+218        <provider
+218-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:35:9-39:39
+219            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
+219-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:36:13-76
+220            android:authorities="com.techcorp.chhatrapatishivajimaharaj.quotes.mobileadsinitprovider"
+220-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:37:13-73
+221            android:exported="false"
+221-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:38:13-37
+222            android:initOrder="100" />
+222-->[com.google.android.gms:play-services-ads-lite:18.3.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c92d277f7c72ac83f8715943b9bdabcb\play-services-ads-lite-18.3.0\AndroidManifest.xml:39:13-36
+223
+224        <meta-data
+224-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b67f323ae820a0bb16f07926845b6711\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+225            android:name="com.google.android.gms.version"
+225-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b67f323ae820a0bb16f07926845b6711\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+226            android:value="@integer/google_play_services_version" />
+226-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\b67f323ae820a0bb16f07926845b6711\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+227
+228        <service
+228-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f3ee90821b5afdb78d5b1ae3bf545bfc\transport-backend-cct-2.2.0\AndroidManifest.xml:29:9-35:19
+229            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+229-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f3ee90821b5afdb78d5b1ae3bf545bfc\transport-backend-cct-2.2.0\AndroidManifest.xml:30:13-103
+230            android:exported="false" >
+230-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f3ee90821b5afdb78d5b1ae3bf545bfc\transport-backend-cct-2.2.0\AndroidManifest.xml:31:13-37
+231            <meta-data
+231-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f3ee90821b5afdb78d5b1ae3bf545bfc\transport-backend-cct-2.2.0\AndroidManifest.xml:32:13-34:39
+232                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+232-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f3ee90821b5afdb78d5b1ae3bf545bfc\transport-backend-cct-2.2.0\AndroidManifest.xml:33:17-94
+233                android:value="cct" />
+233-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f3ee90821b5afdb78d5b1ae3bf545bfc\transport-backend-cct-2.2.0\AndroidManifest.xml:34:17-36
+234        </service>
+235        <service
+235-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:26:9-30:19
+236            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+236-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:27:13-117
+237            android:exported="false"
+237-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:28:13-37
+238            android:permission="android.permission.BIND_JOB_SERVICE" >
+238-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:29:13-69
+239        </service>
+240
+241        <receiver
+241-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:32:9-34:40
+242            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+242-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:33:13-132
+243            android:exported="false" />
+243-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\6d3bb5b9a0e43681fdf8ad161960a412\transport-runtime-2.2.0\AndroidManifest.xml:34:13-37
+244
+245        <provider
+245-->[com.crashlytics.sdk.android:crashlytics:2.10.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c0fc88bef4dc723a02b36153dd771d11\jetified-crashlytics-2.10.1\AndroidManifest.xml:19:9-23:38
+246            android:name="com.crashlytics.android.CrashlyticsInitProvider"
+246-->[com.crashlytics.sdk.android:crashlytics:2.10.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c0fc88bef4dc723a02b36153dd771d11\jetified-crashlytics-2.10.1\AndroidManifest.xml:20:13-75
+247            android:authorities="com.techcorp.chhatrapatishivajimaharaj.quotes.crashlyticsinitprovider"
+247-->[com.crashlytics.sdk.android:crashlytics:2.10.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c0fc88bef4dc723a02b36153dd771d11\jetified-crashlytics-2.10.1\AndroidManifest.xml:21:13-75
+248            android:exported="false"
+248-->[com.crashlytics.sdk.android:crashlytics:2.10.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c0fc88bef4dc723a02b36153dd771d11\jetified-crashlytics-2.10.1\AndroidManifest.xml:22:13-37
+249            android:initOrder="90" /> <!-- The activity will be merged into the manifest of the hosting app. -->
+249-->[com.crashlytics.sdk.android:crashlytics:2.10.1] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\c0fc88bef4dc723a02b36153dd771d11\jetified-crashlytics-2.10.1\AndroidManifest.xml:23:13-35
+250        <activity
+250-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:5-271
+251            android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity"
+251-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:15-102
+252            android:enabled="false"
+252-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:103-126
+253            android:exported="false"
+253-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:127-151
+254            android:launchMode="singleInstance"
+254-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:204-239
+255            android:process=":playcore_missing_splits_activity"
+255-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:152-203
+256            android:stateNotNeeded="true" />
+256-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:8:240-269
+257        <activity
+257-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:5-278
+258            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+258-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:15-95
+259            android:enabled="false"
+259-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:96-119
+260            android:exported="false"
+260-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:120-144
+261            android:process=":playcore_dialog_wrapper_activity"
+261-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:175-226
+262            android:stateNotNeeded="true"
+262-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:145-174
+263            android:theme="@style/Theme.PlayCore.Transparent" /> <!-- Appnext integration -->
+263-->[com.google.android.play:core:1.6.4] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\d62b8600d0e20366aae60563b1c15e8c\core-1.6.4\AndroidManifest.xml:9:227-276
+264        <service
+264-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:13:9-15:43
+265            android:name="com.appnext.core.AdsService"
+265-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:14:13-55
+266            android:multiprocess="true" />
+266-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:15:13-40
+267
+268        <activity
+268-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:17:9-22:74
+269            android:name="com.appnext.ads.interstitial.InterstitialActivity"
+269-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:18:13-77
+270            android:configChanges="keyboardHidden|orientation|screenSize"
+270-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:19:13-74
+271            android:hardwareAccelerated="true"
+271-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:20:13-47
+272            android:multiprocess="true"
+272-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:21:13-40
+273            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+273-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:22:13-71
+274        <activity
+274-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:23:9-27:74
+275            android:name="com.appnext.ads.fullscreen.FullscreenActivity"
+275-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:24:13-73
+276            android:hardwareAccelerated="true"
+276-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:25:13-47
+277            android:multiprocess="true"
+277-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:26:13-40
+278            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+278-->[com.appnext.sdk:ads:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\f9563c5047b7bca2360d112e9e393313\jetified-ads-2.5.0.472\AndroidManifest.xml:27:13-71
+279        <activity
+279-->[com.appnext.sdk:banners:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\674f169f9bed788954c5ea97083c9fa8\jetified-banners-2.5.0.472\AndroidManifest.xml:14:9-16:52
+280            android:name="com.appnext.banners.BannerActivity"
+280-->[com.appnext.sdk:banners:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\674f169f9bed788954c5ea97083c9fa8\jetified-banners-2.5.0.472\AndroidManifest.xml:15:13-62
+281            android:screenOrientation="portrait" />
+281-->[com.appnext.sdk:banners:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\674f169f9bed788954c5ea97083c9fa8\jetified-banners-2.5.0.472\AndroidManifest.xml:16:13-49
+282
+283        <service
+283-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:10:9-13:43
+284            android:name="com.appnext.actionssdk.ActionService"
+284-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:11:13-64
+285            android:exported="false"
+285-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:12:13-37
+286            android:multiprocess="true" /> <!-- <activity -->
+286-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:13:13-40
+287        <!-- android:name=".ActionActivity" -->
+288        <!-- android:excludeFromRecents="true" -->
+289        <!-- android:launchMode="singleTop" -->
+290        <!-- android:theme="@android:style/Theme.Translucent"/> -->
+291        <activity
+291-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:20:9-25:64
+292            android:name="com.appnext.actionssdk.ActionsServiceActivity"
+292-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:21:13-73
+293            android:excludeFromRecents="true"
+293-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:22:13-46
+294            android:launchMode="singleTop"
+294-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:23:13-43
+295            android:multiprocess="true"
+295-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:24:13-40
+296            android:theme="@android:style/Theme.Translucent" />
+296-->[com.appnext.sdk:actions:2.4.6.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\3a8f20d22892cf6e2e84a80cd9dcbd20\jetified-actions-2.4.6.472\AndroidManifest.xml:25:13-61
+297
+298        <service
+298-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:14:9-17:40
+299            android:name="com.appnext.base.services.OperationService"
+299-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:15:13-70
+300            android:enabled="true"
+300-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:16:13-35
+301            android:exported="false" />
+301-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:17:13-37
+302        <service
+302-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:18:9-21:72
+303            android:name="com.appnext.base.services.OperationJobService"
+303-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:19:13-73
+304            android:exported="true"
+304-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:20:13-36
+305            android:permission="android.permission.BIND_JOB_SERVICE" />
+305-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:21:13-69
+306
+307        <receiver android:name="com.appnext.base.receivers.AppnextBootReciever" >
+307-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:23:9-27:20
+307-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:23:19-80
+308            <intent-filter>
+308-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:97:13-99:29
+309                <action android:name="android.intent.action.BOOT_COMPLETED" />
+309-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:98:17-79
+309-->G:\SimpleAppCreation\Github_app\Small_Apps\Chhatrapati Shivaji Maharaj Quotes\app\src\main\AndroidManifest.xml:98:25-76
+310            </intent-filter>
+311        </receiver>
+312
+313        <activity
+313-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:29:9-32:46
+314            android:name="com.appnext.core.ResultActivity"
+314-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:30:13-59
+315            android:excludeFromRecents="true"
+315-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:31:13-46
+316            android:launchMode="singleTop" />
+316-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:32:13-43
+317        <activity
+317-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:33:9-37:52
+318            android:name="com.appnext.core.result.ResultPageActivity"
+318-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:34:13-70
+319            android:excludeFromRecents="true"
+319-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:35:13-46
+320            android:launchMode="singleTop"
+320-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:36:13-43
+321            android:screenOrientation="portrait" />
+321-->[com.appnext.sdk:core:2.5.0.472] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\ce6cf34cfc0bb21b9e622128987c874d\jetified-core-2.5.0.472\AndroidManifest.xml:37:13-49
+322    </application>
+323
+324</manifest>
