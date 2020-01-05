@@ -69,7 +69,9 @@ public class FavoriteActivity extends AppCompatActivity implements ImageAdapter.
         tool_title = (TextView) toolbar.findViewById(R.id.tool_title);
         drawer_layout = (DrawerLayout) toolbar.findViewById(R.id.drawer_layout);
         content_fav = (LinearLayout) findViewById(R.id.content_fav);
-        AudienceNetworkAds.initialize(FavoriteActivity.this);
+        if(!AudienceNetworkAds.isInitialized(FavoriteActivity.this)){
+            AudienceNetworkAds.initialize(FavoriteActivity.this);
+        }
         this.conn = null;
         constantfile = new Constant();
         fav_item_list = new ArrayList<>();

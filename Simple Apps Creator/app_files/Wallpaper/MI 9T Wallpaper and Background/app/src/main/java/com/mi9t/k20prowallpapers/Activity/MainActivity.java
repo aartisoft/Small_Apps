@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private final static int MY_REQUEST_CODE = 111;
     com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
 
-    private AdView adView;
+  //  private AdView adView;
 
 
     @Override
@@ -143,7 +143,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         tool_title = (TextView) toolbar.findViewById(R.id.tool_title);
         drawer_layout = (DrawerLayout) toolbar.findViewById(R.id.drawer_layout);
         content_main = (RelativeLayout) findViewById(R.id.content_main);
-        AudienceNetworkAds.initialize(MainActivity.this);
+        if(!AudienceNetworkAds.isInitialized(MainActivity.this)){
+            AudienceNetworkAds.initialize(MainActivity.this);
+        }
         this.conn = null;
         constantfile = new Constant();
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,31 +176,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         this.detectorconn = new ConnectionDetector(getApplicationContext());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
 
-        adView = new AdView(this, getResources().getString(R.string.facebook_banner_id), AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                Log.e("loadbanner","error : "+adError.getErrorMessage() + ",  code : "+adError.getErrorCode());
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                Log.e("loadbanner","ad loaded");
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-
-            }
-        });
+//        adView = new AdView(this, getResources().getString(R.string.facebook_banner_id), AdSize.BANNER_HEIGHT_50);
+//        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+//        adContainer.addView(adView);
+//        adView.loadAd();
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         no_data_text = (TextView) findViewById(R.id.no_data_text);
@@ -733,9 +714,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
     @Override
     protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
+//        if (adView != null) {
+//            adView.destroy();
+//        }
         super.onDestroy();
     }
 }
