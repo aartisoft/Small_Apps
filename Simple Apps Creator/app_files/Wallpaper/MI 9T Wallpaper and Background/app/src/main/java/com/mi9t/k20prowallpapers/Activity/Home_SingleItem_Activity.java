@@ -397,4 +397,13 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
         }
     }
 
+
+
+    @Override
+    protected void onDestroy() {
+        if (adViewbanner != null) {
+            adViewbanner.destroy();
+        }
+        super.onDestroy();
+    }
 }
