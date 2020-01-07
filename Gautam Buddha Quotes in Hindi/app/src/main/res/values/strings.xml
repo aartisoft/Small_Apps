@@ -9,6 +9,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="default_notification_channel_id">10001_GautamBuddhaQuotes</string>
 
-    <string name="appnext_placement_id">1</string>
+    <string name="appnext_placement_id">b3b56cf0-74c8-4c3a-9a16-bd9c9e4a7518</string>
     <string name="startapp_id"></string>
 </resources>
