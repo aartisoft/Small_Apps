@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#090925</color>
+    <color name="colorPrimaryDark">#01010A</color>
+    <color name="colorAccent">#090925</color>
+    <color name="rv_bg">#090925</color>
+    <color name="black_semi_transparent">#000000</color>
+    <color name="white">#fafafa</color>
+    <color name="black">#000000</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="colorimageback">#2E3446</color>
+    <color name="colorimageblur">#902E3446</color>
+    <color name="colorBackgroundgray">#EEEDED</color>
+    <color name="colorDownloadbutton">#252558</color>
+    <color name="defaultIndicatorColor">#404DFF</color>
+</resources>
