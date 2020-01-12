@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "337870962919",
+    "firebase_url": "https://mother-s-day-status-and-wishes.firebaseio.com",
+    "project_id": "mother-s-day-status-and-wishes",
+    "storage_bucket": "mother-s-day-status-and-wishes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337870962919:android:1d7e514364ed3eb4516242",
+        "android_client_info": {
+          "package_name": "com.techcorp.mothersdaystatus.andwishes2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337870962919-mdb4f97pkb9c8kaqhtobgjv2bedtkrb9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.mothersdaystatus.andwishes2020",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "337870962919-tpo1dotvoo90qtt099kdlo61q6fa3m92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA266zRXMER9gPtm14MKHHZe7AYlg5u1xA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337870962919-tpo1dotvoo90qtt099kdlo61q6fa3m92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

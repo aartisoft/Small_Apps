@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "153851566872",
+    "firebase_url": "https://mothers-day-video-status.firebaseio.com",
+    "project_id": "mothers-day-video-status",
+    "storage_bucket": "mothers-day-video-status.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153851566872:android:5d08f3489ab044a0ac5c6d",
+        "android_client_info": {
+          "package_name": "com.mothersdayspecial.videostatus2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153851566872-djcd2a2nqrj2kcr1vgj2c7jb2bq7inct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mothersdayspecial.videostatus2020",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "153851566872-autrstal2ejl7gpg8sqccho06588nkhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNKGNHnrq_dezs4QIxJOeEJFwNP2r6XD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153851566872-autrstal2ejl7gpg8sqccho06588nkhm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

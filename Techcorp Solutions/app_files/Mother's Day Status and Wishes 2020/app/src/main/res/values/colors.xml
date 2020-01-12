@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ff568d</color>
+    <color name="colorAccentlight">#fff5ee</color>
+    <color name="colormenuitem">#BBBBB7</color>
+    <color name="colorbackground">#EFEFEF</color>
+    <color name="colorbutton">#F90022</color>
+    <color name="colorbuttonlightblur">#80F90022</color>
+    <color name="colorbuttonblur">#50F90022</color>
+    <color name="colorbuttontransperent">#20F90022</color>
+    <color name="colorimageback">#2E3446</color>
+    <color name="textcolor">#6D7794</color>
+
+
+    <color name="colorAccenmiddletblur">#602F2F65</color>
+    <color name="colorAccentblur">#102F2F65</color>
+    <color name="colorlayoutblur">#992F2F65</color>
+    <color name="colorPrimaryblur">#80AC34F9</color>
+    <color name="coloredittextback">#f1f1f1</color>
+
+
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+    <color name="grey">#bdbdbd</color>
+    <color name="black">#000000</color>
+    <color name="app_black">#F6852E</color>
+    <color name="blue">#268bcf</color>
+    <color name="counter">#6c6c6c</color>
+    <color name="lightGrey">#f2f2f2</color>
+    <color name="orange">#F6852E</color>
+    <color name="green">#55D119</color>
+    <color name="white">#ffffff</color>
+
+    <array name="colors">
+        <item name="all" type="color">#827f93</item>
+        <item name="design" type="color">#c467f4</item>
+        <item name="ios" type="color">#3b9aee</item>
+        <item name="android" type="color">#9bc53d</item>
+        <item name="web" type="color">#f4a261</item>
+        <item name="business" type="color">#1ed2bb</item>
+        <item name="research" type="color">#778da9</item>
+        <item name="sales" type="color">#20bf55</item>
+        <item name="quality" type="color">#9f9fed</item>
+        <item name="customer" type="color">#fc6177</item>
+        <item name="other" type="color">#bcbcbc</item>
+    </array>
+</resources>
