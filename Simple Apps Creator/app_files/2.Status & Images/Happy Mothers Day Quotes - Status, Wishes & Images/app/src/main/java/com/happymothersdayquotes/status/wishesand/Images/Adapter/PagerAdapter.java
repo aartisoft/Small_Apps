@@ -20,17 +20,18 @@ public class PagerAdapter extends AwesomeTabBarAdapter
     ArrayList<String> titles=new ArrayList<>();
     int[] colors={R.color.white,R.color.white,R.color.white};
     int[] textColors={android.R.color.black};
-    int[] icons={R.drawable.ic_status_icon,R.drawable.ic_image_icon,R.drawable.ic_video_camera};
+  //  int[] icons={R.drawable.ic_status_icon,R.drawable.ic_image_icon,R.drawable.ic_video_camera};
+    int[] icons={R.drawable.ic_image_icon,R.drawable.ic_status_icon};
 
     public PagerAdapter(FragmentManager fragmentManager)
     {
         super(fragmentManager);
         fragments.add(new ImageFragment());
-        fragments.add(new VideoFragment());
+//        fragments.add(new VideoFragment());
         fragments.add(new StatusFragment());
 
         titles.add("Images");
-        titles.add("Videos");
+//        titles.add("Videos");
         titles.add("Status");
 
     }
