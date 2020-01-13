@@ -17,8 +17,8 @@
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         android:paddingTop="20dp"
-        android:background="#252558"
-        android:textColor="#8F8FE2"
+        android:background="#ff568d"
+        android:textColor="#ffffff"
         android:text="हँस_के_पी_जाओ_भांग_का_प्याला..!!* क्या_डर_है_जब_साथ_है_अपने_त्रिशुल_वाला..!"
         />
 

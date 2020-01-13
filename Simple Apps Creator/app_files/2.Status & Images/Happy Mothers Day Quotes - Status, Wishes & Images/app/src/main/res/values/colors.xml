@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#090925</color>
-    <color name="colorPrimaryDark">#01010A</color>
-    <color name="colorAccent">#090925</color>
-    <color name="rv_bg">#090925</color>
+    <color name="colorPrimary">#9383e9</color>
+    <color name="colorPrimaryDark">#705bde</color>
+    <color name="colorAccent">#9383e9</color>
+    <color name="rv_bg">#ffffff</color>
     <color name="black_semi_transparent">#000000</color>
     <color name="white">#fafafa</color>
     <color name="black">#000000</color>
