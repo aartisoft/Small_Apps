@@ -1,13 +1,11 @@
 <resources>
-    <string name="app_name">Mothers Day Special Video Status 2020</string>
+    <string name="app_name">Mothers Day Video Status</string>
     <string name="title_settings">Settings</string>
-
-    <string name="see_alert_title">Watch this Video Ad to Download ,Share or Set Image</string>
+    <string name="see_alert_title">Watch this Video Ad to Download, Share or Set Image</string>
 
 
 
     <string name="downloading">Downloading</string>
-
     <string name="favoritlist_title">Favorite List</string>
     <string name="privacypolicy_title">Privacy Policy</string>
     <string name="title">My Description</string>
@@ -30,12 +28,9 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="download_directory">Mothers Day Special Video Status</string>
-
+    <string name="download_directory">Mothers Day Videos</string>
     <string name="default_notification_channel_id">10001_MothersDayVIS</string>
     <string name="default_notification_name">MothersDayVIS_notification</string>
-
     <string name="txt_Welcome">StartApp Interstitial Showcase</string>
     <string name="txt_SecondActivity">Welcome to another Activity</string>
     <string name="main_nextBtn">Next Activity</string>
