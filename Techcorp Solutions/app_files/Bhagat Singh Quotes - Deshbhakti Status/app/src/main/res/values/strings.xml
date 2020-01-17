@@ -9,6 +9,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="default_notification_channel_id">10001_BhagatSinghDeshbhakti</string>
 
-    <string name="appnext_placement_id">.</string>
+    <string name="appnext_placement_id">10b75935-4ee5-4109-ba93-672f6ac88226</string>
     <string name="startapp_id"></string>
 </resources>
