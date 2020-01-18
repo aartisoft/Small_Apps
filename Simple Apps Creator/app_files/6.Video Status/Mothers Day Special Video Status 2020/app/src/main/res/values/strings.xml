@@ -41,12 +41,9 @@
     <string name="list_row_description">Ad Description</string>
 
 
-    <string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstial_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="banner_id">ca-app-pub-4622636209999635/1746181347</string>
+    <string name="interstial_id">ca-app-pub-4622636209999635/4005513172</string>
 
 
-<!--    <string name="startapp_id">211774923</string>-->
-
-
-
+    <!--<string name="startapp_id"></string>-->
 </resources>
