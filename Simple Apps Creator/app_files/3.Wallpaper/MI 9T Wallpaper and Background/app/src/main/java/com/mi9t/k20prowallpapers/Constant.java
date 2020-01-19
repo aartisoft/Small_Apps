@@ -56,7 +56,7 @@ public class Constant {
     public static final String LOGIN_DATA = "LOGIN_DATA";
     public static final String actiondownload = "download";
     public static final String actionsetas = "setas";
-    public static int Adscount = 2;
+    public static int Adscount = 1;
     public static ArrayList<Item_collections> passing_array = new ArrayList<>();
     public static Item_collections passing_object = new Item_collections();
     public static int passing_from = 1;

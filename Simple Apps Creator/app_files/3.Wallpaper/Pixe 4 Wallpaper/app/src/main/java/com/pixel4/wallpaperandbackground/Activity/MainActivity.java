@@ -11,32 +11,41 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
+import com.appnext.ads.AdsError;
+import com.appnext.ads.interstitial.Interstitial;
+import com.appnext.core.AppnextAdCreativeType;
+import com.appnext.core.callbacks.OnAdClicked;
+import com.appnext.core.callbacks.OnAdClosed;
+import com.appnext.core.callbacks.OnAdError;
+import com.appnext.core.callbacks.OnAdLoaded;
+import com.appnext.core.callbacks.OnAdOpened;
 import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.InterstitialAd;
-import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -73,14 +82,14 @@ import java.util.Objects;
 import cz.msebera.android.httpclient.Header;
 
 import static com.crashlytics.android.Crashlytics.log;
+import static com.pixel4.wallpaperandbackground.Constant.passing_from;
 import static com.pixel4.wallpaperandbackground.Constant.passing_object;
 
-public class MainActivity extends AppCompatActivity implements ImageAdapter.MyClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ImageAdapter.MyClickListener {
     TextView tool_title;
     Toolbar toolbar;
     Constant constantfile;
     String title_text;
-    DrawerLayout drawer_layout;
     private ConnectionDetector detectorconn;
     Boolean conn;
     private ProgressBar progressBar;
@@ -99,10 +108,20 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     private FirebaseAnalytics mFirebaseAnalytics;
     RelativeLayout content_main;
 
+    DrawerLayout drawer_layout;
+    NavigationView navigationView;
+    ImageView drawer_back;
+
+
+    String PassUrl = "";
+    Interstitial interstitial_Ad;
+
     public static String PACKAGE_NAME;
     AppUpdateManager appUpdateManager;
     private final static int MY_REQUEST_CODE = 111;
     com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+
+    //  private AdView adView;
 
 
     @Override
@@ -115,9 +134,36 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         tool_title = (TextView) toolbar.findViewById(R.id.tool_title);
         drawer_layout = (DrawerLayout) toolbar.findViewById(R.id.drawer_layout);
         content_main = (RelativeLayout) findViewById(R.id.content_main);
-        AudienceNetworkAds.initialize(MainActivity.this);
+        if (!AudienceNetworkAds.isInitialized(MainActivity.this)) {
+            AudienceNetworkAds.initialize(MainActivity.this);
+        }
+
+        intializeappnextads();
+
         this.conn = null;
         constantfile = new Constant();
+        drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer_back = (ImageView) navigationView.findViewById(R.id.drawer_back);
+
+        this.detectorconn = new ConnectionDetector(getApplicationContext());
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu, getApplicationContext().getTheme()));
+        } else {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu));
+        }
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+
         PACKAGE_NAME = getApplicationContext().getPackageName();
         this.detectorconn = new ConnectionDetector(getApplicationContext());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -127,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         no_data_text.setVisibility(View.GONE);
 
         Image_list = (RecyclerView) findViewById(R.id.Image_list);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(MainActivity.this,3);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(MainActivity.this, 3);
         Image_list.setLayoutManager(mLayoutManager);
         Image_list.setItemAnimator(new DefaultItemAnimator());
         Image_list.setHasFixedSize(true);
@@ -146,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                switch(mAdapter.getItemViewType(position)){
+                switch (mAdapter.getItemViewType(position)) {
                     case ImageAdapter.VIEW_TYPE_ITEM:
                         return 1;
                     case ImageAdapter.VIEW_TYPE_LOADING:
@@ -165,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
 
         pref = getApplicationContext().getSharedPreferences(Constant.SHARED_PREF, 0);
 
-        if (pref.getString("regId", null) != null  && !pref.getString("regId",null).equals("")) {
+        if (pref.getString("regId", null) != null && !pref.getString("regId", null).equals("")) {
             String regId = pref.getString("regId", null);
             CallAddToken(regId);
         } else {
@@ -210,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
 
     }
 
-    public void updatestart(AppUpdateInfo appUpdateInfo){
+    public void updatestart(AppUpdateInfo appUpdateInfo) {
         InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
             @Override
             public void onStateUpdate(InstallState installState) {
@@ -236,7 +282,9 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     @Override
     protected void onResume() {
         super.onResume();
-
+        if (interstitial_Ad != null) {
+            loadappnextads();
+        }
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
             @Override
             public void onSuccess(AppUpdateInfo appUpdateInfo) {
@@ -309,6 +357,28 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         client.get(Constant.GET_IMAGE_LISTING, params, new AsynchronouseData(pageget));
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+        } else if (id == R.id.nav_favorite) {
+            getopenFavorite_activity();
+        } else if (id == R.id.nav_rate_us) {
+            getRateAppCounter();
+        } else if (id == R.id.nav_share_app) {
+            getShareCounter();
+        } else if (id == R.id.nav_policy) {
+            getopenPrivacypolicy();
+        } else if (id == R.id.nav_exit_app) {
+            AppExit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     class AsynchronouseData extends JsonHttpResponseHandler {
 
         int getpagenumber;
@@ -319,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
 
         public void onStart() {
             super.onStart();
-            if (getpagenumber == 1){
+            if (getpagenumber == 1) {
                 progressBar.setVisibility(View.VISIBLE);
             }
         }
@@ -383,8 +453,6 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     }
 
 
-
-
     public void snackbarcommonrelativeLong(Context mcontext, RelativeLayout coordinatorLayout, String snackmsg) {
         Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg + "", Snackbar.LENGTH_INDEFINITE).setAction("Try Again!", new View.OnClickListener() {
             @Override
@@ -409,28 +477,31 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         AppExit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_rateus) {
-            getRateAppCounter();
-            return true;
-        }else if (id == R.id.action_privacy) {
-            getopenPrivacypolicy();
-            return true;
-        }else if (id == R.id.action_exit) {
-            AppExit();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.action_rateus) {
+//            getRateAppCounter();
+//            return true;
+//        }else if (id == R.id.action_privacy) {
+//            getopenPrivacypolicy();
+//            return true;
+//        }else if (id == R.id.action_favorite) {
+//            getopenFavorite_activity();
+//            return true;
+//        }else if (id == R.id.action_exit) {
+//            AppExit();
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     public void getRateAppCounter() {
@@ -451,9 +522,14 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         startActivity(browserIntent);
     }
 
+    public void getopenFavorite_activity() {
+        Intent openfav = new Intent(MainActivity.this, FavoriteActivity.class);
+        startActivity(openfav);
+    }
+
     public void getShareCounter() {
         constantfile.snackbarcommondrawerLayout(MainActivity.this, drawer_layout, "Processing");
-        String whatsAppMessage = getResources().getString(R.string.app_share_status)+"\n\n";
+        String whatsAppMessage = getResources().getString(R.string.share_message) + "\n\n";
         whatsAppMessage = whatsAppMessage + "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName() + "\n";
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -499,7 +575,14 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     public void onItemClick(int position, String ImgUrl, ArrayList<Item_collections> passarray, View v) {
         passing_object = new Item_collections();
         passing_object = passarray.get(position);
-        loadInterstitialAd(ImgUrl);
+        passing_from = 1;
+        PassUrl = ImgUrl;
+        if (Constant.Adscount >= 2) {
+            callingadsonclick();
+        } else {
+            Constant.Adscount++;
+            callnextscreen();
+        }
     }
 
 
@@ -526,7 +609,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         }
 
         public void onSuccess(int i, Header[] headers, JSONObject bytes) {
-            Log.e("getdatacall","::::    "+ bytes.toString());
+            Log.e("getdatacall", "::::    " + bytes.toString());
             try {
                 ItemUpdate statusData = new ItemUpdate();
                 statusData.setStatus(bytes.getBoolean("status"));
@@ -545,72 +628,95 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         }
     }
 
+    public void intializeappnextads() {
+        interstitial_Ad = new Interstitial(MainActivity.this, getResources().getString(R.string.appnext_placement_id));
+        interstitial_Ad.setOnAdLoadedCallback(new OnAdLoaded() {
+            @Override
+            public void adLoaded(String bannerId, AppnextAdCreativeType creativeType) {
+
+            }
+        });
+        interstitial_Ad.setOnAdOpenedCallback(new OnAdOpened() {
+            @Override
+            public void adOpened() {
+
+            }
+        });
+        interstitial_Ad.setOnAdClickedCallback(new OnAdClicked() {
+            @Override
+            public void adClicked() {
+
+            }
+        });
+        interstitial_Ad.setOnAdClosedCallback(new OnAdClosed() {
+            @Override
+            public void onAdClosed() {
+                Constant.Adscount = 1;
+                callnextscreen();
+            }
+        });
+        interstitial_Ad.setOnAdErrorCallback(new OnAdError() {
+            @Override
+            public void adError(String error) {
+                switch (error) {
+                    case AdsError.NO_ADS:
+                        Log.v("appnext", "no ads" + error);
+                        break;
+                    case AdsError.CONNECTION_ERROR:
+                        Log.v("appnext", "connection problem");
+                        break;
+                    default:
+                        Log.v("appnext", "other error");
+                }
+            }
+        });
+    }
 
 
+    public void loadappnextads() {
+        if (interstitial_Ad != null) {
+            interstitial_Ad.loadAd();
+        }
+    }
 
-
-
-
-
-    private void loadInterstitialAd(final String imgURL) {
+    public void callingadsonclick() {
         final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.MyAlertDialogStyle);
         progress.setMessage("Loading Ad");
         progress.setCancelable(false);
         progress.show();
-        final InterstitialAd interstitialAd = new InterstitialAd(MainActivity.this, getResources().getString(R.string.facebook_interstitial_id));
-        interstitialAd.loadAd();
-        interstitialAd.setAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
-            }
+        if (interstitial_Ad.isAdLoaded()) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (progress.isShowing()) {
+                        progress.dismiss();
+                    }
+                    interstitial_Ad.showAd();
+                }
+            }, 1500);
 
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
-                }
-                if (interstitialAd != null) {
-                    interstitialAd.destroy();
-                }
-                callnextscreen(imgURL);
+        } else {
+            if (progress.isShowing()) {
+                progress.dismiss();
             }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
-                }
-                if (interstitialAd != null) {
-                    interstitialAd.destroy();
-                }
-                callnextscreen(imgURL);
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                if (progress.isShowing()) {
-                    progress.dismiss();
-                }
-                if (interstitialAd.isAdLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-            }
-        });
+            callnextscreen();
+        }
 
     }
 
 
-    public void callnextscreen(String imgURL){
+    public void callnextscreen() {
         Intent catwise = new Intent(MainActivity.this, Home_SingleItem_Activity.class);
-        catwise.putExtra("image_url", imgURL + "");
+        catwise.putExtra("image_url", PassUrl + "");
         startActivity(catwise);
+    }
+
+    @Override
+    protected void onDestroy() {
+//        if (adView != null) {
+//            adView.destroy();
+//        }
+        super.onDestroy();
     }
 }

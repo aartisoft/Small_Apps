@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -56,8 +57,11 @@ public class Constant {
     public static final String actiondownload = "download";
     public static final String actionsetas = "setas";
     public static int Adscount = 1;
+    public static int Adsreward = 1;
     public static ArrayList<Item_collections> passing_array = new ArrayList<>();
     public static Item_collections passing_object = new Item_collections();
+    public static int passing_from = 1;
+    public static final String downloadshareimage = "Pixel4Wallpapershare.jpg";
 
 
     ProgressDialog pdialog;
@@ -87,7 +91,7 @@ public class Constant {
         snackbar.show();
     }
 
-    public void snackbarcommonlinear(Context mcontext, LinearLayout coordinatorLayout, String snackmsg){
+    public void snackbarcommonView(Context mcontext, View coordinatorLayout, String snackmsg){
         Snackbar snackbar = Snackbar.make(coordinatorLayout, snackmsg+"", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorPrimaryDark));
@@ -247,6 +251,104 @@ public class Constant {
             }
 
             return null;
+        }
+    }
+
+    public void download_bitmapimage(Context mContext, Bitmap imageshare, RelativeLayout relaivelayout) {
+        context = mContext;
+        if (pdialog.isShowing()) {
+            pdialog.dismiss();
+        }
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+            File myDir = new File(root + "/" + mContext.getResources().getString(R.string.download_directory) + "/");
+            if (!myDir.exists()) {
+                myDir.mkdirs();
+            }
+            File file = new File(myDir, mContext.getResources().getString(R.string.download_imagename) + System.currentTimeMillis() + ".jpg");
+
+            try {
+                if (file.exists()) {
+                    file = new File(myDir, mContext.getResources().getString(R.string.download_imagename) + System.currentTimeMillis() + "12" + ".jpg");
+                    file.createNewFile();
+
+
+                } else {
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(file);
+                imageshare.compress(Bitmap.CompressFormat.JPEG, 40, out);
+                out.flush();
+                out.close();
+                scanFile(mContext, file.getAbsolutePath());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            snackbarcommonrelative(mContext, relaivelayout, "Download Successfully!");
+            new generatePictureStyleNotification(mContext, mContext.getResources().getString(R.string.app_name), "Download Successfully", file.getAbsolutePath()).execute();
+        } catch (NullPointerException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ClassCastException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ActivityNotFoundException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (RuntimeException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (OutOfMemoryError e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        }
+    }
+
+    public void setAs_bitmapimage(Context mContext, Bitmap imageshare, RelativeLayout relaivelayout) {
+        context = mContext;
+        if (pdialog.isShowing()) {
+            pdialog.dismiss();
+        }
+        try {
+            String root = Environment.getExternalStorageDirectory().toString();
+            File myDir = new File(root + "/" + mContext.getResources().getString(R.string.download_directory) + "/");
+            if (!myDir.exists()) {
+                myDir.mkdirs();
+            }
+            File file = new File(myDir, mContext.getResources().getString(R.string.download_imagename) + downloadshareimage);
+            snackbarcommonrelative(mContext, relaivelayout, "Sharing Process!");
+            if (file.exists())
+                file.delete();
+            try {
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                FileOutputStream ostream = new FileOutputStream(file);
+                imageshare.compress(Bitmap.CompressFormat.PNG, 100, ostream);
+                ostream.close();
+
+                Uri contentUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".provider", file);
+
+                if (contentUri != null) {
+                    SetAscall(mContext, file);
+                }
+
+                scanFile(mContext, file.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (NullPointerException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ClassCastException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (ActivityNotFoundException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (RuntimeException e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
+        } catch (OutOfMemoryError e) {
+            snackbarcommonrelative(mContext, relaivelayout, "Something Went Wrong! please try again");
         }
     }
 

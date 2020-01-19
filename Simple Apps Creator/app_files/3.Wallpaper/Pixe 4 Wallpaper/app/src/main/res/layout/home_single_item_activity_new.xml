@@ -25,13 +25,24 @@
         android:src="@drawable/ic_backarrow"
         android:tint="@color/white" />
 
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/white" />
+
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ads">
 
         <com.pixel4.wallpaperandbackground.Float.FloatingActionsMenu
-
+            android:id="@+id/floatingmenu"
             xmlns:fab="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -72,12 +83,29 @@
         </com.pixel4.wallpaperandbackground.Float.FloatingActionsMenu>
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+    <RelativeLayout
         android:id="@+id/ads"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true">
+
+        <com.appnext.banners.BannerView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:bannerSize="BANNER"
+            ads:placementId="@string/appnext_placement_id"/>
+
+    </RelativeLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:id="@+id/ads"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_alignParentBottom="true"/>-->
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -3,6 +3,9 @@
 
     <string name="app_share_status">For More Wallpapers.... Download Pixel 4 Wallpapers:</string>
     <string name="download_directory">Pixel 4 Wallpaper</string>
+    <string name="download_imagename">Pixel4Wallpape</string>
+    <string name="favorite_title">Favorite</string>
+    <string name="share_message">Download Now:</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -18,9 +21,12 @@
     <!--<string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>-->
     <!--<string name="interstial_id">ca-app-pub-3940256099942544/1033173712</string>-->
 
+
+    <string name="appnext_placement_id">appnext_placement_id</string>
+
     <!--for test id's add IMG_16_9_LINK# before ads id-->
-    <string name="facebook_banner_id">435459373712516_435459593712494</string>
-    <string name="facebook_interstitial_id">435459373712516_435459937045793</string>
+<!--    <string name="facebook_banner_id">435459373712516_435459593712494</string>-->
+<!--    <string name="facebook_interstitial_id">435459373712516_435459937045793</string>-->
 
 
 </resources>
