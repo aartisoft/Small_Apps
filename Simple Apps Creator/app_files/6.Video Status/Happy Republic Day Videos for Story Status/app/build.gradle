@@ -13,10 +13,16 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
-    maven { url "http://dl.appnext.com/" }
     jcenter()
 }
 
+allprojects {
+    repositories {
+        maven {
+            url "http://dl.appnext.com/"
+        }
+    }
+}
 
 
 android {

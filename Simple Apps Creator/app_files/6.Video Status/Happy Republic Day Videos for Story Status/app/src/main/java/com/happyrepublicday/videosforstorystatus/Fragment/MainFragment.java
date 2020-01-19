@@ -112,7 +112,7 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (Constant.Passing_from_notification){
+        if (Constant.Passing_from_notification) {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -248,9 +248,9 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
     @Override
     public void onResume() {
         super.onResume();
-//        if (interstitial_Ad != null && !interstitial_Ad.isAdLoaded()){
-//            loadappnextads();
-//        }
+        if (interstitial_Ad != null) {
+            loadappnextads();
+        }
     }
 
     @Override
@@ -291,7 +291,7 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
         }
     }
 
-    public void intializeappnextads(){
+    public void intializeappnextads() {
         interstitial_Ad = new Interstitial(getActivity(), getActivity().getResources().getString(R.string.appnext_placement_id));
         interstitial_Ad.setOnAdLoadedCallback(new OnAdLoaded() {
             @Override
@@ -315,15 +315,15 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
             @Override
             public void onAdClosed() {
                 onAdsresponce();
-                loadappnextads();
+                // loadappnextads();
             }
         });
         interstitial_Ad.setOnAdErrorCallback(new OnAdError() {
             @Override
             public void adError(String error) {
-                switch (error){
+                switch (error) {
                     case AdsError.NO_ADS:
-                        Log.v("appnext", "no ads");
+                        Log.v("appnext", "no ads" + error);
                         break;
                     case AdsError.CONNECTION_ERROR:
                         Log.v("appnext", "connection problem");
@@ -333,23 +333,21 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
                 }
             }
         });
-
-        loadappnextads();
     }
 
 
-    public void loadappnextads(){
-        if (interstitial_Ad != null){
+    public void loadappnextads() {
+        if (interstitial_Ad != null) {
             interstitial_Ad.loadAd();
         }
     }
 
-    public void callingadsonclick(){
+    public void callingadsonclick() {
         final ProgressDialog progress = new ProgressDialog(getActivity(), R.style.MyAlertDialogStyle);
         progress.setMessage("Loading Ad");
         progress.setCancelable(false);
         progress.show();
-        if (interstitial_Ad.isAdLoaded()){
+        if (interstitial_Ad.isAdLoaded()) {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -361,8 +359,8 @@ public class MainFragment extends Fragment implements HomeFullItemAdapter.MyClic
                 }
             }, 1500);
 
-        }else{
-            if (progress.isShowing()){
+        } else {
+            if (progress.isShowing()) {
                 progress.dismiss();
             }
             onAdsresponce();
