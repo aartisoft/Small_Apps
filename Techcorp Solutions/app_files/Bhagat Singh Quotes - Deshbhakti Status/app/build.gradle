@@ -12,9 +12,14 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
-    maven { url "http://dl.appnext.com/" }
 }
-
+allprojects {
+    repositories {
+        maven {
+            url "http://dl.appnext.com/"
+        }
+    }
+}
 
 
 android {
@@ -25,8 +30,8 @@ android {
         applicationId "com.techcorp.bhagatsingh.quotes"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
