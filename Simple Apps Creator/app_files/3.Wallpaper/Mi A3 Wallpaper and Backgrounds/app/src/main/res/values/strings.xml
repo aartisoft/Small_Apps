@@ -4,6 +4,10 @@
     <string name="app_share_status">For More Wallpapers.... Download Mi A3 Wallpapers:</string>
     <string name="download_directory">Mi A3 Wallpaper</string>
 
+    <string name="download_imagename">MiA3_Wallpapers</string>
+    <string name="share_message">Download Now:</string>
+    <string name="favorite_title">Favorite</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

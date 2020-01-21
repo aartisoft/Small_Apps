@@ -4,6 +4,10 @@
     <string name="app_share_status">Download this Amazing App For Realme X:</string>
     <string name="download_directory">Realme X Wallpapers</string>
 
+    <string name="download_imagename">RealmeX_Wallpapers</string>
+    <string name="share_message">Download Now:</string>
+    <string name="favorite_title">Favorite</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

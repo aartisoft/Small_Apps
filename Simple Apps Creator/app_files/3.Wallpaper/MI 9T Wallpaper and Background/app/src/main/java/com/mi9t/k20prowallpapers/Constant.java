@@ -52,7 +52,7 @@ public class Constant {
     public static final String GET_ADD_TOKEN = BASIC_URL + "api_add_token.php";
 
 
-    public static final String downloadshareimage = "MI9TWallpapershare.jpg";
+
     public static final String LOGIN_DATA = "LOGIN_DATA";
     public static final String actiondownload = "download";
     public static final String actionsetas = "setas";
@@ -60,6 +60,7 @@ public class Constant {
     public static ArrayList<Item_collections> passing_array = new ArrayList<>();
     public static Item_collections passing_object = new Item_collections();
     public static int passing_from = 1;
+    public static final String downloadshareimage = "MI9TWallpapershare.jpg";
 
 
     ProgressDialog pdialog;

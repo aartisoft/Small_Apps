@@ -59,6 +59,12 @@
 
         </activity>
         <activity
+            android:name="com.realmex.wallpaper.and.background.Activity.FavoriteActivity"
+            android:fitsSystemWindows="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
             android:name="com.realmex.wallpaper.and.background.Activity.Home_SingleItem_Activity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>

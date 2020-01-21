@@ -9,44 +9,32 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
 import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
@@ -64,12 +52,6 @@ import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -98,7 +80,7 @@ import static com.crashlytics.android.Crashlytics.log;
 import static com.mi9t.k20prowallpapers.Constant.passing_from;
 import static com.mi9t.k20prowallpapers.Constant.passing_object;
 
-public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,ImageAdapter.MyClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ImageAdapter.MyClickListener {
     TextView tool_title;
     Toolbar toolbar;
     Constant constantfile;
@@ -130,7 +112,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private final static int MY_REQUEST_CODE = 111;
     com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
 
-  //  private AdView adView;
+    //  private AdView adView;
 
 
     @Override
@@ -143,7 +125,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         tool_title = (TextView) toolbar.findViewById(R.id.tool_title);
         drawer_layout = (DrawerLayout) toolbar.findViewById(R.id.drawer_layout);
         content_main = (RelativeLayout) findViewById(R.id.content_main);
-        if(!AudienceNetworkAds.isInitialized(MainActivity.this)){
+        if (!AudienceNetworkAds.isInitialized(MainActivity.this)) {
             AudienceNetworkAds.initialize(MainActivity.this);
         }
         this.conn = null;
@@ -170,8 +152,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         navigationView.setCheckedItem(R.id.nav_home);
 
 
-
-
         PACKAGE_NAME = getApplicationContext().getPackageName();
         this.detectorconn = new ConnectionDetector(getApplicationContext());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -186,7 +166,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         no_data_text.setVisibility(View.GONE);
 
         Image_list = (RecyclerView) findViewById(R.id.Image_list);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(MainActivity.this,3);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(MainActivity.this, 3);
         Image_list.setLayoutManager(mLayoutManager);
         Image_list.setItemAnimator(new DefaultItemAnimator());
         Image_list.setHasFixedSize(true);
@@ -205,7 +185,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                switch(mAdapter.getItemViewType(position)){
+                switch (mAdapter.getItemViewType(position)) {
                     case ImageAdapter.VIEW_TYPE_ITEM:
                         return 1;
                     case ImageAdapter.VIEW_TYPE_LOADING:
@@ -224,7 +204,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         pref = getApplicationContext().getSharedPreferences(Constant.SHARED_PREF, 0);
 
-        if (pref.getString("regId", null) != null  && !pref.getString("regId",null).equals("")) {
+        if (pref.getString("regId", null) != null && !pref.getString("regId", null).equals("")) {
             String regId = pref.getString("regId", null);
             CallAddToken(regId);
         } else {
@@ -269,7 +249,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
     }
 
-    public void updatestart(AppUpdateInfo appUpdateInfo){
+    public void updatestart(AppUpdateInfo appUpdateInfo) {
         InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
             @Override
             public void onStateUpdate(InstallState installState) {
@@ -400,7 +380,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         public void onStart() {
             super.onStart();
-            if (getpagenumber == 1){
+            if (getpagenumber == 1) {
                 progressBar.setVisibility(View.VISIBLE);
             }
         }
@@ -462,8 +442,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         }
     }
-
-
 
 
     public void snackbarcommonrelativeLong(Context mcontext, RelativeLayout coordinatorLayout, String snackmsg) {
@@ -536,8 +514,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     }
 
     public void getopenFavorite_activity() {
-       Intent openfav = new Intent(MainActivity.this,FavoriteActivity.class);
-       startActivity(openfav);
+        Intent openfav = new Intent(MainActivity.this, FavoriteActivity.class);
+        startActivity(openfav);
     }
 
     public void getShareCounter() {
@@ -551,7 +529,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         startActivity(sendIntent);
 
     }
-
 
 
     public void AppExit() {
@@ -590,9 +567,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         passing_object = new Item_collections();
         passing_object = passarray.get(position);
         passing_from = 1;
-        if (Constant.Adscount >= 2){
+        if (Constant.Adscount >= 2) {
             loadInterstitialAd(ImgUrl);
-        }else{
+        } else {
             Constant.Adscount++;
             callnextscreen(ImgUrl);
         }
@@ -622,7 +599,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         }
 
         public void onSuccess(int i, Header[] headers, JSONObject bytes) {
-            Log.e("getdatacall","::::    "+ bytes.toString());
+            Log.e("getdatacall", "::::    " + bytes.toString());
             try {
                 ItemUpdate statusData = new ItemUpdate();
                 statusData.setStatus(bytes.getBoolean("status"));
@@ -640,12 +617,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         }
     }
-
-
-
-
-
-
 
 
     private void loadInterstitialAd(final String imgURL) {
@@ -706,7 +677,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     }
 
 
-    public void callnextscreen(String imgURL){
+    public void callnextscreen(String imgURL) {
         Intent catwise = new Intent(MainActivity.this, Home_SingleItem_Activity.class);
         catwise.putExtra("image_url", imgURL + "");
         startActivity(catwise);

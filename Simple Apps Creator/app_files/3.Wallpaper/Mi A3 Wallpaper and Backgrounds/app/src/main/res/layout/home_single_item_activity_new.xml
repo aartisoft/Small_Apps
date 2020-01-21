@@ -25,12 +25,23 @@
         android:src="@drawable/ic_backarrow"
         android:tint="@color/white" />
 
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/white" />
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ads">
 
         <com.mia3.wallpaperandbackgrounds.Float.FloatingActionsMenu
+            android:id="@+id/floatingmenu"
 
             xmlns:fab="http://schemas.android.com/apk/res-auto"
             android:layout_width="wrap_content"

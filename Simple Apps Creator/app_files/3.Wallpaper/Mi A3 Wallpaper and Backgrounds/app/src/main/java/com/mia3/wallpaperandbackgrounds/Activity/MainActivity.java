@@ -11,20 +11,24 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -37,6 +41,7 @@ import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -75,12 +80,11 @@ import cz.msebera.android.httpclient.Header;
 import static com.crashlytics.android.Crashlytics.log;
 import static com.mia3.wallpaperandbackgrounds.Constant.passing_object;
 
-public class MainActivity extends AppCompatActivity implements ImageAdapter.MyClickListener {
+public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,ImageAdapter.MyClickListener {
     TextView tool_title;
     Toolbar toolbar;
     Constant constantfile;
     String title_text;
-    DrawerLayout drawer_layout;
     private ConnectionDetector detectorconn;
     Boolean conn;
     private ProgressBar progressBar;
@@ -91,13 +95,14 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
 
     private int currentpage = 0;
     private boolean mIsLoadingMore;
-    private static final int TOTAL_ITEM_EACH_LOAD = 15;
-    String oldestKeyYouveSeen = null;
-
     SharedPreferences pref;
 
     private FirebaseAnalytics mFirebaseAnalytics;
     RelativeLayout content_main;
+
+    DrawerLayout drawer_layout;
+    NavigationView navigationView;
+    ImageView drawer_back;
 
     public static String PACKAGE_NAME;
     AppUpdateManager appUpdateManager;
@@ -115,9 +120,32 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         tool_title = (TextView) toolbar.findViewById(R.id.tool_title);
         drawer_layout = (DrawerLayout) toolbar.findViewById(R.id.drawer_layout);
         content_main = (RelativeLayout) findViewById(R.id.content_main);
-        AudienceNetworkAds.initialize(MainActivity.this);
+        if(!AudienceNetworkAds.isInitialized(MainActivity.this)){
+            AudienceNetworkAds.initialize(MainActivity.this);
+        }
         this.conn = null;
         constantfile = new Constant();
+        drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer_back = (ImageView) navigationView.findViewById(R.id.drawer_back);
+
+        this.detectorconn = new ConnectionDetector(getApplicationContext());
+        this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu, getApplicationContext().getTheme()));
+        } else {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu));
+        }
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
         PACKAGE_NAME = getApplicationContext().getPackageName();
         this.detectorconn = new ConnectionDetector(getApplicationContext());
         this.conn = Boolean.valueOf(this.detectorconn.isConnectingToInternet());
@@ -309,6 +337,28 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         client.get(Constant.GET_IMAGE_LISTING, params, new AsynchronouseData(pageget));
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+        } else if (id == R.id.nav_favorite) {
+            getopenFavorite_activity();
+        } else if (id == R.id.nav_rate_us) {
+            getRateAppCounter();
+        } else if (id == R.id.nav_share_app) {
+            getShareCounter();
+        } else if (id == R.id.nav_policy) {
+            getopenPrivacypolicy();
+        } else if (id == R.id.nav_exit_app) {
+            AppExit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
     class AsynchronouseData extends JsonHttpResponseHandler {
 
         int getpagenumber;
@@ -409,28 +459,31 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         AppExit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_rateus) {
-            getRateAppCounter();
-            return true;
-        }else if (id == R.id.action_privacy) {
-            getopenPrivacypolicy();
-            return true;
-        }else if (id == R.id.action_exit) {
-            AppExit();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.action_rateus) {
+//            getRateAppCounter();
+//            return true;
+//        }else if (id == R.id.action_privacy) {
+//            getopenPrivacypolicy();
+//            return true;
+//        }else if (id == R.id.action_favorite) {
+//            getopenFavorite_activity();
+//            return true;
+//        }else if (id == R.id.action_exit) {
+//            AppExit();
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     public void getRateAppCounter() {
@@ -451,9 +504,14 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         startActivity(browserIntent);
     }
 
+    public void getopenFavorite_activity() {
+        Intent openfav = new Intent(MainActivity.this,FavoriteActivity.class);
+        startActivity(openfav);
+    }
+
     public void getShareCounter() {
         constantfile.snackbarcommondrawerLayout(MainActivity.this, drawer_layout, "Processing");
-        String whatsAppMessage = getResources().getString(R.string.app_share_status)+"\n\n";
+        String whatsAppMessage = getResources().getString(R.string.share_message) + "\n\n";
         whatsAppMessage = whatsAppMessage + "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName() + "\n";
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -462,6 +520,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         startActivity(sendIntent);
 
     }
+
 
 
     public void AppExit() {
@@ -499,7 +558,13 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
     public void onItemClick(int position, String ImgUrl, ArrayList<Item_collections> passarray, View v) {
         passing_object = new Item_collections();
         passing_object = passarray.get(position);
-        loadInterstitialAd(ImgUrl);
+        Constant.passing_from = 1;
+        if (Constant.Adscount >= 2){
+            loadInterstitialAd(ImgUrl);
+        }else{
+            Constant.Adscount++;
+            callnextscreen(ImgUrl);
+        }
     }
 
 
@@ -572,6 +637,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
                 if (interstitialAd != null) {
                     interstitialAd.destroy();
                 }
+                Constant.Adscount = 1;
                 callnextscreen(imgURL);
             }
 
@@ -583,6 +649,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
                 if (interstitialAd != null) {
                     interstitialAd.destroy();
                 }
+                Constant.Adscount = 1;
                 callnextscreen(imgURL);
             }
 
@@ -612,5 +679,10 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.MyCl
         Intent catwise = new Intent(MainActivity.this, Home_SingleItem_Activity.class);
         catwise.putExtra("image_url", imgURL + "");
         startActivity(catwise);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
