@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/AppThemesearch"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:subtitleTextColor="@color/black"
+        app:titleTextColor="@color/black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/player_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp">
+
+                    <FrameLayout
+                        android:id="@+id/player_fl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/black">
+
+                        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                            android:background="@color/black"
+                            android:visibility="visible"
+                            app:use_controller="true"
+                            android:id="@+id/video_view"
+                            app:resize_mode="fixed_width"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                    </FrameLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relaivelayout_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ProgressBar
+                            android:theme="@style/MyProgressDialogwhite"
+                            android:id="@+id/Progressbar_player"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:visibility="visible"
+                        android:id="@+id/relative_layout_fragement_video_thum"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:adjustViewBounds="true"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:scaleType="fitXY"
+                            android:id="@+id/image_view_video_fragement_video"
+                            android:layout_centerVertical="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:id="@+id/image_view_load_video_item"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:padding="15dp"
+                            android:src="@drawable/ic_play_button"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="#80000000"
+                        android:id="@+id/relative_layout_progress_fragement_video">
+
+                        <RelativeLayout
+                            android:background="@drawable/progress_bg_box"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:paddingBottom="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:id="@+id/text_view_progress_fragement_video"
+                                    android:textSize="14dp"
+                                    android:gravity="left|center"
+                                    android:text="Downloading : "
+                                    android:textColor="@color/white"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="22dp" />
+                                <ProgressBar
+                                    android:progressDrawable="@drawable/progress_bg"
+                                    android:progress="0"
+                                    android:id="@+id/progress_bar_fragement_video"
+                                    style="?android:attr/progressBarStyleHorizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="5dp" />
+                            </LinearLayout>
+                            <ImageView
+                                android:visibility="gone"
+                                android:id="@+id/image_view_cancel_fragement_video"
+                                android:tint="@color/colorDownloadbutton"
+                                app:srcCompat="@drawable/ic_file_download"
+                                android:layout_alignParentLeft="true"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                tools:ignore="VectorDrawableCompat" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/video_detail_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_alignParentBottom="true">
+
+                    <TextView
+                        android:id="@+id/detail_title"
+                        android:textSize="15dp"
+                        android:padding="2dp"
+                        android:textColor="@color/black"
+                        android:gravity="center|left"
+                        android:text="Title"
+                        android:maxLines="2"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/detail_views"
+                        android:padding="2dp"
+                        android:textSize="12dp"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:text="Views"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/action_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/transparent"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <LinearLayout
+                                android:id="@+id/favorite_ll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:id="@+id/image_favorite"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:src="@drawable/ic_favorite" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Favorite"
+                                    android:layout_margin="5dp"
+                                    android:layout_centerInParent="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"/>
+
+                            </LinearLayout>
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <LinearLayout
+                                android:id="@+id/download_ll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:src="@drawable/ic_download" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Download"
+                                    android:layout_margin="5dp"
+                                    android:layout_centerInParent="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"/>
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <LinearLayout
+                                android:id="@+id/share_ll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:src="@drawable/ic_share" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Share"
+                                    android:layout_margin="5dp"
+                                    android:layout_centerInParent="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"/>
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <LinearLayout
+                                android:id="@+id/whatsapp_ll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:tint="#00DE72"
+                                    android:src="@drawable/ic_whatsapp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="WhatsApp"
+                                    android:layout_margin="5dp"
+                                    android:layout_centerInParent="true"
+                                    android:textColor="#00DE72"
+                                    android:textSize="11sp"
+                                    android:textStyle="bold"
+                                    android:textAlignment="center"/>
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:id="@+id/ads"
+                        android:orientation="vertical"
+                        android:layout_alignParentBottom="true"/>
+
+                    <com.facebook.ads.NativeAdLayout
+                        android:id="@+id/native_banner_ad_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorBackgroundgray"/>
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/text_related"
+                    android:textSize="15dp"
+                    android:gravity="left|center"
+                    android:text="Related"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/suggestion_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:id="@+id/videonotfound"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="Fetching Problem to Load Video!\nPlase Try Again"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#FF3758</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorBackgroundgray">#EEEDED</color>
+    <color name="colorDownloadbutton">#FF3758</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+
+    <color name="colorAccentlight">#F3F2EA</color>
+    <color name="colormenuitem">#44F6D2</color>
+    <color name="colorbutton">#FF3758</color>
+    <color name="colorbuttonlightblur">#80F90022</color>
+    <color name="colorbuttonblur">#50F90022</color>
+    <color name="colorbuttontransperent">#20F90022</color>
+    <color name="colorimageback">#2E3446</color>
+    <color name="colorimageblur">#902E3446</color>
+    <color name="textcolor">#6D7794</color>
+
+
+    <color name="colorAccenmiddletblur">#602F2F65</color>
+    <color name="colorAccentblur">#102F2F65</color>
+    <color name="colorlayoutblur">#992F2F65</color>
+    <color name="colorPrimaryblur">#80AC34F9</color>
+    <color name="coloredittextback">#f1f1f1</color>
+
+
+
+    <integer-array name="random_imgs">
+        <item>@drawable/gradient_cat_one</item>
+        <item>@drawable/gradient_cat_two</item>
+        <item>@drawable/gradient_cat_three</item>
+        <item>@drawable/gradient_cat_four</item>
+        <item>@drawable/gradient_cat_five</item>
+        <item>@drawable/gradient_cat_six</item>
+        <item>@drawable/gradient_cat_seven</item>
+        <item>@drawable/gradient_cat_eight</item>
+        <item>@drawable/gradient_cat_nine</item>
+        <item>@drawable/gradient_cat_ten</item>
+    </integer-array>
+
+</resources>
