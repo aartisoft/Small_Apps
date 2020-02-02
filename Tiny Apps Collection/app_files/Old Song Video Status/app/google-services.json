@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "551030132074",
+    "firebase_url": "https://old-song-video-status.firebaseio.com",
+    "project_id": "old-song-video-status",
+    "storage_bucket": "old-song-video-status.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551030132074:android:66565a419fde28ef466913",
+        "android_client_info": {
+          "package_name": "com.tinyapps.oldsong.videostatus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "551030132074-k91hpu8124g2g4fn5mq2ds7lb5st6t96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tinyapps.oldsong.videostatus",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "551030132074-dvoqdp2v7jrlesi4735nl7i7uvd97e5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQp80TUpSvdb5Va46m6zeJXgznUCDD2Qc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "551030132074-dvoqdp2v7jrlesi4735nl7i7uvd97e5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
