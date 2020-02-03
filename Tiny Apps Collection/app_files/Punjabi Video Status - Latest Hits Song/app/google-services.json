@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1074611273666",
+    "firebase_url": "https://punjabi-video-status-fd48b.firebaseio.com",
+    "project_id": "punjabi-video-status-fd48b",
+    "storage_bucket": "punjabi-video-status-fd48b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074611273666:android:a86d710dee23633b2d205b",
+        "android_client_info": {
+          "package_name": "com.punjabivideostatus.latestsong"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074611273666-pcuc9ahl4vjnkfqsrnhdkudueequ69g5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.punjabivideostatus.latestsong",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "1074611273666-veqlkbsf3rn0u88vg3n5ni9h0lich7s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_arrvkp2whkYJygPn6AbTmLwpEbLyowY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074611273666-veqlkbsf3rn0u88vg3n5ni9h0lich7s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
