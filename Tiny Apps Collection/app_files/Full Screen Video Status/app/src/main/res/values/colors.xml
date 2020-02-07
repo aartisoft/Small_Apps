@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#FF3758</color>
+    <color name="colorAccent">#ff7747</color>
     <color name="colorBackground">#ffffff</color>
     <color name="colorBackgroundgray">#EEEDED</color>
-    <color name="colorDownloadbutton">#FF3758</color>
+    <color name="colorDownloadbutton">#ff7747</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
