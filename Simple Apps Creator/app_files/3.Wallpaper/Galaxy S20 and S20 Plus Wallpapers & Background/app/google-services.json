@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "238447006802",
+    "firebase_url": "https://galaxy-s11-wallpapers.firebaseio.com",
+    "project_id": "galaxy-s11-wallpapers",
+    "storage_bucket": "galaxy-s11-wallpapers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238447006802:android:e5d672fd9b01add0307b8b",
+        "android_client_info": {
+          "package_name": "com.galaxys11.wallpapersandbackground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238447006802-mc2gekut1r09djv27sl6pfoe4vvkmd2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.galaxys11.wallpapersandbackground",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "238447006802-oitijra62ns5qhgcrletl9387g0o114p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIUnTRqoiQff_Dwxw1xab4794E-V50pMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238447006802-oitijra62ns5qhgcrletl9387g0o114p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

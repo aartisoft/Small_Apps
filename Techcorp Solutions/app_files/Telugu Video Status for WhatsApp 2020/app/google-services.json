@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "876448588065",
+    "firebase_url": "https://telugu-video-status-594d8.firebaseio.com",
+    "project_id": "telugu-video-status-594d8",
+    "storage_bucket": "telugu-video-status-594d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876448588065:android:f73b1e68c30da99b175e60",
+        "android_client_info": {
+          "package_name": "com.techcorp.teluguvideostatus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876448588065-5gbo5ho0cbltmq1ofinmc1emdjg6a08f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techcorp.teluguvideostatus",
+            "certificate_hash": "1464920ff188e3046ded6294c5d43289a6c06f7c"
+          }
+        },
+        {
+          "client_id": "876448588065-h423oae6le7050ks4sr9p7s17ahmn8rn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-aCErz4h0qaU2j2HWFTWlw8uSRzyzvjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876448588065-h423oae6le7050ks4sr9p7s17ahmn8rn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

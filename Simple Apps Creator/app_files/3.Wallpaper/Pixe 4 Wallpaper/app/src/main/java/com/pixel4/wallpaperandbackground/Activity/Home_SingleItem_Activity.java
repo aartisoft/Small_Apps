@@ -268,7 +268,7 @@ public class Home_SingleItem_Activity extends AppCompatActivity {
                         constantfile.share_image(Home_SingleItem_Activity.this, actionsetas, getdata.getWallpaper_image(), relative);
                     } else if (actiontype.equals(actiondownload)) {
                         CallAddDownload(getdata.getId());
-                     }
+                    }
                 }
             } else {
                 constantfile.snackbarcommonrelative(Home_SingleItem_Activity.this, relative, "Please give the permission to download Image!");
