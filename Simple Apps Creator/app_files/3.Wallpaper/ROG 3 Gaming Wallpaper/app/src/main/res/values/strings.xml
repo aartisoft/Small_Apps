@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Note 9 Wallpapers</string>
+    <string name="app_share_status">For More Wallpapers.... Download Galaxy Note 9 Wallpapers &amp; Background:</string>
+    <string name="download_directory">Note 9 Wallpapers</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title">My Description</string>
+    <string name="context_menu">Context menu</string>
+    <string name="no_internet">No Internet Connection!</string>
+    <string name="not_download">Something Went Wrong!</string>
+    <string name="default_notification_channel_id">10001</string>
+    <string name="download_imagename">Note 9 Wallpaper</string>
+
+
+    <!--  IMG_16_9_LINK#  -->
+    <string name="facebook_banner_id">IMG_16_9_LINK#</string>
+    <string name="facebook_interstitial_id">IMG_16_9_LINK#</string>
+</resources>

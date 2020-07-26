@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="31dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/cover_linear"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_175sdp">
+
+                <ImageView
+                    android:id="@+id/cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/bg"
+                    android:tag="image_path" />
+
+                <ImageView
+                    android:id="@+id/img_eventcreation_back"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/img_back_selector"
+                    android:padding="@dimen/_12sdp"
+                    android:src="@mipmap/back_sm"
+                    android:tag="backbutton" />
+
+                <LinearLayout
+                    android:id="@+id/ll_eventcreation_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img_eventcreation_camera"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/app_name"
+                        android:src="@mipmap/ed_acm"
+                        android:tag="userimage" />
+
+                    <widgets.CustomTextView
+                        android:id="@+id/txt_eventcreation_banner_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="label"
+                        android:text="@string/txt_eventcreation_banner_title"
+                        android:textColor="@color/whitemenu"
+                        android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/twenty"
+                android:background="@color/grey_f5f5f5"
+                android:orientation="vertical"
+                android:padding="@dimen/ten">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ten"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/twenty_five"
+                        android:paddingLeft="@dimen/ten"
+                        android:paddingRight="@dimen/ten">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:weightSum="1">
+
+                            <TextView
+                                android:id="@+id/et_eventcreation_date"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/background_edittext"
+                                android:drawableEnd="@mipmap/cal"
+                                android:drawableRight="@mipmap/cal"
+                                android:gravity="center_vertical"
+                                android:hint="@string/et_eventcreation_date"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/_12ssp"
+                                android:paddingRight="@dimen/_5sdp"
+                                android:tag="event_date"
+                                android:textColor="@color/grey_aeaeae"
+                                android:textColorHint="@color/grey_aeaeae"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/et_eventcreation_time"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/fifteen"
+                                android:layout_marginStart="@dimen/fifteen"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/background_edittext"
+                                android:drawableEnd="@mipmap/tim"
+                                android:drawableRight="@mipmap/tim"
+                                android:gravity="center_vertical"
+                                android:hint="@string/et_eventcreation_time"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/_12ssp"
+                                android:paddingRight="@dimen/_5sdp"
+                                android:tag="time"
+                                android:textColor="@color/grey_aeaeae"
+                                android:textColorHint="@color/grey_aeaeae"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_eventcreation_eventname"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@drawable/background_edittext"
+                            android:hint="@string/et_eventcreation_eventname"
+                            android:inputType="text"
+                            android:paddingLeft="@dimen/_12ssp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:tag="event_name"
+
+                            android:textColor="@color/grey_aeaeae"
+                            android:textColorHint="@color/grey_aeaeae"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <EditText
+                            android:id="@+id/et_eventcreation_loc"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@drawable/background_edittext"
+                            android:drawableEnd="@mipmap/loc"
+                            android:drawableRight="@mipmap/loc"
+                            android:hint="@string/et_eventcreation_loc"
+                            android:inputType="text"
+                            android:paddingLeft="@dimen/_12ssp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:tag="event_place"
+
+                            android:textColor="@color/grey_aeaeae"
+                            android:textColorHint="@color/grey_aeaeae"
+                            android:textSize="@dimen/_10ssp"
+                            android:visibility="visible" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible">
+
+                            <EditText
+                                android:id="@+id/et_eventcreation_describe"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:background="@drawable/background_edittext"
+                                android:hint="@string/et_eventcreation_describe"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/_12ssp"
+                                android:paddingRight="@dimen/_25sdp"
+                                android:tag="description"
+                                android:textColor="@color/grey_aeaeae"
+                                android:textColorHint="@color/grey_aeaeae"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <ImageView
+                                android:id="@+id/microphone"
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="@dimen/_2sdp"
+                                android:src="@mipmap/microphone"
+                                android:tag="microphone" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@drawable/background_edittext">
+
+                            <Spinner
+                                android:id="@+id/dwontime"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:tag="dwontime"></Spinner>
+
+                            <ImageView
+                                android:layout_width="@dimen/_10sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:layout_margin="@dimen/_12sdp"
+                                android:src="@mipmap/drop_arrow"
+                                android:tag="label" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ten"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:orientation="vertical"
+                            android:paddingBottom="@dimen/_20sdp"
+                            android:paddingLeft="@dimen/_7sdp"
+                            android:paddingRight="@dimen/_7sdp"
+                            android:paddingTop="@dimen/_11sdp">
+
+                            <widgets.CustomTextView
+                                android:id="@+id/txt_eventcreation_invite_eventpic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/_12ssp"
+                                android:tag="label"
+
+                                android:text="@string/txt_eventcreation_invite_eventpic"
+                                android:textColor="@color/grey_aeaeae"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <RelativeLayout
+                                android:id="@+id/LinearLayoutin"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/_12ssp">
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/rv_event_creation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginRight="@dimen/_2sdp"
+                                    android:layout_toLeftOf="@+id/rel_plusadd"
+                                    android:tag="imagelist">
+
+                                </android.support.v7.widget.RecyclerView>
+
+                                <RelativeLayout
+                                    android:id="@+id/rel_plusadd"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true">
+
+                                    <ImageView
+                                        android:id="@+id/addimages"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+
+                                        android:src="@mipmap/grey"
+                                        android:tag="label" />
+
+                                    <ImageView
+                                        android:id="@+id/plus_tick"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignStart="@+id/addimages"
+                                        android:layout_centerVertical="true"
+                                        android:padding="@dimen/_10sdp"
+                                        android:src="@drawable/plus_white"
+                                        android:tag="label" />
+                                </RelativeLayout>
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/twenty_five"
+                        android:paddingLeft="@dimen/_7sdp"
+                        android:paddingRight="@dimen/_7sdp"
+                        android:paddingTop="@dimen/_11sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <widgets.CustomTextView
+                                android:id="@+id/txt_eventcreation_invite_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tag="label"
+                                android:text="@string/txt_eventcreation_invite_title"
+                                android:textColor="@color/grey_aeaeae"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <widgets.CustomTextView
+                                android:id="@+id/txt_eventcreation_select_all"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:paddingLeft="@dimen/_7sdp"
+                                android:paddingRight="@dimen/_7sdp"
+                                android:tag="sectall"
+                                android:text="@string/txt_eventcreation_select_all"
+                                android:textColor="@color/grey_aeaeae"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_eventcreation_events"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/five"
+                            android:fitsSystemWindows="true"
+                            android:tag="userlist" />
+
+                        <Button
+                            android:id="@+id/txt_eventcreation_addadmin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_23sdp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:background="@drawable/selector_bg"
+                            android:paddingBottom="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_8sdp"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:paddingTop="@dimen/_5sdp"
+                            android:tag="btnaddadmin"
+                            android:text="@string/txt_eventcreation_addadmin"
+                            android:textColor="@color/blue_3abfd2"
+                            android:textSize="@dimen/_8ssp" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/txt_eventcreation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_33sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/blue_3abfd2"
+                    android:gravity="center"
+                    android:tag="btncrteat"
+                    android:text="CREATE"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/fourteen_sp" />
+
+                <Button
+                    android:id="@+id/txt_eventcreation_promote"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_33sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/blue_3abfd2"
+                    android:gravity="center"
+                    android:tag="btncrteat_promote"
+                    android:text="PROMOTE"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/fourteen_sp" />
+
+                <Button
+                    android:id="@+id/txt_eventedit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_33sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_weight="0.5"
+                    android:background="@color/blue_3abfd2"
+                    android:tag="btn_updt_promote"
+                    android:text="SAVE"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/fourteen_sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>
